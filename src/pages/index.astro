@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LateDiagnosed.org/title>
+  <title>LateDiagnosed.org</title>
   <script is:inline src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script is:inline src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
@@ -16,17 +16,20 @@
 
 <body class="w-full min-h-screen bg-white">
   <!-- Nav -->
-  <nav class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-heading text-xl font-bold text-[#1e2a5e] no-underline">latediagnosed.org</a>
-      <div class="hidden md:flex gap-6 text-sm">
-        <a href="#start-here" class="text-gray-600 hover:text-[#1e2a5e]">Start Here</a>
-        <a href="#resources" class="text-gray-600 hover:text-[#1e2a5e]">Resources</a>
-        <a href="#community" class="text-gray-600 hover:text-[#1e2a5e]">Community</a>
-        <a href="#donate" class="text-gray-600 hover:text-[#1e2a5e]">Donate</a>
-      </div>
+<nav class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-heading text-xl font-bold text-[#1e2a5e] no-underline">
+      LateDiagnosed.org
+    </a>
+
+    <div class="hidden md:flex gap-6 text-sm">
+      <a href="/resources" class="text-gray-600 hover:text-[#1e2a5e]">Resources</a>
+      <a href="/community" class="text-gray-600 hover:text-[#1e2a5e]">Community</a>
+      <a href="/about" class="text-gray-600 hover:text-[#1e2a5e]">About Us</a>
+      <a href="/donate" class="text-gray-600 hover:text-[#1e2a5e]">Donate</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Hero -->
   <header class="relative w-full overflow-hidden min-h-[70vh]">
@@ -238,11 +241,19 @@
   </section>
 
   <!-- Footer -->
-  <footer class="w-full py-12 bg-[#1e2a5e]">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <p class="text-sm text-slate-400">© 2026 Late Diagnosed. All rights reserved. A 501(c)(3) nonprofit organization.</p>
+<footer class="w-full py-12 bg-[#1e2a5e]">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="flex flex-wrap justify-center gap-6 mb-4 text-sm">
+      <a href="/privacy" class="text-slate-300 hover:text-white">Privacy Policy</a>
+      <a href="/terms" class="text-slate-300 hover:text-white">Terms of Use</a>
+      <a href="/medical-disclaimer" class="text-slate-300 hover:text-white">Medical Disclaimer</a>
     </div>
-  </footer>
+
+    <p class="text-sm text-slate-400">
+      © 2026 Late Diagnosed. All rights reserved. A 501(c)(3) nonprofit organization.
+    </p>
+  </div>
+</footer>
 
   <script is:inline>
     if (window.lucide) {
