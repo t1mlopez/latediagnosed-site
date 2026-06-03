@@ -1,5 +1,4 @@
 ---
 title: About
 ---
-
-Placeholder content for About.
+Founded in 2026
