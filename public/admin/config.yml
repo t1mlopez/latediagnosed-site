@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: t1mlopez/latediagnosed-site
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: pages
+    label: Pages
+    folder: content/pages
+    create: false
+    fields:
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Body
+        name: body
+        widget: markdown
