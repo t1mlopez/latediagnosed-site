@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const updates = await getCollection("updates");
+
+  return updates.map((update) => ({
+    params: { slug: update.id.replace(".md", "") },
+    props: { update },
+  }));
+}
+
+const { update } = Astro.props;
+
+const { Content } = await render(update);
+---
+
+<html lang="en">
+  <head>
+    <title>{update.data.title}</title>
+  </head>
+
+  <body>
+    <main class="max-w-4xl mx-auto px-6 py-16">
+      <h1 class="text-4xl font-bold text-[#1e2a5e] mb-4">
+        {update.data.title}
+      </h1>
+
+      <p class="text-gray-600 mb-8">
+        {update.data.description}
+      </p>
+
+      <Content />
+    </main>
+  </body>
+</html>

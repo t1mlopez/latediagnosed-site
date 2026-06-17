@@ -1,0 +1,199 @@
+---
+import Layout from "./Layout.astro";
+
+const {
+  title = "Resources",
+  description = "Resource hub description",
+} = Astro.props;
+---
+
+<Layout title={title}>
+  <main class="bg-white">
+    <section class="bg-[#f8f6fb] py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h1 class="text-4xl font-bold text-[#1e2a5e] mb-4">
+          {title}
+        </h1>
+
+        <p class="max-w-3xl text-lg text-gray-700">
+          {description}
+        </p>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+        Start Here
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">
+          <h3 class="font-semibold mb-2">I Don't Know What's Going On</h3>
+          <p class="text-gray-600">
+            Start here if you're trying to make sense of your experiences.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">
+          <h3 class="font-semibold mb-2">Just Diagnosed</h3>
+          <p class="text-gray-600">
+            Guidance for the first steps after a diagnosis.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">
+          <h3 class="font-semibold mb-2">Welcome to ADHD</h3>
+          <p class="text-gray-600">
+            Learn the fundamentals of adult ADHD.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+        Popular Guides
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Welcome to ADHD</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Welcome to Autism</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Welcome to AuDHD</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Executive Function</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Sensory Differences</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-[#f8f6fb]">
+          <h3 class="font-semibold mb-2">Masking & Burnout</h3>
+          <p class="text-gray-600">Placeholder guide description.</p>
+        </div>
+      </div>
+    </section>
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+        Explore By Topic
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Executive Function</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Sensory Differences</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Masking</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Burnout</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Emotional Regulation</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Relationships</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Work & Career</div>
+        <div class="p-6 rounded-xl border border-gray-200 bg-white">Assessments & Support</div>
+      </div>
+    </section>
+    <section class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+    Helpful Resources
+  </h2>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Books</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Videos</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Podcasts</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Assessments</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Organizations</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Tools</h3>
+      <p class="text-gray-600">Placeholder resources.</p>
+    </div>
+  </div>
+</section>
+<section class="w-full py-20 bg-[#f0edf5]">
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <h2 class="text-2xl font-bold text-[#1e2a5e] mb-4">
+      Sign Up For Updates
+    </h2>
+
+    <p class="mb-6 text-gray-700">
+      Placeholder newsletter description.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+      <input
+        type="email"
+        placeholder="Email Address"
+        class="flex-1 px-4 py-3 rounded-lg border border-gray-300"
+      />
+
+      <button
+        class="px-6 py-3 rounded-lg bg-[#1e2a5e] text-white font-semibold"
+      >
+        Subscribe
+      </button>
+    </div>
+  </div>
+</section>
+  </main>
+  <section class="w-full py-20 bg-[#faf8fc]">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+      Community
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-xl bg-white border border-gray-200">
+        <h3 class="font-semibold mb-2">Discord</h3>
+        <p class="text-gray-600">
+          Placeholder community description.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-white border border-gray-200">
+        <h3 class="font-semibold mb-2">Reddit</h3>
+        <p class="text-gray-600">
+          Placeholder community description.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-white border border-gray-200">
+        <h3 class="font-semibold mb-2">Stories</h3>
+        <p class="text-gray-600">
+          Placeholder community description.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from "astro:content";
+import ResourceHubLayout from "../../layouts/ResourceHubLayout.astro";
+
+export async function getStaticPaths() {
+  const resourceHubs = await getCollection("resource_hubs");
+
+  return resourceHubs.map((hub) => ({
+    params: { slug: hub.id.replace(".md", "") },
+    props: { hub },
+  }));
+}
+
+const { hub } = Astro.props;
+
+const { Content } = await render(hub);
+---
+
+<ResourceHubLayout
+  title={hub.data.title}
+  description={hub.data.description}
+>
+  <Content />
+</ResourceHubLayout>

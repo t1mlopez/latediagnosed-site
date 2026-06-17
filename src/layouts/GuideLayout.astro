@@ -1,0 +1,95 @@
+---
+import Layout from "./Layout.astro";
+
+const {
+  title = "Guide Title",
+  description = "Guide description",
+} = Astro.props;
+---
+
+<Layout title={title}>
+  <main class="bg-white">
+<section class="bg-[#f8f6fb] py-20">
+  <div class="max-w-4xl mx-auto px-6">
+    <h1 class="text-4xl font-bold text-[#1e2a5e] mb-4">
+      {title}
+    </h1>
+
+    <p class="text-lg text-gray-700">
+      {description}
+    </p>
+  </div>
+</section>
+
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <div class="p-8 rounded-xl bg-[#f8f6fb]">
+    <h2 class="text-2xl font-bold text-[#1e2a5e] mb-4">
+      Quick Summary
+    </h2>
+
+    <p class="text-gray-700">
+      Placeholder summary content.
+    </p>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-6 py-16">
+  <div class="grid lg:grid-cols-5 gap-10">
+
+    <aside>
+      <div class="sticky top-24">
+        <h2 class="text-lg font-semibold text-[#1e2a5e] mb-4">
+          On This Page
+        </h2>
+
+        <ul class="space-y-2 text-gray-600">
+          <li><a href="#section-1">Section One</a></li>
+          <li><a href="#section-2">Section Two</a></li>
+          <li><a href="#section-3">Section Three</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <article class="lg:col-span-4">
+      <slot />
+    </article>
+
+  </div>
+</section>
+
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <div class="p-8 rounded-xl bg-[#1e2a5e] text-white">
+    <h2 class="text-2xl font-bold mb-4">
+      Key Takeaway
+    </h2>
+
+    <p>
+      Placeholder takeaway content.
+    </p>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-2xl font-bold text-[#1e2a5e] mb-8">
+    Related Guides
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Related Guide</h3>
+      <p class="text-gray-600">Placeholder content.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Related Guide</h3>
+      <p class="text-gray-600">Placeholder content.</p>
+    </div>
+
+    <div class="p-6 rounded-xl bg-[#f8f6fb]">
+      <h3 class="font-semibold mb-2">Related Guide</h3>
+      <p class="text-gray-600">Placeholder content.</p>
+    </div>
+  </div>
+</section>
+  </main>
+</Layout>
