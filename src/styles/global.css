@@ -297,3 +297,39 @@ hr {
   list-style-position: outside !important;
   margin-left: 1.5rem !important;
 }
+/* ===========================
+   ARTICLE CARDS
+=========================== */
+
+.article-card {
+  display: block;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: inherit;
+
+  transition: transform 0.15s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+}
+
+.article-card h3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.article-card p {
+  margin: 0;
+}
+
+.article-card-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

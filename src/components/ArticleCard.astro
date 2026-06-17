@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href: string;
+  categories?: string[];
+}
+
+const {
+  title,
+  description,
+  href,
+  categories = [],
+} = Astro.props;
+---
+
+<a href={href} class="article-card">
+  {
+    categories.length > 0 && (
+      <div class="article-card-categories">
+        {
+          categories.map((category) => (
+            <span class="category-pill">
+              {category}
+            </span>
+          ))
+        }
+      </div>
+    )
+  }
+
+  <h3>{title}</h3>
+
+  {
+    description && (
+      <p>{description}</p>
+    )
+  }
+</a>

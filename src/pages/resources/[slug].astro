@@ -2,19 +2,34 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
 
 export async function getStaticPaths() {
   const resources = await getCollection("resources");
+  const articles = await getCollection("articles");
 
   return resources
     .filter((resource) => resource.data.status === "published")
-    .map((resource) => ({
-      params: { slug: resource.id },
-      props: { resource },
-    }));
+    .map((resource) => {
+      const relatedArticles = articles.filter(
+        (article) =>
+          article.data.status === "published" &&
+          article.data.categories?.some((category) =>
+            resource.data.categories?.includes(category)
+          )
+      );
+
+      return {
+        params: { slug: resource.id },
+        props: {
+          resource,
+          relatedArticles,
+        },
+      };
+    });
 }
 
-const { resource } = Astro.props;
+const { resource, relatedArticles } = Astro.props;
 ---
 
 <Layout title={resource.data.title}>
@@ -25,5 +40,28 @@ const { resource } = Astro.props;
     categories={resource.data.categories}
   >
     <div set:html={resource.rendered.html} />
+
+    {
+      relatedArticles.length > 0 && (
+        <>
+          <hr />
+
+          <h2>Related Articles</h2>
+
+          <div>
+  {
+    relatedArticles.map((article) => (
+      <ArticleCard
+        title={article.data.title}
+        description={article.data.description}
+        categories={article.data.categories}
+        href={`/articles/${article.id}/`}
+      />
+    ))
+  }
+</div>
+        </>
+      )
+    }
   </ArticleLayout>
 </Layout>
