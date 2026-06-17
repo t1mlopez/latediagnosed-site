@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  author?: string;
+  categories?: string[];
+  lastUpdated?: Date;
+}
+
+const {
+  title,
+  description,
+  author,
+  categories = [],
+  lastUpdated,
+} = Astro.props;
+---
+
+<main class="article-container">
+  <header class="article-header">
+    <h1>{title}</h1>
+
+    <p class="article-description">
+      {description}
+    </p>
+
+    <div class="article-meta">
+      {author && (
+        <span>
+          By {author}
+        </span>
+      )}
+
+      {lastUpdated && (
+        <span>
+          Updated {lastUpdated.toLocaleDateString()}
+        </span>
+      )}
+    </div>
+
+    {
+      categories.length > 0 && (
+        <div class="article-categories">
+          {
+            categories.map((category) => (
+              <span class="category-pill">
+                {category}
+              </span>
+            ))
+          }
+        </div>
+      )
+    }
+  </header>
+
+  <article class="article-content">
+    <slot />
+  </article>
+</main>
