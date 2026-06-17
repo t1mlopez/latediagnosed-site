@@ -3,26 +3,35 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
-
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
+  const authors = await getCollection("authors");
 
   return articles
     .filter((article) => article.data.status === "published")
-    .map((article) => ({
-      params: { slug: article.id },
-      props: { article },
-    }));
+    .map((article) => {
+      const author = authors.find(
+        (a) => a.id === article.data.author
+      );
+
+      return {
+        params: { slug: article.id },
+        props: {
+          article,
+          author,
+        },
+      };
+    });
 }
 
-const { article } = Astro.props;
+const { article, author } = Astro.props;
 ---
 
 <Layout title={article.data.title}>
   <ArticleLayout
     title={article.data.title}
     description={article.data.description}
-    author={article.data.author}
+    author={author?.data?.name}
     categories={article.data.categories}
     lastUpdated={article.data.lastUpdated}
   >

@@ -1,24 +1,29 @@
 ---
-import { getCollection, render } from "astro:content";
-import ResourceHubLayout from "../../layouts/ResourceHubLayout.astro";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
 export async function getStaticPaths() {
-  const resourceHubs = await getCollection("resource_hubs");
+  const resources = await getCollection("resources");
 
-  return resourceHubs.map((hub) => ({
-    params: { slug: hub.id.replace(".md", "") },
-    props: { hub },
-  }));
+  return resources
+    .filter((resource) => resource.data.status === "published")
+    .map((resource) => ({
+      params: { slug: resource.id },
+      props: { resource },
+    }));
 }
 
-const { hub } = Astro.props;
-
-const { Content } = await render(hub);
+const { resource } = Astro.props;
 ---
 
-<ResourceHubLayout
-  title={hub.data.title}
-  description={hub.data.description}
->
-  <Content />
-</ResourceHubLayout>
+<Layout title={resource.data.title}>
+  <ArticleLayout
+    title={resource.data.title}
+    description={resource.data.description}
+    author=""
+    categories={resource.data.categories}
+  >
+    <div set:html={resource.rendered.html} />
+  </ArticleLayout>
+</Layout>

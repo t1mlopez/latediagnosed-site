@@ -21,9 +21,6 @@ excerpt: A short summary used for homepage cards and featured content.
 
 heroImage: /images/placeholder.jpg
 ---
-
-# Welcome to Late Diagnosis
-
 This is placeholder content.
 
 The purpose of this article is to validate:
