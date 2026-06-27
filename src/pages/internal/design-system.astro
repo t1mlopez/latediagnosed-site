@@ -1,0 +1,139 @@
+---
+import PublicLayout from "../../layouts/PublicLayout.astro";
+---
+
+<PublicLayout title="Late Diagnosed Design System">
+  <main style="max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem;">
+    <h1>Late Diagnosed Design System</h1>
+
+    <p>
+      This page documents the design and publishing system for Late Diagnosed.
+    </p>
+
+    <h2>Brand Feel</h2>
+    <ul>
+      <li>Calm</li>
+      <li>Trustworthy</li>
+      <li>Supportive</li>
+      <li>Clear</li>
+      <li>Professional enough for practitioners</li>
+      <li>Human enough for newly diagnosed adults</li>
+    </ul>
+
+    <h2>Core Colors</h2>
+    <ul>
+      <li><strong>Primary Navy:</strong> #1e2a5e</li>
+      <li><strong>Deep Purple:</strong> #4a2068</li>
+      <li><strong>Soft Lavender:</strong> #f8f6fb</li>
+      <li><strong>White:</strong> #ffffff</li>
+      <li><strong>Text Gray:</strong> #4b5563</li>
+    </ul>
+
+    <h2>Typography</h2>
+    <ul>
+      <li><strong>Headings:</strong> Playfair Display</li>
+      <li><strong>Body:</strong> Libre Franklin</li>
+    </ul>
+
+    <h2>Global Page Structure</h2>
+    <pre>Header
+Page Hero
+Main Content
+Related Content
+Footer</pre>
+
+    <h2>Homepage Sections</h2>
+    <ul>
+      <li>Hero</li>
+      <li>Validation</li>
+      <li>Start Here</li>
+      <li>Community</li>
+      <li>Mission</li>
+      <li>Featured Articles</li>
+      <li>Resource Library</li>
+      <li>Practitioner Library</li>
+      <li>Stories</li>
+      <li>Newsletter</li>
+      <li>Donate</li>
+    </ul>
+
+    <h2>Article Template</h2>
+    <pre>Header
+Article Hero
+Article Shell
+  Main Article
+  Sidebar
+Footer</pre>
+
+    <h2>Article Components</h2>
+    <ul>
+      <li>Key Takeaways</li>
+      <li>Table of Contents</li>
+      <li>Research Callout</li>
+      <li>Tip Box</li>
+      <li>Warning Box</li>
+      <li>Definition Box</li>
+      <li>Pull Quote</li>
+      <li>FAQ</li>
+      <li>References</li>
+      <li>Download Box</li>
+    </ul>
+
+    <h2>Resource Hubs</h2>
+    <ul>
+      <li>/resources/adhd</li>
+      <li>/resources/autism</li>
+      <li>/resources/audhd</li>
+      <li>/resources/cptsd</li>
+    </ul>
+
+    <h2>Icon Direction</h2>
+    <ul>
+      <li><strong>ADHD:</strong> zap</li>
+      <li><strong>Autism:</strong> infinity symbol</li>
+      <li><strong>AuDHD:</strong> sparkles</li>
+      <li><strong>CPTSD:</strong> shield</li>
+      <li><strong>Practitioner Library:</strong> book-open</li>
+    </ul>
+
+    <h2>Accessibility Priorities</h2>
+    <ul>
+      <li>Readable font sizes</li>
+      <li>Strong contrast</li>
+      <li>Semantic headings</li>
+      <li>Descriptive alt text</li>
+      <li>Keyboard-friendly links/buttons</li>
+      <li>Minimal motion</li>
+    </ul>
+
+    <h2>Engineering Rules</h2>
+    <ul>
+      <li>Prefer shared components.</li>
+      <li>Prefer content-driven pages.</li>
+      <li>Prefer collection metadata.</li>
+      <li>Avoid large hardcoded page files.</li>
+      <li>Avoid duplicate styling.</li>
+    </ul>
+
+    <h2>Current Architecture</h2>
+    <pre>src/components/
+src/components/home/
+src/layouts/
+src/content/articles/
+src/content/resources/
+src/content/authors/
+src/content/categories/</pre>
+
+    <h2>Future Additions</h2>
+    <ul>
+      <li>Search</li>
+      <li>Related content engine</li>
+      <li>SEO metadata</li>
+      <li>PDF generation</li>
+      <li>Newsletter integration</li>
+      <li>Dynamic category pages</li>
+      <li>Author pages</li>
+      <li>Download library</li>
+    </ul>
+  </main>
+</PublicLayout>

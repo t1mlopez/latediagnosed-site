@@ -508,3 +508,25 @@ hr {
 #featured-articles .article-card-categories {
   margin-bottom: 0.5rem;
 }
+/* ===========================
+   RESOURCE HUB RELATED CONTENT
+=========================== */
+
+.resource-related-section {
+  margin-top: 3rem;
+}
+
+.resource-related-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #1e2a5e;
+}
+
+.resource-related-section p {
+  color: #4b5563;
+}
+
+.resource-related-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}

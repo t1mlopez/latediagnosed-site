@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 
@@ -11,13 +11,25 @@ export async function getStaticPaths() {
   return resources
     .filter((resource) => resource.data.status === "published")
     .map((resource) => {
-      const relatedArticles = articles.filter(
-        (article) =>
-          article.data.status === "published" &&
-          article.data.categories?.some((category) =>
-            resource.data.categories?.includes(category)
-          )
-      );
+      const relatedArticles = articles
+        .filter(
+          (article) =>
+            article.data.status === "published" &&
+            article.data.categories?.some((category) =>
+              resource.data.categories?.includes(category)
+            )
+        )
+        .sort((a, b) => {
+          const aDate = a.data.publishDate
+            ? new Date(a.data.publishDate).getTime()
+            : 0;
+
+          const bDate = b.data.publishDate
+            ? new Date(b.data.publishDate).getTime()
+            : 0;
+
+          return bDate - aDate;
+        });
 
       return {
         params: { slug: resource.id },
@@ -32,36 +44,38 @@ export async function getStaticPaths() {
 const { resource, relatedArticles } = Astro.props;
 ---
 
-<Layout title={resource.data.title}>
+<PublicLayout title={`${resource.data.title} Resources`}>
   <ArticleLayout
-    title={resource.data.title}
+    title={`${resource.data.title} Resources`}
     description={resource.data.description}
     author=""
     categories={resource.data.categories}
+    publishDate={resource.data.publishDate}
+    lastUpdated={resource.data.lastUpdated}
   >
     <div set:html={resource.rendered.html} />
 
-    {
-      relatedArticles.length > 0 && (
-        <>
-          <hr />
+    {relatedArticles.length > 0 && (
+      <section class="resource-related-section">
+        <hr />
 
-          <h2>Related Articles</h2>
+        <h2>Related Articles</h2>
 
-          <div>
-  {
-    relatedArticles.map((article) => (
-      <ArticleCard
-        title={article.data.title}
-        description={article.data.description}
-        categories={article.data.categories}
-        href={`/articles/${article.id}/`}
-      />
-    ))
-  }
-</div>
-        </>
-      )
-    }
+        <p>
+          Articles connected to {resource.data.title} based on shared categories.
+        </p>
+
+        <div class="resource-related-grid">
+          {relatedArticles.map((article) => (
+            <ArticleCard
+              title={article.data.title}
+              description={article.data.excerpt || article.data.description}
+              categories={article.data.categories}
+              href={`/articles/${article.id}/`}
+            />
+          ))}
+        </div>
+      </section>
+    )}
   </ArticleLayout>
-</Layout>
+</PublicLayout>
