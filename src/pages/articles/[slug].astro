@@ -25,6 +25,13 @@ export async function getStaticPaths() {
 }
 
 const { article, author } = Astro.props;
+
+const wordCount = article.body
+  ? article.body.trim().split(/\s+/).length
+  : 0;
+
+const minutes = Math.max(1, Math.ceil(wordCount / 225));
+const readingTime = `${minutes} min read`;
 ---
 
 <PublicLayout title={article.data.title}>
@@ -34,7 +41,9 @@ const { article, author } = Astro.props;
     author={author?.data?.name}
     categories={article.data.categories}
     lastUpdated={article.data.lastUpdated}
-  >
+    publishDate={article.data.publishDate}
+    lastUpdated={article.data.lastUpdated}
+    readingTime={readingTime}
     <article set:html={article.rendered.html} />
   </ArticleLayout>
 </PublicLayout>

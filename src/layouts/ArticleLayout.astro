@@ -4,7 +4,9 @@ interface Props {
   description: string;
   author?: string;
   categories?: string[];
+  publishDate?: Date;
   lastUpdated?: Date;
+  readingTime?: string;
 }
 
 const {
@@ -12,8 +14,13 @@ const {
   description,
   author,
   categories = [],
+  publishDate,
   lastUpdated,
+  readingTime,
 } = Astro.props;
+
+const formattedPublishDate = publishDate?.toLocaleDateString();
+const formattedUpdatedDate = lastUpdated?.toLocaleDateString();
 ---
 
 <section class="article-hero">
@@ -34,7 +41,9 @@ const {
 
     <div class="article-meta">
       {author && <span>By {author}</span>}
-      {lastUpdated && <span>Updated {lastUpdated.toLocaleDateString()}</span>}
+      {readingTime && <span>{readingTime}</span>}
+      {formattedPublishDate && <span>Published {formattedPublishDate}</span>}
+      {formattedUpdatedDate && <span>Updated {formattedUpdatedDate}</span>}
     </div>
   </div>
 </section>
