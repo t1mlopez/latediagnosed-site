@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
+import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
 export async function getStaticPaths() {
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 const { article, author } = Astro.props;
 ---
 
-<Layout title={article.data.title}>
+<PublicLayout title={article.data.title}>
   <ArticleLayout
     title={article.data.title}
     description={article.data.description}
@@ -37,4 +37,4 @@ const { article, author } = Astro.props;
   >
     <article set:html={article.rendered.html} />
   </ArticleLayout>
-</Layout>
+</PublicLayout>

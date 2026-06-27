@@ -1,18 +1,29 @@
----
-import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
----
+<header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a
+      href="/"
+      class="text-xl font-bold text-[#1e2a5e] no-underline"
+style="font-family: 'Playfair Display', serif;"
+    >
+      LateDiagnosed.org
+    </a>
 
-<header class="site-header">
-  <a class="logo" href="/">Late Diagnosed</a>
+    <div class="hidden md:flex gap-6 text-sm">
+      <a href="/resources" class="text-gray-600 hover:text-[#1e2a5e]">
+        Resources
+      </a>
 
-  <nav class="nav-links">
-    <a href="/">Home</a>
-    <a href="/resources">Resources</a>
-    <a href="/community">Community</a>
-    <a href="/about">About</a>
-    <a href="/organization-updates">Updates</a>
-    <a href="/contact">Contact</a>
-    <a class="donate-link" href="/donate">Donate</a>
-  </nav>
+      <a href="/community" class="text-gray-600 hover:text-[#1e2a5e]">
+        Community
+      </a>
+
+      <a href="/about" class="text-gray-600 hover:text-[#1e2a5e]">
+        About Us
+      </a>
+
+      <a href="/donate" class="text-gray-600 hover:text-[#1e2a5e]">
+        Donate
+      </a>
+    </div>
+  </div>
 </header>

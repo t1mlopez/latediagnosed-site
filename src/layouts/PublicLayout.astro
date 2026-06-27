@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title = "Late Diagnosed" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+
+  <script is:inline src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+  <script
+    is:inline
+    src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"
+  ></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body { font-family: 'Libre Franklin', sans-serif; }
+    .font-heading { font-family: 'Playfair Display', serif; }
+    .infinity-symbol { width: 32px; height: 32px; }
+  </style>
+</head>
+
+  <body>
+    <Header />
+
+    <slot />
+
+    <Footer />
+  </body>
+</html>
