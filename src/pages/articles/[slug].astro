@@ -1,4 +1,5 @@
 ---
+import KeyTakeaways from "../../components/KeyTakeaways.astro";
 import { getCollection } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
@@ -10,9 +11,7 @@ export async function getStaticPaths() {
   return articles
     .filter((article) => article.data.status === "published")
     .map((article) => {
-      const author = authors.find(
-        (a) => a.id === article.data.author
-      );
+      const author = authors.find((a) => a.id === article.data.author);
 
       return {
         params: { slug: article.id },
@@ -40,10 +39,18 @@ const readingTime = `${minutes} min read`;
     description={article.data.description}
     author={author?.data?.name}
     categories={article.data.categories}
-    lastUpdated={article.data.lastUpdated}
     publishDate={article.data.publishDate}
     lastUpdated={article.data.lastUpdated}
     readingTime={readingTime}
-    <article set:html={article.rendered.html} />
+  >
+    <KeyTakeaways>
+      <ul>
+        <li>This article is placeholder content.</li>
+        <li>The template now supports reusable summary blocks.</li>
+        <li>Future articles can use this space for quick reader orientation.</li>
+      </ul>
+    </KeyTakeaways>
+
+    <div set:html={article.rendered.html} />
   </ArticleLayout>
 </PublicLayout>

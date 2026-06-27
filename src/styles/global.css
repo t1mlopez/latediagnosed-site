@@ -405,3 +405,26 @@ hr {
     margin-top: 3rem;
   }
 }
+/* ===========================
+   KEY TAKEAWAYS
+=========================== */
+
+.key-takeaways {
+  margin: 2rem 0 3rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #f8f6fb;
+  border: 1px solid #e7e0ef;
+}
+
+.key-takeaways h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  color: #1e2a5e;
+  font-size: 1.75rem;
+}
+
+.key-takeaways-content ul {
+  margin-bottom: 0;
+}
