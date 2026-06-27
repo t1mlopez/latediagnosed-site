@@ -1,0 +1,44 @@
+---
+const { featuredArticles = [] } = Astro.props;
+---
+
+{featuredArticles.length > 0 && (
+  <section id="featured-articles" class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+      <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">
+        Featured Articles
+      </h2>
+
+      <p class="text-lg text-gray-700">
+        Start with these resources from the Late Diagnosed library.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {featuredArticles.map((article) => (
+        <a
+          href={`/articles/${article.id}/`}
+          class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline"
+        >
+          {article.data.categories?.length > 0 && (
+            <div class="mb-3 flex flex-wrap gap-2">
+              {article.data.categories.map((category) => (
+                <span class="inline-block rounded-full border border-[#1e2a5e]/25 px-3 py-1 text-xs text-[#1e2a5e]">
+                  {category}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h3 class="font-semibold mb-2 text-[#1e2a5e] text-xl">
+            {article.data.title}
+          </h3>
+
+          <p class="text-sm text-gray-600">
+            {article.data.excerpt || article.data.description}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

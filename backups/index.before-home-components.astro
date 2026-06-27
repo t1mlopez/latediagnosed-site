@@ -1,0 +1,315 @@
+---
+import "../styles/global.css";
+import { getCollection } from "astro:content";
+import ArticleCard from "../components/ArticleCard.astro";
+
+const featuredArticles = (await getCollection("articles"))
+  .filter((article) => article.data.status === "published" && article.data.featured)
+  .sort((a, b) => {
+    const aDate = a.data.publishDate ? new Date(a.data.publishDate).getTime() : 0;
+    const bDate = b.data.publishDate ? new Date(b.data.publishDate).getTime() : 0;
+
+    return bDate - aDate;
+  })
+  .slice(0, 3);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LateDiagnosed.org</title>
+  <script is:inline src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Libre Franklin', sans-serif; }
+    .font-heading { font-family: 'Playfair Display', serif; }
+    .infinity-symbol { width: 32px; height: 32px; }
+  </style>
+</head>
+
+<body class="w-full min-h-screen bg-white">
+  <!-- Nav -->
+<nav class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="font-heading text-xl font-bold text-[#1e2a5e] no-underline">
+      LateDiagnosed.org
+    </a>
+
+    <div class="hidden md:flex gap-6 text-sm">
+      <a href="/resources" class="text-gray-600 hover:text-[#1e2a5e]">Resources</a>
+      <a href="/community" class="text-gray-600 hover:text-[#1e2a5e]">Community</a>
+      <a href="/about" class="text-gray-600 hover:text-[#1e2a5e]">About Us</a>
+      <a href="/donate" class="text-gray-600 hover:text-[#1e2a5e]">Donate</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero -->
+  <header class="relative w-full overflow-hidden min-h-[70vh]">
+    <img
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+      src="https://images.pexels.com/photos/28310481/pexels-photo-28310481.jpeg?auto=compress&cs=tinysrgb&w=1920"
+      alt="Tranquil forest path lit by morning sun with mist"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-[#1e2a5eee] to-[#4a2068cc]"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[70vh] py-24">
+      <h1 class="font-heading text-white mb-4 text-4xl md:text-5xl font-bold max-w-4xl">
+        You're not broken. You were just never given the right map.
+      </h1>
+      <p class="text-white/90 text-lg max-w-2xl mb-8">
+        Supporting adults navigating late diagnosis of ADHD, Autism, AuDHD, CPTSD, dissociation, burnout, and related neurodivergent experiences.
+      </p>
+      <a href="#start-here" class="inline-block w-fit px-6 py-3 rounded-lg font-semibold bg-white text-[#1e2a5e] no-underline">
+        I Don't Know Where to Start
+      </a>
+    </div>
+  </header>
+
+  <!-- Emotional Validation -->
+  <section class="w-full py-16 bg-[#f8f6fb]">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">
+        If you've just discovered this about yourself — breathe.
+      </h2>
+      <p class="text-lg leading-relaxed mb-4 text-gray-700">
+        What you're feeling right now is valid. The grief, the relief, the anger, the confusion — all of it. A late diagnosis doesn't erase your past, but it can illuminate a path forward.
+      </p>
+      <p class="text-lg leading-relaxed text-gray-700">
+        You are not alone. Thousands of adults discover their neurodivergence every day. We're here to help you figure out what comes next.
+      </p>
+    </div>
+  </section>
+
+  <!-- Start Here -->
+  <section id="start-here" class="max-w-6xl mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+      <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-3xl">Start Here</h2>
+      <p class="text-lg text-gray-700">Not sure where to begin? Choose the path that feels most relevant to you right now.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-3">
+          <i data-lucide="compass" class="text-[#1e2a5e] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#1e2a5e] text-xl">Just Diagnosed?</h3>
+        <p class="text-sm text-gray-600">A gentle guide to your first days and weeks after receiving a diagnosis. What to expect, what's normal, and how to take care of yourself.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#4a2068]/10 flex items-center justify-center mb-3">
+          <i data-lucide="help-circle" class="text-[#4a2068] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#4a2068] text-xl">Suspect ADHD or Autism?</h3>
+        <p class="text-sm text-gray-600">Exploring the possibility of neurodivergence? Learn about common signs in adults, self-assessment tools, and how to seek evaluation.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-3">
+          <i data-lucide="eye-off" class="text-[#1e2a5e] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#1e2a5e] text-xl">Understanding Masking & Burnout</h3>
+        <p class="text-sm text-gray-600">Why you've been exhausted for years. Learn about masking, autistic burnout, ADHD burnout, and how to begin unmasking safely.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#4a2068]/10 flex items-center justify-center mb-3">
+          <i data-lucide="clipboard-list" class="text-[#4a2068] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#4a2068] text-xl">Finding Assessments & Support</h3>
+        <p class="text-sm text-gray-600">Navigate the assessment process, find neurodivergent-affirming clinicians, and understand your options for formal and informal identification.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-3">
+          <i data-lucide="users" class="text-[#1e2a5e] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#1e2a5e] text-xl">Explaining Your Diagnosis to Family</h3>
+        <p class="text-sm text-gray-600">Tips for having conversations with partners, parents, friends, and colleagues about your diagnosis — at your own pace.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+        <div class="w-10 h-10 rounded-full bg-[#4a2068]/10 flex items-center justify-center mb-3">
+          <i data-lucide="message-circle" class="text-[#4a2068] w-5 h-5"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-[#4a2068] text-xl">Frequently Asked Questions</h3>
+        <p class="text-sm text-gray-600">Answers to common questions about late diagnosis, including "Am I too old?", "Is self-diagnosis valid?", and more.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section id="community" class="w-full py-20 bg-[#faf8fc]">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">You Are Not Alone</h2>
+        <p class="text-lg mb-6 text-gray-700">Connect with thousands of late-diagnosed adults in our moderated Discord community. Share experiences, ask questions, and find your people.</p>
+        <a href="#" class="inline-block px-6 py-3 rounded-lg font-semibold bg-[#5865f2] text-white no-underline">Join Our Community</a>
+      </div>
+      <img
+        class="rounded-xl shadow-lg w-full h-72 object-cover"
+        loading="lazy"
+        src="https://images.pexels.com/photos/9775854/pexels-photo-9775854.jpeg?auto=compress&cs=tinysrgb&w=800"
+        alt="Diverse hands joined together in unity"
+      />
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="mission" class="max-w-4xl mx-auto px-6 py-20 text-center">
+    <h2 class="font-heading mb-6 text-[#1e2a5e] font-bold text-2xl">Our Mission</h2>
+    <p class="text-lg leading-relaxed text-gray-700">
+      Late Diagnosed exists to provide evidence-based resources, peer support, and community for adults who discover their neurodivergence later in life. We believe understanding yourself is a right — not a privilege.
+    </p>
+  </section>
+
+  <!-- Featured Articles -->
+  {featuredArticles.length > 0 && (
+    <section id="featured-articles" class="max-w-6xl mx-auto px-6 py-20">
+      <div class="text-center mb-12">
+        <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">
+          Featured Articles
+        </h2>
+        <p class="text-lg text-gray-700">
+          Start with these resources from the Late Diagnosed library.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {featuredArticles.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.excerpt || article.data.description}
+            categories={article.data.categories}
+            href={`/articles/${article.id}/`}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Resources -->
+  <section id="resources" class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="font-heading text-center mb-12 text-[#1e2a5e] font-bold text-2xl">Resource Library</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
+        <div class="w-12 h-12 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-4">
+          <i data-lucide="zap" class="text-[#1e2a5e]"></i>
+        </div>
+        <h3 class="font-semibold text-lg mb-3 text-[#1e2a5e]">ADHD Resources</h3>
+        <p class="text-gray-600">Executive function strategies, medication guides, workplace accommodations, and understanding the emotional side of ADHD.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
+        <div class="w-12 h-12 rounded-full bg-[#4a2068]/10 flex items-center justify-center mb-4">
+          <svg class="infinity-symbol text-[#4a2068]" viewBox="0 0 32 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 10c0-3.3 2.7-6 6-6s6 2.7 6 6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6c0-3.3-2.7-6-6-6S2 6.7 2 10s2.7 6 6 6 6-2.7 6-6"></path>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-3 text-[#4a2068]">Autism Resources</h3>
+        <p class="text-gray-600">Sensory processing, masking and unmasking, social communication differences, and building an autistic-affirming life.</p>
+      </a>
+
+      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
+        <div class="w-12 h-12 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-4">
+          <i data-lucide="shield" class="text-[#1e2a5e]"></i>
+        </div>
+        <h3 class="font-semibold text-lg mb-3 text-[#1e2a5e]">CPTSD Resources</h3>
+        <p class="text-gray-600">Trauma-informed approaches, nervous system regulation, dissociation support, and understanding the overlap with neurodivergence.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Practitioner Library -->
+  <section class="w-full py-20 bg-[#1e2a5e]">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="w-14 h-14 rounded-full bg-white/80 flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="book-open" class="text-[#1e2a5e] w-7 h-7"></i>
+      </div>
+      <h2 class="font-heading mb-4 text-white font-bold text-2xl">Practitioner Resource Library</h2>
+      <p class="text-lg mb-6 text-slate-200">Curated, evidence-based resources for clinicians, therapists, and coaches working with late-diagnosed adults.</p>
+      <a href="#" class="inline-block px-6 py-3 rounded-lg font-semibold bg-white text-[#1e2a5e] no-underline">Browse Library</a>
+    </div>
+  </section>
+
+  <!-- Stories -->
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <h2 class="font-heading text-center mb-12 text-[#1e2a5e] font-bold text-2xl">Stories from the Community</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+        <img class="w-16 h-16 rounded-full object-cover mb-4" loading="lazy" src="https://images.pexels.com/photos/36439572/pexels-photo-36439572.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Community story portrait" />
+        <p class="italic mb-4 text-gray-700">"Being diagnosed with ADHD at 38 changed everything. Late Diagnosed helped me grieve what I'd lost and celebrate who I actually am."</p>
+        <p class="font-semibold text-sm text-[#1e2a5e]">— Sarah, diagnosed at 38</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+        <img class="w-16 h-16 rounded-full object-cover mb-4" loading="lazy" src="https://images.pexels.com/photos/15608264/pexels-photo-15608264.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Community story portrait" />
+        <p class="italic mb-4 text-gray-700">"I spent decades thinking I was broken. Finding this community showed me I was just different — and that's okay."</p>
+        <p class="font-semibold text-sm text-[#1e2a5e]">— Marcus, diagnosed at 45</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+        <img class="w-16 h-16 rounded-full object-cover mb-4" loading="lazy" src="https://images.pexels.com/photos/30494318/pexels-photo-30494318.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Community story portrait" />
+        <p class="italic mb-4 text-gray-700">"The practitioner library helped my therapist finally understand AuDHD. For the first time, I felt truly seen in session."</p>
+        <p class="font-semibold text-sm text-[#1e2a5e]">— Jamie, diagnosed at 32</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="w-full py-20 bg-[#f0edf5]">
+    <div class="max-w-xl mx-auto px-6 text-center">
+      <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">Stay Connected</h2>
+      <p class="mb-6 text-gray-700">Get monthly resources, community updates, and new research delivered to your inbox.</p>
+      <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3">
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input id="newsletter-email" type="email" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1e2a5e]" required placeholder="Enter your email address" />
+        <button type="submit" class="px-6 py-3 rounded-lg font-semibold bg-[#1e2a5e] text-white">Subscribe</button>
+      </form>
+      <p id="newsletter-success" class="text-green-700 mt-3 hidden">Thank you for subscribing!</p>
+    </div>
+  </section>
+
+  <!-- Donate -->
+  <section id="donate" class="max-w-4xl mx-auto px-6 py-20 text-center">
+    <h2 class="font-heading mb-4 text-[#1e2a5e] font-bold text-2xl">Support Our Work</h2>
+    <p class="text-lg mb-6 text-gray-700">Late Diagnosed is community-funded. Your donation helps us keep resources free, maintain our Discord, and develop new guides.</p>
+    <a href="#" class="inline-block px-8 py-4 rounded-lg font-bold text-lg bg-[#4a2068] text-white no-underline">Donate Now</a>
+  </section>
+
+  <!-- Footer -->
+<footer class="w-full py-12 bg-[#1e2a5e]">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="flex flex-wrap justify-center gap-6 mb-4 text-sm">
+      <a href="/privacy" class="text-slate-300 hover:text-white">Privacy Policy</a>
+      <a href="/terms" class="text-slate-300 hover:text-white">Terms of Use</a>
+      <a href="/medical-disclaimer" class="text-slate-300 hover:text-white">Medical Disclaimer</a>
+    </div>
+
+    <p class="text-sm text-slate-400">
+      © 2026 Late Diagnosed. All rights reserved. A 501(c)(3) nonprofit organization.
+    </p>
+  </div>
+</footer>
+
+  <script is:inline>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterSuccess = document.getElementById('newsletter-success');
+
+    if (newsletterForm && newsletterSuccess) {
+      newsletterForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        newsletterForm.classList.add('hidden');
+        newsletterSuccess.classList.remove('hidden');
+      });
+    }
+  </script>
+</body>
+</html>
