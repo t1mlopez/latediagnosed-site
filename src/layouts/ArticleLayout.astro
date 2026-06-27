@@ -7,6 +7,20 @@ interface Props {
   publishDate?: Date;
   lastUpdated?: Date;
   readingTime?: string;
+
+  difficulty?: "beginner" | "intermediate" | "advanced";
+  audience?: string[];
+  reviewedBy?: string;
+  reviewDate?: Date;
+
+  hasPdf?: boolean;
+  pdfUrl?: string;
+
+  hasAudio?: boolean;
+  audioUrl?: string;
+
+  hasVideo?: boolean;
+  videoUrl?: string;
 }
 
 const {
@@ -17,10 +31,30 @@ const {
   publishDate,
   lastUpdated,
   readingTime,
+
+  difficulty,
+  audience = [],
+  reviewedBy,
+  reviewDate,
+
+  hasPdf,
+  pdfUrl,
+
+  hasAudio,
+  audioUrl,
+
+  hasVideo,
+  videoUrl,
 } = Astro.props;
 
 const formattedPublishDate = publishDate?.toLocaleDateString();
 const formattedUpdatedDate = lastUpdated?.toLocaleDateString();
+const formattedReviewDate = reviewDate?.toLocaleDateString();
+
+const hasMediaLinks =
+  (hasPdf && pdfUrl) ||
+  (hasAudio && audioUrl) ||
+  (hasVideo && videoUrl);
 ---
 
 <section class="article-hero">
@@ -42,9 +76,37 @@ const formattedUpdatedDate = lastUpdated?.toLocaleDateString();
     <div class="article-meta">
       {author && <span>By {author}</span>}
       {readingTime && <span>{readingTime}</span>}
+      {difficulty && <span>{difficulty}</span>}
       {formattedPublishDate && <span>Published {formattedPublishDate}</span>}
       {formattedUpdatedDate && <span>Updated {formattedUpdatedDate}</span>}
     </div>
+
+    {(audience.length > 0 || reviewedBy || formattedReviewDate || hasMediaLinks) && (
+      <div class="article-extra-meta">
+        {audience.length > 0 && (
+          <div>
+            <strong>Audience:</strong> {audience.join(", ")}
+          </div>
+        )}
+
+        {(reviewedBy || formattedReviewDate) && (
+          <div>
+            <strong>Reviewed:</strong>{" "}
+            {reviewedBy && <span>{reviewedBy}</span>}
+            {reviewedBy && formattedReviewDate && <span> · </span>}
+            {formattedReviewDate && <span>{formattedReviewDate}</span>}
+          </div>
+        )}
+
+        {hasMediaLinks && (
+          <div class="article-media-links">
+            {hasPdf && pdfUrl && <a href={pdfUrl}>PDF</a>}
+            {hasAudio && audioUrl && <a href={audioUrl}>Audio</a>}
+            {hasVideo && videoUrl && <a href={videoUrl}>Video</a>}
+          </div>
+        )}
+      </div>
+    )}
   </div>
 </section>
 

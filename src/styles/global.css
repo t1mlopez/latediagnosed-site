@@ -645,3 +645,30 @@ hr {
   font-size: 0.8rem;
   color: #1e2a5e;
 }
+
+/* ===========================
+   ARTICLE EXTRA METADATA
+=========================== */
+
+.article-extra-meta {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+.article-extra-meta strong {
+  color: white;
+}
+
+.article-media-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.article-media-links a {
+  color: white;
+  text-decoration: underline;
+}
