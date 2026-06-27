@@ -549,3 +549,99 @@ hr {
   gap: 1rem;
   margin-top: 1.5rem;
 }
+
+/* ===========================
+   SEARCH
+=========================== */
+
+.search-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.search-hero {
+  margin-bottom: 2rem;
+}
+
+.search-hero h1 {
+  font-family: 'Playfair Display', serif;
+  color: #1e2a5e;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.search-hero p {
+  color: #4b5563;
+  font-size: 1.1rem;
+}
+
+#site-search {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid #e7e0ef;
+  border-radius: 14px;
+  font-size: 1rem;
+}
+
+.search-count {
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.search-empty {
+  color: #4b5563;
+}
+
+.search-result-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.search-result-card {
+  display: block;
+  padding: 1.25rem;
+  border: 1px solid #e7e0ef;
+  border-radius: 14px;
+  background: white;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-result-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.search-result-type {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: #4a2068;
+  font-weight: 700;
+}
+
+.search-result-card h2 {
+  margin: 0 0 0.5rem;
+  color: #1e2a5e;
+  font-size: 1.35rem;
+}
+
+.search-result-card p {
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+}
+
+.search-result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.search-result-tags span {
+  border: 1px solid #e7e0ef;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+  color: #1e2a5e;
+}

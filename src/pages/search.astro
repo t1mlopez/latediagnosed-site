@@ -1,0 +1,108 @@
+---
+import PublicLayout from "../layouts/PublicLayout.astro";
+---
+
+<PublicLayout title="Search Late Diagnosed">
+  <main class="search-page">
+    <section class="search-hero">
+      <h1>Search Late Diagnosed</h1>
+      <p>Search articles, resource hubs, and future guides.</p>
+
+      <label class="sr-only" for="site-search">Search</label>
+      <input
+        id="site-search"
+        type="search"
+        placeholder="Search ADHD, autism, CPTSD, masking..."
+        autocomplete="off"
+      />
+    </section>
+
+    <section id="search-results" class="search-results" aria-live="polite">
+      <p class="search-empty">Start typing to search the library.</p>
+    </section>
+  </main>
+
+  <script>
+    const input = document.getElementById("site-search");
+    const resultsEl = document.getElementById("search-results");
+
+    let searchIndex = [];
+
+    function normalize(value) {
+      return String(value || "").toLowerCase();
+    }
+
+    function scoreItem(item, query) {
+      const q = normalize(query);
+
+      let score = 0;
+
+      if (normalize(item.title).includes(q)) score += 10;
+      if (normalize(item.description).includes(q)) score += 6;
+      if (normalize(item.categories.join(" ")).includes(q)) score += 5;
+      if (normalize(item.tags.join(" ")).includes(q)) score += 4;
+      if (normalize(item.body).includes(q)) score += 1;
+
+      return score;
+    }
+
+    function renderResults(items, query) {
+      if (!query.trim()) {
+        resultsEl.innerHTML = '<p class="search-empty">Start typing to search the library.</p>';
+        return;
+      }
+
+      if (items.length === 0) {
+        resultsEl.innerHTML = '<p class="search-empty">No matching results found.</p>';
+        return;
+      }
+
+      resultsEl.innerHTML = `
+        <p class="search-count">${items.length} result${items.length === 1 ? "" : "s"} found</p>
+
+        <div class="search-result-list">
+          ${items
+            .map(
+              (item) => `
+                <a class="search-result-card" href="${item.url}">
+                  <span class="search-result-type">${item.type}</span>
+                  <h2>${item.title}</h2>
+                  <p>${item.description}</p>
+                  ${
+                    item.categories?.length
+                      ? `<div class="search-result-tags">${item.categories
+                          .map((category) => `<span>${category}</span>`)
+                          .join("")}</div>`
+                      : ""
+                  }
+                </a>
+              `
+            )
+            .join("")}
+        </div>
+      `;
+    }
+
+    async function initSearch() {
+      const response = await fetch("/search.json");
+      searchIndex = await response.json();
+
+      input.addEventListener("input", () => {
+        const query = input.value;
+
+        const results = searchIndex
+          .map((item) => ({
+            ...item,
+            score: scoreItem(item, query),
+          }))
+          .filter((item) => item.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 20);
+
+        renderResults(results, query);
+      });
+    }
+
+    initSearch();
+  </script>
+</PublicLayout>
