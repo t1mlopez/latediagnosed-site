@@ -1,21 +1,181 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import PublicLayout from "../layouts/PublicLayout.astro";
 ---
 
-<Layout title="About | Late Diagnosed">
-  <main class="min-h-screen bg-slate-950 text-white">
-    <section class="mx-auto max-w-5xl px-6 py-24">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-purple-300">
-        Late Diagnosed
-      </p>
-
-      <h1 class="mb-6 text-4xl font-bold tracking-tight md:text-5xl">
-        About
+<PublicLayout
+  title="About Us"
+  description="Learn about Late Diagnosed, a 501(c)(3) nonprofit providing education, resources, community, and advocacy for late-diagnosed neurodivergent and trauma-related experiences."
+>
+  <main class="max-w-5xl mx-auto px-6 py-20">
+    <section class="mb-16">
+      <h1 class="font-heading text-5xl text-[#1e2a5e] mb-6">
+        About Late Diagnosed
       </h1>
 
-      <p class="max-w-2xl text-lg leading-8 text-slate-300">
-        This page is currently being built. Placeholder content will be replaced in a future phase.
+      <p class="text-xl text-gray-700 max-w-3xl leading-relaxed">
+        No one should have to navigate a late diagnosis alone.
+      </p>
+
+      <p class="text-lg text-gray-700 max-w-3xl leading-relaxed mt-6">
+        Late Diagnosed is a California Public Benefit Corporation and IRS-recognized 501(c)(3) public charity dedicated to improving public understanding of neurodivergence and trauma-related conditions through evidence-informed education, practical resources, community, and advocacy.
+      </p>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">Our Mission</h2>
+
+      <blockquote class="border-l-4 border-[#4a2068] pl-6 text-xl leading-relaxed text-gray-700">
+        Late Diagnosed exists to ensure that no one faces a late diagnosis alone. We provide evidence-informed education, practical resources, community, and advocacy to help individuals, families, and professionals better understand neurodivergence and trauma-related conditions, reducing isolation while fostering self-understanding, connection, and hope.
+      </blockquote>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">Who We Serve</h2>
+
+      <p class="text-gray-700 mb-4">
+        Late Diagnosed supports people across every stage of the diagnostic journey, including:
+      </p>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-2">
+        <li>Adults receiving a late diagnosis</li>
+        <li>Individuals exploring possible neurodivergence</li>
+        <li>Family members and caregivers</li>
+        <li>Mental health professionals</li>
+        <li>Medical professionals</li>
+        <li>Educators</li>
+        <li>Researchers studying neurodivergence and trauma</li>
+      </ul>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">What We Do</h2>
+
+      <p class="text-gray-700 mb-4">
+        Our work focuses on education, awareness, and community. Current and planned initiatives include:
+      </p>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-2">
+        <li>Educational articles</li>
+        <li>Downloadable guides and resources</li>
+        <li>Resource library</li>
+        <li>Community education</li>
+        <li>Professional resources</li>
+        <li>Public awareness initiatives</li>
+        <li>Research participation opportunities</li>
+        <li>Surveys</li>
+        <li>Live educational events</li>
+        <li>Webinars</li>
+        <li>Podcasts</li>
+        <li>Community support resources</li>
+      </ul>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">Our Commitment</h2>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        We believe that accurate information changes lives. Many individuals spend years—or even decades—without understanding why certain experiences have felt different. By improving access to reliable educational resources, we hope to reduce confusion, stigma, and unnecessary isolation while helping people better understand themselves and those around them.
+      </p>
+
+      <p class="text-gray-700 leading-relaxed">
+        Our goal is not to provide medical diagnosis or treatment, but to improve public understanding through evidence-informed educational materials and community resources.
+      </p>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-6">Organization Information</h2>
+
+      <dl class="grid md:grid-cols-2 gap-x-10 gap-y-6 text-gray-700">
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Legal Name</dt>
+          <dd>Late Diagnosed</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Organization Type</dt>
+          <dd>California Public Benefit Corporation</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Federal Tax Status</dt>
+          <dd>501(c)(3) Public Charity</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Federal Employer Identification Number (EIN)</dt>
+          <dd>41-3813703</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Managing Director</dt>
+          <dd>Tim Lopez</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Official Website</dt>
+          <dd>
+  <a href="https://latediagnosed.org" class="text-[#1e2a5e] underline">
+    https://latediagnosed.org
+  </a>
+</dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Mailing Address</dt>
+          <dd>
+            31283 Skyline Drive<br />
+            Temecula, CA 92591
+          </dd>
+        </div>
+
+        <div>
+          <dt class="font-semibold text-[#1e2a5e]">Contact</dt>
+          <dd>
+
+  <a
+
+    href="mailto:info@latediagnosed.org"
+
+    class="text-[#1e2a5e] underline"
+
+  >
+
+    info@latediagnosed.org
+
+  </a>
+
+</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">Transparency</h2>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Late Diagnosed is committed to operating with transparency, accountability, and responsible stewardship of donations and organizational resources.
+      </p>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        As the organization grows, this website will include additional public information including:
+      </p>
+
+      <ul class="list-disc pl-6 text-gray-700 space-y-2">
+        <li>Annual reports</li>
+        <li>IRS Form 990 filings</li>
+        <li>Organizational policies</li>
+        <li>Governance information</li>
+        <li>Financial reporting</li>
+        <li>Board information</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="font-heading text-3xl text-[#1e2a5e] mb-4">Official Website</h2>
+
+      <p class="text-gray-700 leading-relaxed">
+        This website is the official online presence of Late Diagnosed and serves as the primary source for organizational information, educational resources, public updates, and contact information.
       </p>
     </section>
   </main>
-</Layout>
+</PublicLayout>
