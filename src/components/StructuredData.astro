@@ -1,0 +1,49 @@
+---
+const {
+  type = "WebPage",
+  title,
+  description,
+  url,
+  image,
+  author,
+  publishDate,
+  modifiedDate,
+} = Astro.props;
+
+const siteUrl = "https://latediagnosed.org";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type,
+  headline: title,
+  name: title,
+  description,
+  url,
+  image,
+  author: author
+    ? {
+        "@type": "Person",
+        name: author,
+      }
+    : {
+        "@type": "Organization",
+        name: "Late Diagnosed",
+        url: siteUrl,
+      },
+  publisher: {
+    "@type": "Organization",
+    name: "Late Diagnosed",
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/images/placeholder.jpg`,
+    },
+  },
+  datePublished: publishDate,
+  dateModified: modifiedDate || publishDate,
+};
+
+const json = JSON.stringify(structuredData);
+---
+
+<script type="application/ld+json" set:html={json} />

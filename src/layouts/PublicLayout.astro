@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-
+import StructuredData from "../components/StructuredData.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -9,6 +9,10 @@ const {
   description = "Supporting adults navigating late diagnosis, neurodivergence, CPTSD, burnout, and related experiences.",
   image = "/images/placeholder.jpg",
   canonicalUrl,
+  type = "WebPage",
+  author,
+  publishDate,
+  modifiedDate,
 } = Astro.props;
 
 const pageTitle = title.includes("Late Diagnosed")
@@ -40,7 +44,16 @@ const imageUrl = new URL(image, siteUrl).toString();
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-
+<StructuredData
+  type={type}
+  title={pageTitle}
+  description={description}
+  url={canonical}
+  image={imageUrl}
+  author={author}
+  publishDate={publishDate}
+  modifiedDate={modifiedDate}
+/>
     <script is:inline src="https://cdn.tailwindcss.com/3.4.17"></script>
 
     <script

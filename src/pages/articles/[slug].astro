@@ -80,6 +80,10 @@ const isComponentShowcase = article.id === "component-showcase";
   description={article.data.seoDescription || article.data.description}
   image={article.data.heroImage}
   canonicalUrl={article.data.canonicalUrl}
+  type="Article"
+author={author?.data?.name}
+publishDate={article.data.publishDate?.toISOString()}
+modifiedDate={(article.data.lastUpdated || article.data.publishDate)?.toISOString()}
 >
   <ArticleLayout
     title={article.data.title}
