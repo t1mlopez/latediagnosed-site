@@ -1,8 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import KeyTakeaways from "../../components/KeyTakeaways.astro";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import KeyTakeaways from "../../components/KeyTakeaways.astro";
 import ResearchCallout from "../../components/ResearchCallout.astro";
 import TipBox from "../../components/TipBox.astro";
 import WarningBox from "../../components/WarningBox.astro";
@@ -22,17 +23,46 @@ export async function getStaticPaths() {
     .map((article) => {
       const author = authors.find((a) => a.id === article.data.author);
 
+      const relatedArticles = articles
+        .filter((candidate) => {
+          if (candidate.id === article.id) return false;
+          if (candidate.data.status !== "published") return false;
+
+          const sharedCategories = candidate.data.categories?.some((category) =>
+            article.data.categories?.includes(category)
+          );
+
+          const sharedTags = candidate.data.tags?.some((tag) =>
+            article.data.tags?.includes(tag)
+          );
+
+          return sharedCategories || sharedTags;
+        })
+        .sort((a, b) => {
+          const aDate = a.data.publishDate
+            ? new Date(a.data.publishDate).getTime()
+            : 0;
+
+          const bDate = b.data.publishDate
+            ? new Date(b.data.publishDate).getTime()
+            : 0;
+
+          return bDate - aDate;
+        })
+        .slice(0, 3);
+
       return {
         params: { slug: article.id },
         props: {
           article,
           author,
+          relatedArticles,
         },
       };
     });
 }
 
-const { article, author } = Astro.props;
+const { article, author, relatedArticles } = Astro.props;
 
 const wordCount = article.body
   ? article.body.trim().split(/\s+/).length
@@ -41,59 +71,87 @@ const wordCount = article.body
 const minutes = Math.max(1, Math.ceil(wordCount / 225));
 const readingTime = `${minutes} min read`;
 const headings = article.rendered?.metadata?.headings ?? [];
+
+const isComponentShowcase = article.id === "component-showcase";
 ---
 
 <PublicLayout title={article.data.title}>
-<ArticleLayout
-  title={article.data.title}
-  description={article.data.description}
-  author={author?.data?.name}
-  categories={article.data.categories}
-  publishDate={article.data.publishDate}
-  lastUpdated={article.data.lastUpdated}
-  readingTime={readingTime}
->
-  <KeyTakeaways>
-    <ul>
-      <li>This article is placeholder content.</li>
-      <li>The template now supports reusable summary blocks.</li>
-      <li>Future articles can use this space for quick reader orientation.</li>
-    </ul>
-  </KeyTakeaways>
-<ResearchCallout>
-  Research-backed information goes here.
-</ResearchCallout>
+  <ArticleLayout
+    title={article.data.title}
+    description={article.data.description}
+    author={author?.data?.name}
+    categories={article.data.categories}
+    publishDate={article.data.publishDate}
+    lastUpdated={article.data.lastUpdated}
+    readingTime={readingTime}
+  >
+    <KeyTakeaways>
+      <ul>
+        <li>This article is placeholder content.</li>
+        <li>The template now supports reusable summary blocks.</li>
+        <li>Future articles can use this space for quick reader orientation.</li>
+      </ul>
+    </KeyTakeaways>
 
-<TipBox>
-  Practical advice goes here.
-</TipBox>
+    {isComponentShowcase && (
+      <>
+        <ResearchCallout>
+          Research-backed information goes here.
+        </ResearchCallout>
 
-<WarningBox>
-  This is an important warning.
-</WarningBox>
+        <TipBox>
+          Practical advice goes here.
+        </TipBox>
 
-<DefinitionBox term="Executive Function">
-  Executive function is the brain's management system.
-</DefinitionBox>
+        <WarningBox>
+          This is an important warning.
+        </WarningBox>
 
-<PullQuote attribution="Late Diagnosed">
-  Understanding yourself changes how you understand your past.
-</PullQuote>
+        <DefinitionBox term="Executive Function">
+          Executive function is the brain's management system.
+        </DefinitionBox>
 
-<FAQ question="Can adults have ADHD without knowing?">
-  <p>Yes. Many people are diagnosed in adulthood.</p>
-</FAQ>
+        <PullQuote attribution="Late Diagnosed">
+          Understanding yourself changes how you understand your past.
+        </PullQuote>
 
-<DownloadBox title="Printable Checklist">
-  Download a PDF version.
-</DownloadBox>
+        <FAQ question="Can adults have ADHD without knowing?">
+          <p>Yes. Many people are diagnosed in adulthood.</p>
+        </FAQ>
 
-<References>
-  <ul>
-    <li>Example reference.</li>
-  </ul>
-</References>
-  <div set:html={article.rendered.html} />
+        <DownloadBox title="Printable Checklist">
+          Download a PDF version.
+        </DownloadBox>
 
-  <TableOfContents slot="sidebar" headings={headings} />
-</ArticleLayout>
+        <References>
+          <ul>
+            <li>Example reference.</li>
+          </ul>
+        </References>
+      </>
+    )}
+
+    <div set:html={article.rendered.html} />
+
+    {relatedArticles.length > 0 && (
+      <section class="related-articles-section">
+        <hr />
+
+        <h2>Related Articles</h2>
+
+        <div class="related-articles-grid">
+          {relatedArticles.map((relatedArticle) => (
+            <ArticleCard
+              title={relatedArticle.data.title}
+              description={relatedArticle.data.excerpt || relatedArticle.data.description}
+              categories={relatedArticle.data.categories}
+              href={`/articles/${relatedArticle.id}/`}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <TableOfContents slot="sidebar" headings={headings} />
+  </ArticleLayout>
+</PublicLayout>

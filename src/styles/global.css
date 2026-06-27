@@ -530,3 +530,22 @@ hr {
   gap: 1rem;
   margin-top: 1.5rem;
 }
+
+/* ===========================
+   RELATED ARTICLES
+=========================== */
+
+.related-articles-section {
+  margin-top: 3rem;
+}
+
+.related-articles-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #1e2a5e;
+}
+
+.related-articles-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
