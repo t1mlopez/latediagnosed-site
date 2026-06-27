@@ -1,31 +1,87 @@
-<!-- Resources -->
-  <section id="resources" class="max-w-6xl mx-auto px-6 py-20">
-    <h2 class="font-heading text-center mb-12 text-[#1e2a5e] font-bold text-2xl">Resource Library</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
-        <div class="w-12 h-12 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-4">
-          <i data-lucide="zap" class="text-[#1e2a5e]"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-3 text-[#1e2a5e]">ADHD Resources</h3>
-        <p class="text-gray-600">Executive function strategies, medication guides, workplace accommodations, and understanding the emotional side of ADHD.</p>
-      </a>
+---
+const { resources = [] } = Astro.props;
 
-      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
-        <div class="w-12 h-12 rounded-full bg-[#4a2068]/10 flex items-center justify-center mb-4">
-          <svg class="infinity-symbol text-[#4a2068]" viewBox="0 0 32 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 10c0-3.3 2.7-6 6-6s6 2.7 6 6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6c0-3.3-2.7-6-6-6S2 6.7 2 10s2.7 6 6 6 6-2.7 6-6"></path>
-          </svg>
-        </div>
-        <h3 class="font-semibold text-lg mb-3 text-[#4a2068]">Autism Resources</h3>
-        <p class="text-gray-600">Sensory processing, masking and unmasking, social communication differences, and building an autistic-affirming life.</p>
-      </a>
+const iconMap = {
+  ADHD: "zap",
+  Autism: "infinity",
+  AuDHD: "sparkles",
+  CPTSD: "shield",
+};
 
-      <a href="#" class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline">
-        <div class="w-12 h-12 rounded-full bg-[#1e2a5e]/10 flex items-center justify-center mb-4">
-          <i data-lucide="shield" class="text-[#1e2a5e]"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-3 text-[#1e2a5e]">CPTSD Resources</h3>
-        <p class="text-gray-600">Trauma-informed approaches, nervous system regulation, dissociation support, and understanding the overlap with neurodivergence.</p>
-      </a>
-    </div>
-  </section>
+const colorMap = {
+  ADHD: "#1e2a5e",
+  Autism: "#4a2068",
+  AuDHD: "#4a2068",
+  CPTSD: "#1e2a5e",
+};
+
+function getPrimaryCategory(resource) {
+  return resource.data.categories?.[0] || resource.data.title;
+}
+
+function getIcon(resource) {
+  const category = getPrimaryCategory(resource);
+  return iconMap[category] || "book-open";
+}
+
+function getColor(resource) {
+  const category = getPrimaryCategory(resource);
+  return colorMap[category] || "#1e2a5e";
+}
+---
+
+<section id="resources" class="max-w-6xl mx-auto px-6 py-20">
+  <h2 class="font-heading text-center mb-12 text-[#1e2a5e] font-bold text-2xl">
+    Resource Library
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    {resources.map((resource) => {
+      const icon = getIcon(resource);
+      const color = getColor(resource);
+
+      return (
+        <a
+          href={`/resources/${resource.id}/`}
+          class="block rounded-xl p-8 border border-gray-100 shadow-sm bg-white no-underline"
+        >
+          <div
+            class="w-12 h-12 rounded-full flex items-center justify-center mb-4"
+            style={`background: ${color}1A;`}
+          >
+            {icon === "infinity" ? (
+              <svg
+                class="infinity-symbol"
+                style={`color: ${color};`}
+                viewBox="0 0 32 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M8 10c0-3.3 2.7-6 6-6s6 2.7 6 6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6c0-3.3-2.7-6-6-6S2 6.7 2 10s2.7 6 6 6 6-2.7 6-6"></path>
+              </svg>
+            ) : (
+              <i
+                data-lucide={icon}
+                style={`color: ${color};`}
+              ></i>
+            )}
+          </div>
+
+          <h3
+            class="font-semibold text-lg mb-3"
+            style={`color: ${color};`}
+          >
+            {resource.data.title} Resources
+          </h3>
+
+          <p class="text-gray-600">
+            {resource.data.excerpt || resource.data.description}
+          </p>
+        </a>
+      );
+    })}
+  </div>
+</section>

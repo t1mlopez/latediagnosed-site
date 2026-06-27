@@ -23,6 +23,17 @@ const featuredArticles = (await getCollection("articles"))
     return bDate - aDate;
   })
   .slice(0, 3);
+const resourceOrder = ["ADHD", "Autism", "AuDHD", "CPTSD"];
+
+const featuredResources = (await getCollection("resources"))
+  .filter((resource) => resource.data.status === "published" && resource.data.featured)
+  .sort((a, b) => {
+    const aIndex = resourceOrder.indexOf(a.data.title);
+    const bIndex = resourceOrder.indexOf(b.data.title);
+
+    return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+  })
+  .slice(0, 6);
 ---
 <!doctype html>
 <html lang="en">
@@ -56,7 +67,7 @@ const featuredArticles = (await getCollection("articles"))
 
   <FeaturedArticles featuredArticles={featuredArticles} />
 
-  <ResourceLibrary />
+  <ResourceLibrary resources={featuredResources} />
 
   <PractitionerLibrary />
 
