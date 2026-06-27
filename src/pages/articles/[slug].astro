@@ -75,7 +75,12 @@ const headings = article.rendered?.metadata?.headings ?? [];
 const isComponentShowcase = article.id === "component-showcase";
 ---
 
-<PublicLayout title={article.data.title}>
+<PublicLayout
+  title={article.data.seoTitle || article.data.title}
+  description={article.data.seoDescription || article.data.description}
+  image={article.data.heroImage}
+  canonicalUrl={article.data.canonicalUrl}
+>
   <ArticleLayout
     title={article.data.title}
     description={article.data.description}
@@ -84,6 +89,16 @@ const isComponentShowcase = article.id === "component-showcase";
     publishDate={article.data.publishDate}
     lastUpdated={article.data.lastUpdated}
     readingTime={readingTime}
+    difficulty={article.data.difficulty}
+    audience={article.data.audience}
+    reviewedBy={article.data.reviewedBy}
+    reviewDate={article.data.reviewDate}
+    hasPdf={article.data.hasPdf}
+    pdfUrl={article.data.pdfUrl}
+    hasAudio={article.data.hasAudio}
+    audioUrl={article.data.audioUrl}
+    hasVideo={article.data.hasVideo}
+    videoUrl={article.data.videoUrl}
   >
     <KeyTakeaways>
       <ul>
