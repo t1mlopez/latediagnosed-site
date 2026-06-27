@@ -1,21 +1,141 @@
 backend:
   name: github
   repo: t1mlopez/latediagnosed-site
-  branch: main
+  branch: phase-12-content-system
   base_url: https://fragrant-hall-b531.tim-0a7.workers.dev
 
 media_folder: public/uploads
 public_folder: /uploads
 
 collections:
-  - name: pages
-    label: Pages
-    folder: content/pages
-    create: false
+  - name: articles
+    label: Articles
+    folder: src/content/articles
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
     fields:
       - label: Title
         name: title
         widget: string
+
+      - label: Description
+        name: description
+        widget: text
+
+      - label: Categories
+        name: categories
+        widget: list
+        default: []
+
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+
+      - label: Author
+        name: author
+        widget: string
+        default: late-diagnosed
+
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+        required: false
+
+      - label: Last Updated
+        name: lastUpdated
+        widget: datetime
+        required: false
+
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - published
+          - archived
+        default: draft
+
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+
+      - label: Excerpt
+        name: excerpt
+        widget: text
+        required: false
+
+      - label: Hero Image
+        name: heroImage
+        widget: image
+        required: false
+
+      - label: Body
+        name: body
+        widget: markdown
+
+  - name: resources
+    label: Resources
+    folder: src/content/resources
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Description
+        name: description
+        widget: text
+
+      - label: Categories
+        name: categories
+        widget: list
+        default: []
+
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+
+      - label: Author
+        name: author
+        widget: string
+        default: late-diagnosed
+
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+        required: false
+
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - draft
+          - published
+          - archived
+        default: draft
+
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+
+      - label: Excerpt
+        name: excerpt
+        widget: text
+        required: false
+
+      - label: Hero Image
+        name: heroImage
+        widget: image
+        required: false
 
       - label: Body
         name: body
