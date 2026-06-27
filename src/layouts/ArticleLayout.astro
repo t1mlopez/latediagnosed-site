@@ -16,8 +16,16 @@ const {
 } = Astro.props;
 ---
 
-<main class="article-container">
-  <header class="article-header">
+<section class="article-hero">
+  <div class="article-hero-inner">
+    {categories.length > 0 && (
+      <div class="article-categories">
+        {categories.map((category) => (
+          <span class="category-pill">{category}</span>
+        ))}
+      </div>
+    )}
+
     <h1>{title}</h1>
 
     <p class="article-description">
@@ -25,35 +33,20 @@ const {
     </p>
 
     <div class="article-meta">
-      {author && (
-        <span>
-          By {author}
-        </span>
-      )}
-
-      {lastUpdated && (
-        <span>
-          Updated {lastUpdated.toLocaleDateString()}
-        </span>
-      )}
+      {author && <span>By {author}</span>}
+      {lastUpdated && <span>Updated {lastUpdated.toLocaleDateString()}</span>}
     </div>
+  </div>
+</section>
 
-    {
-      categories.length > 0 && (
-        <div class="article-categories">
-          {
-            categories.map((category) => (
-              <span class="category-pill">
-                {category}
-              </span>
-            ))
-          }
-        </div>
-      )
-    }
-  </header>
-
-  <article class="article-content">
-    <slot />
+<main class="article-shell">
+  <article class="article-main">
+    <div class="article-content">
+      <slot />
+    </div>
   </article>
+
+  <aside class="article-sidebar">
+    <slot name="sidebar" />
+  </aside>
 </main>
