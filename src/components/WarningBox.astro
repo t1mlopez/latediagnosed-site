@@ -1,0 +1,8 @@
+---
+const { title = "Important note" } = Astro.props;
+---
+
+<section class="content-block warning-box">
+  <h3>{title}</h3>
+  <slot />
+</section>

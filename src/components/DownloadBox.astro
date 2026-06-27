@@ -1,0 +1,12 @@
+---
+const { title = "Download", href = "#" } = Astro.props;
+---
+
+<section class="download-box">
+  <div>
+    <h3>{title}</h3>
+    <slot />
+  </div>
+
+  <a href={href}>Download</a>
+</section>

@@ -428,3 +428,46 @@ hr {
 .key-takeaways-content ul {
   margin-bottom: 0;
 }
+/* ===========================
+   TABLE OF CONTENTS
+=========================== */
+
+.toc-card {
+  position: sticky;
+  top: 6rem;
+  padding: 1rem;
+  border: 1px solid #e7e0ef;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.toc-title {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+  color: #1e2a5e;
+}
+
+.toc-card ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-card li {
+  margin-bottom: 0.5rem;
+}
+
+.toc-card a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.toc-card a:hover {
+  color: #1e2a5e;
+}
+
+.toc-depth-3 {
+  padding-left: 1rem;
+  font-size: 0.9rem;
+}
