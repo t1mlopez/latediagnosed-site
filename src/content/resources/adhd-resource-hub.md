@@ -1,7 +1,8 @@
 ---
 title: "ADHD Resources"
 description: "Placeholder ADHD resource hub."
-draft: false
+author: late-diagnosed
+status: draft
 ---
 
 # ADHD Resources
