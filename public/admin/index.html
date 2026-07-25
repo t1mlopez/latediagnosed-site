@@ -6,5 +6,266 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var Preview = createClass;
+
+      function field(entry, name) {
+        return entry && entry.getIn ? entry.getIn(["data", name]) : undefined;
+      }
+
+      function list(value) {
+        if (value == null) return [];
+        if (Array.isArray(value)) return value;
+        if (typeof value.toArray === "function") return value.toArray();
+        if (typeof value.toJS === "function") {
+          var converted = value.toJS();
+          return Array.isArray(converted) ? converted : [];
+        }
+        return [];
+      }
+
+      function itemField(item, name) {
+        if (item == null) return undefined;
+        return typeof item.get === "function" ? item.get(name) : item[name];
+      }
+
+      function present(value) {
+        return value !== undefined && value !== null && value !== "";
+      }
+
+      function formatDate(value) {
+        if (!present(value)) return "";
+        var date = new Date(value);
+        return Number.isNaN(date.getTime())
+          ? String(value)
+          : date.toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+      }
+
+      function assetUrl(value, getAsset) {
+        if (!present(value)) return "";
+        var asset = getAsset(value);
+        return asset == null ? "" : String(asset);
+      }
+
+      function safeWebUrl(value) {
+        return typeof value === "string" && /^https?:\/\//i.test(value)
+          ? value
+          : "";
+      }
+
+      function renderHero(value, getAsset, alt, className) {
+        var src = assetUrl(value, getAsset);
+        return src
+          ? h("img", {
+              className: className || "preview-hero",
+              src: src,
+              alt: alt || "",
+            })
+          : null;
+      }
+
+      function renderPills(values, className) {
+        var items = list(values).filter(present);
+        return items.length
+          ? h(
+              "div",
+              { className: className || "preview-pills" },
+              items.map(function (item, index) {
+                return h("span", { className: "preview-pill", key: index }, String(item));
+              })
+            )
+          : null;
+      }
+
+      function renderMetadata(items) {
+        var visible = items.filter(function (item) {
+          return present(item.value);
+        });
+        return visible.length
+          ? h(
+              "dl",
+              { className: "preview-meta" },
+              visible.map(function (item) {
+                return h(
+                  "div",
+                  { className: "preview-meta-item", key: item.label },
+                  h("dt", null, item.label),
+                  h("dd", null, item.value)
+                );
+              })
+            )
+          : null;
+      }
+
+      function renderTakeaways(values) {
+        var items = list(values).filter(present);
+        return items.length
+          ? h(
+              "section",
+              { className: "preview-takeaways" },
+              h("h2", null, "Key Takeaways"),
+              h(
+                "ul",
+                null,
+                items.map(function (item, index) {
+                  return h("li", { key: index }, String(item));
+                })
+              )
+            )
+          : null;
+      }
+
+      function createContentPreview(kind) {
+        return Preview({
+          render: function () {
+            var entry = this.props.entry;
+            var widgetFor = this.props.widgetFor;
+            var getAsset = this.props.getAsset;
+            var title = field(entry, "title") || "Untitled";
+            var audience = list(field(entry, "audience")).filter(present).join(", ");
+
+            return h(
+              "main",
+              { className: "preview-shell preview-" + kind },
+              renderHero(field(entry, "heroImage"), getAsset, String(title)),
+              h(
+                "article",
+                { className: "preview-card" },
+                renderPills(field(entry, "categories")),
+                h("h1", null, String(title)),
+                present(field(entry, "description"))
+                  ? h("p", { className: "preview-description" }, String(field(entry, "description")))
+                  : null,
+                renderMetadata([
+                  { label: "Author", value: field(entry, "author") },
+                  { label: "Published", value: formatDate(field(entry, "publishDate")) },
+                  { label: "Updated", value: formatDate(field(entry, "lastUpdated")) },
+                  { label: "Difficulty", value: field(entry, "difficulty") },
+                  { label: "Audience", value: audience },
+                ]),
+                renderTakeaways(field(entry, "keyTakeaways")),
+                h("div", { className: "preview-body" }, widgetFor("body"))
+              )
+            );
+          },
+        });
+      }
+
+      var AuthorPreview = Preview({
+        render: function () {
+          var entry = this.props.entry;
+          var credentials = list(field(entry, "credentials")).filter(present);
+          var socialLinks = list(field(entry, "socialLinks"));
+          var website = field(entry, "website");
+          var websiteUrl = safeWebUrl(website);
+
+          return h(
+            "main",
+            { className: "preview-shell preview-author" },
+            h(
+              "article",
+              { className: "preview-card preview-profile" },
+              renderHero(field(entry, "avatar"), this.props.getAsset, String(field(entry, "name") || ""), "preview-avatar"),
+              h("h1", null, String(field(entry, "name") || "Unnamed Author")),
+              present(field(entry, "title"))
+                ? h("p", { className: "preview-professional-title" }, String(field(entry, "title")))
+                : null,
+              renderPills(credentials, "preview-pills preview-credentials"),
+              present(field(entry, "bio"))
+                ? h("p", { className: "preview-description" }, String(field(entry, "bio")))
+                : null,
+              present(website)
+                ? h(
+                    "p",
+                    { className: "preview-link-row" },
+                    h("strong", null, "Website: "),
+                    websiteUrl
+                      ? h("a", { href: websiteUrl }, String(website))
+                      : h("span", null, String(website))
+                  )
+                : null,
+              socialLinks.length
+                ? h(
+                    "section",
+                    { className: "preview-social" },
+                    h("h2", null, "Social Links"),
+                    h(
+                      "ul",
+                      null,
+                      socialLinks.map(function (item, index) {
+                        var label = itemField(item, "label") || "Link";
+                        var url = itemField(item, "url") || "";
+                        var safeUrl = safeWebUrl(url);
+                        return h(
+                          "li",
+                          { key: index },
+                          safeUrl
+                            ? h("a", { href: safeUrl }, String(label))
+                            : h("span", null, String(label))
+                        );
+                      })
+                    )
+                  )
+                : null,
+              h("div", { className: "preview-body" }, this.props.widgetFor("body"))
+            )
+          );
+        },
+      });
+
+      var CategoryPreview = Preview({
+        render: function () {
+          var entry = this.props.entry;
+          var color = field(entry, "color");
+          var order = field(entry, "order");
+
+          return h(
+            "main",
+            { className: "preview-shell preview-category" },
+            h(
+              "article",
+              { className: "preview-card" },
+              present(field(entry, "icon"))
+                ? h("div", { className: "preview-icon", "aria-hidden": "true" }, String(field(entry, "icon")))
+                : null,
+              h("h1", null, String(field(entry, "title") || "Untitled Category")),
+              present(field(entry, "description"))
+                ? h("p", { className: "preview-description" }, String(field(entry, "description")))
+                : null,
+              h(
+                "div",
+                { className: "preview-category-details" },
+                present(color)
+                  ? h(
+                      "span",
+                      { className: "preview-color-value" },
+                      h("span", { className: "preview-color-swatch", style: { backgroundColor: String(color) } }),
+                      String(color)
+                    )
+                  : null,
+                h("span", null, "Featured: " + (field(entry, "featured") ? "Yes" : "No")),
+                present(order) ? h("span", null, "Order: " + String(order)) : null
+              ),
+              h("div", { className: "preview-body" }, this.props.widgetFor("body"))
+            )
+          );
+        },
+      });
+
+      CMS.registerPreviewStyle("/admin/preview.css");
+      CMS.registerPreviewTemplate("articles", createContentPreview("article"));
+      CMS.registerPreviewTemplate("resources", createContentPreview("resource"));
+      CMS.registerPreviewTemplate("pages", createContentPreview("page"));
+      CMS.registerPreviewTemplate("authors", AuthorPreview);
+      CMS.registerPreviewTemplate("categories", CategoryPreview);
+    })();
+  </script>
 </body>
 </html>
