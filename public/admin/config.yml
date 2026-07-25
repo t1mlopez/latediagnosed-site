@@ -13,7 +13,7 @@ collections:
     folder: src/content/articles
     create: true
     slug: "{{slug}}"
-    extension: mdx
+    extension: md
     format: frontmatter
     fields:
       - label: Title
