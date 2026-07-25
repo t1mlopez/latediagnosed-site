@@ -21,6 +21,8 @@ const contentSchema = z.object({
 
   heroImage: z.string().optional(),
 
+  keyTakeaways: z.array(z.string()).default([]),
+
   // Editorial metadata
   difficulty: z
     .enum(["beginner", "intermediate", "advanced"])

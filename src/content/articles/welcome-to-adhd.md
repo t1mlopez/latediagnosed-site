@@ -20,6 +20,11 @@ featured: true
 excerpt: A starting point for understanding ADHD.
 
 heroImage: /images/placeholder.jpg
+
+keyTakeaways:
+  - This article is placeholder content.
+  - The template now supports reusable summary blocks.
+  - Future articles can use this space for quick reader orientation.
 ---
 
 ADHD affects attention, executive function, motivation, working memory, and emotional regulation.

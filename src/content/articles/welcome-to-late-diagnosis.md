@@ -20,6 +20,11 @@ featured: true
 excerpt: A short summary used for homepage cards and featured content.
 
 heroImage: /images/placeholder.jpg
+
+keyTakeaways:
+  - This article is placeholder content.
+  - The template now supports reusable summary blocks.
+  - Future articles can use this space for quick reader orientation.
 ---
 This is placeholder content.
 

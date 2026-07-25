@@ -104,13 +104,13 @@ modifiedDate={(article.data.lastUpdated || article.data.publishDate)?.toISOStrin
     hasVideo={article.data.hasVideo}
     videoUrl={article.data.videoUrl}
   >
-    <KeyTakeaways>
-      <ul>
-        <li>This article is placeholder content.</li>
-        <li>The template now supports reusable summary blocks.</li>
-        <li>Future articles can use this space for quick reader orientation.</li>
-      </ul>
-    </KeyTakeaways>
+    {article.data.keyTakeaways.length > 0 && (
+      <KeyTakeaways>
+        <ul>
+          {article.data.keyTakeaways.map((takeaway) => <li>{takeaway}</li>)}
+        </ul>
+      </KeyTakeaways>
+    )}
 
     {isComponentShowcase && (
       <>

@@ -16,66 +16,59 @@ collections:
     extension: md
     format: frontmatter
     fields:
-      - label: Title
-        name: title
-        widget: string
-
-      - label: Description
-        name: description
-        widget: text
-
-      - label: Categories
-        name: categories
-        widget: list
-        default: []
-
-      - label: Tags
-        name: tags
-        widget: list
-        default: []
-
-      - label: Author
-        name: author
-        widget: string
-        default: late-diagnosed
-
-      - label: Publish Date
-        name: publishDate
-        widget: datetime
-        required: false
-
-      - label: Last Updated
-        name: lastUpdated
-        widget: datetime
-        required: false
-
-      - label: Status
+      - { label: "Core — Title", name: title, widget: string, hint: "Public content title." }
+      - { label: "Core — Description", name: description, widget: text, hint: "Primary summary used in listings and metadata." }
+      - { label: "Core — Excerpt", name: excerpt, widget: text, required: false, hint: "Optional shorter summary for content cards." }
+      - { label: "Core — Hero Image", name: heroImage, widget: image, required: false, hint: "Optional lead image path." }
+      - { label: "Core — Categories", name: categories, widget: list, default: [], hint: "Category names used for organization and related content." }
+      - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
+      - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
+      - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - label: "Core — Status"
         name: status
         widget: select
-        options:
-          - draft
-          - published
-          - archived
+        options: [draft, published, archived]
         default: draft
+        hint: "Only published entries appear on public routes."
+      - { label: "Core — Featured", name: featured, widget: boolean, default: false, hint: "Include this entry in featured-content selections." }
+      - { label: "Core — Body", name: body, widget: markdown, hint: "Main Markdown content." }
 
-      - label: Featured
-        name: featured
-        widget: boolean
-        default: false
-
-      - label: Excerpt
-        name: excerpt
-        widget: text
+      - { label: "Orientation — Key Takeaways", name: keyTakeaways, widget: list, default: [], hint: "Short summary bullets shown before the article body." }
+      - label: "Orientation — Difficulty"
+        name: difficulty
+        widget: select
+        options: [beginner, intermediate, advanced]
         required: false
+        hint: "Optional reader difficulty level."
+      - label: "Orientation — Audience"
+        name: audience
+        widget: select
+        multiple: true
+        options: [newly-diagnosed, self-discovery, family, partners, practitioners, parents, workplace, general]
+        default: []
+        hint: "Select all intended audiences; saved as a flat list."
 
-      - label: Hero Image
-        name: heroImage
-        widget: image
-        required: false
+      - { label: "Review — Reviewed By", name: reviewedBy, widget: string, required: false, hint: "Optional reviewer name or credential." }
+      - { label: "Review — Review Date", name: reviewDate, widget: datetime, required: false, hint: "Optional date of editorial or clinical review." }
+      - { label: "Review — Review Note", name: reviewNote, widget: text, required: false, hint: "Optional note describing the review." }
 
-      - label: Body
-        name: body
-        widget: markdown
+      - { label: "Related — Articles", name: relatedArticles, widget: list, default: [], hint: "Article slugs selected as related content." }
+      - { label: "Related — Resources", name: relatedResources, widget: list, default: [], hint: "Resource slugs selected as related content." }
+      - { label: "Related — Guides", name: relatedGuides, widget: list, default: [], hint: "Guide identifiers retained for related-content controls." }
+
+      - { label: "Media — Has PDF", name: hasPdf, widget: boolean, default: false, hint: "Enable when a PDF version is available." }
+      - { label: "Media — PDF URL", name: pdfUrl, widget: string, required: false, hint: "Used only when Media — Has PDF is enabled." }
+      - { label: "Media — Has Audio", name: hasAudio, widget: boolean, default: false, hint: "Enable when an audio version is available." }
+      - { label: "Media — Audio URL", name: audioUrl, widget: string, required: false, hint: "Used only when Media — Has Audio is enabled." }
+      - { label: "Media — Has Video", name: hasVideo, widget: boolean, default: false, hint: "Enable when a video version is available." }
+      - { label: "Media — Video URL", name: videoUrl, widget: string, required: false, hint: "Used only when Media — Has Video is enabled." }
+
+      - { label: "SEO — Title", name: seoTitle, widget: string, required: false, hint: "Optional title override for search and social metadata." }
+      - { label: "SEO — Description", name: seoDescription, widget: text, required: false, hint: "Optional description override for search and social metadata." }
+      - { label: "SEO — Canonical URL", name: canonicalUrl, widget: string, required: false, hint: "Optional absolute canonical URL." }
+
+      - { label: "Internal — Editorial Notes", name: internalNotes, widget: text, required: false, hint: "Private editorial notes; not rendered publicly." }
 
   - name: resources
     label: Resources
@@ -85,58 +78,158 @@ collections:
     extension: md
     format: frontmatter
     fields:
-      - label: Title
-        name: title
-        widget: string
-
-      - label: Description
-        name: description
-        widget: text
-
-      - label: Categories
-        name: categories
-        widget: list
-        default: []
-
-      - label: Tags
-        name: tags
-        widget: list
-        default: []
-
-      - label: Author
-        name: author
-        widget: string
-        default: late-diagnosed
-
-      - label: Publish Date
-        name: publishDate
-        widget: datetime
-        required: false
-
-      - label: Status
+      - { label: "Core — Title", name: title, widget: string, hint: "Public content title." }
+      - { label: "Core — Description", name: description, widget: text, hint: "Primary summary used in listings and metadata." }
+      - { label: "Core — Excerpt", name: excerpt, widget: text, required: false, hint: "Optional shorter summary for content cards." }
+      - { label: "Core — Hero Image", name: heroImage, widget: image, required: false, hint: "Optional lead image path." }
+      - { label: "Core — Categories", name: categories, widget: list, default: [], hint: "Category names used for organization and related content." }
+      - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
+      - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
+      - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - label: "Core — Status"
         name: status
         widget: select
-        options:
-          - draft
-          - published
-          - archived
+        options: [draft, published, archived]
         default: draft
+        hint: "Only published entries appear on public routes."
+      - { label: "Core — Featured", name: featured, widget: boolean, default: false, hint: "Include this entry in featured-content selections." }
+      - { label: "Core — Body", name: body, widget: markdown, hint: "Main Markdown content." }
 
-      - label: Featured
-        name: featured
-        widget: boolean
-        default: false
-
-      - label: Excerpt
-        name: excerpt
-        widget: text
+      - { label: "Orientation — Key Takeaways", name: keyTakeaways, widget: list, default: [], hint: "Short summary bullets available to content templates." }
+      - label: "Orientation — Difficulty"
+        name: difficulty
+        widget: select
+        options: [beginner, intermediate, advanced]
         required: false
+        hint: "Optional reader difficulty level."
+      - label: "Orientation — Audience"
+        name: audience
+        widget: select
+        multiple: true
+        options: [newly-diagnosed, self-discovery, family, partners, practitioners, parents, workplace, general]
+        default: []
+        hint: "Select all intended audiences; saved as a flat list."
 
-      - label: Hero Image
-        name: heroImage
-        widget: image
+      - { label: "Review — Reviewed By", name: reviewedBy, widget: string, required: false, hint: "Optional reviewer name or credential." }
+      - { label: "Review — Review Date", name: reviewDate, widget: datetime, required: false, hint: "Optional date of editorial or clinical review." }
+      - { label: "Review — Review Note", name: reviewNote, widget: text, required: false, hint: "Optional note describing the review." }
+
+      - { label: "Related — Articles", name: relatedArticles, widget: list, default: [], hint: "Article slugs selected as related content." }
+      - { label: "Related — Resources", name: relatedResources, widget: list, default: [], hint: "Resource slugs selected as related content." }
+      - { label: "Related — Guides", name: relatedGuides, widget: list, default: [], hint: "Guide identifiers retained for related-content controls." }
+
+      - { label: "Media — Has PDF", name: hasPdf, widget: boolean, default: false, hint: "Enable when a PDF version is available." }
+      - { label: "Media — PDF URL", name: pdfUrl, widget: string, required: false, hint: "Used only when Media — Has PDF is enabled." }
+      - { label: "Media — Has Audio", name: hasAudio, widget: boolean, default: false, hint: "Enable when an audio version is available." }
+      - { label: "Media — Audio URL", name: audioUrl, widget: string, required: false, hint: "Used only when Media — Has Audio is enabled." }
+      - { label: "Media — Has Video", name: hasVideo, widget: boolean, default: false, hint: "Enable when a video version is available." }
+      - { label: "Media — Video URL", name: videoUrl, widget: string, required: false, hint: "Used only when Media — Has Video is enabled." }
+
+      - { label: "SEO — Title", name: seoTitle, widget: string, required: false, hint: "Optional title override for search and social metadata." }
+      - { label: "SEO — Description", name: seoDescription, widget: text, required: false, hint: "Optional description override for search and social metadata." }
+      - { label: "SEO — Canonical URL", name: canonicalUrl, widget: string, required: false, hint: "Optional absolute canonical URL." }
+
+      - { label: "Internal — Editorial Notes", name: internalNotes, widget: text, required: false, hint: "Private editorial notes; not rendered publicly." }
+
+  - name: pages
+    label: Pages
+    folder: src/content/pages
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: "Core — Title", name: title, widget: string, hint: "Public content title." }
+      - { label: "Core — Description", name: description, widget: text, hint: "Primary summary used in listings and metadata." }
+      - { label: "Core — Excerpt", name: excerpt, widget: text, required: false, hint: "Optional shorter summary for content cards." }
+      - { label: "Core — Hero Image", name: heroImage, widget: image, required: false, hint: "Optional lead image path." }
+      - { label: "Core — Categories", name: categories, widget: list, default: [], hint: "Category names used for organization and related content." }
+      - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
+      - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
+      - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - label: "Core — Status"
+        name: status
+        widget: select
+        options: [draft, published, archived]
+        default: draft
+        hint: "Only published entries appear on public routes."
+      - { label: "Core — Featured", name: featured, widget: boolean, default: false, hint: "Include this entry in featured-content selections." }
+      - { label: "Core — Body", name: body, widget: markdown, hint: "Main Markdown content." }
+
+      - { label: "Orientation — Key Takeaways", name: keyTakeaways, widget: list, default: [], hint: "Short summary bullets available to content templates." }
+      - label: "Orientation — Difficulty"
+        name: difficulty
+        widget: select
+        options: [beginner, intermediate, advanced]
         required: false
+        hint: "Optional reader difficulty level."
+      - label: "Orientation — Audience"
+        name: audience
+        widget: select
+        multiple: true
+        options: [newly-diagnosed, self-discovery, family, partners, practitioners, parents, workplace, general]
+        default: []
+        hint: "Select all intended audiences; saved as a flat list."
 
-      - label: Body
-        name: body
-        widget: markdown
+      - { label: "Review — Reviewed By", name: reviewedBy, widget: string, required: false, hint: "Optional reviewer name or credential." }
+      - { label: "Review — Review Date", name: reviewDate, widget: datetime, required: false, hint: "Optional date of editorial or clinical review." }
+      - { label: "Review — Review Note", name: reviewNote, widget: text, required: false, hint: "Optional note describing the review." }
+
+      - { label: "Related — Articles", name: relatedArticles, widget: list, default: [], hint: "Article slugs selected as related content." }
+      - { label: "Related — Resources", name: relatedResources, widget: list, default: [], hint: "Resource slugs selected as related content." }
+      - { label: "Related — Guides", name: relatedGuides, widget: list, default: [], hint: "Guide identifiers retained for related-content controls." }
+
+      - { label: "Media — Has PDF", name: hasPdf, widget: boolean, default: false, hint: "Enable when a PDF version is available." }
+      - { label: "Media — PDF URL", name: pdfUrl, widget: string, required: false, hint: "Used only when Media — Has PDF is enabled." }
+      - { label: "Media — Has Audio", name: hasAudio, widget: boolean, default: false, hint: "Enable when an audio version is available." }
+      - { label: "Media — Audio URL", name: audioUrl, widget: string, required: false, hint: "Used only when Media — Has Audio is enabled." }
+      - { label: "Media — Has Video", name: hasVideo, widget: boolean, default: false, hint: "Enable when a video version is available." }
+      - { label: "Media — Video URL", name: videoUrl, widget: string, required: false, hint: "Used only when Media — Has Video is enabled." }
+
+      - { label: "SEO — Title", name: seoTitle, widget: string, required: false, hint: "Optional title override for search and social metadata." }
+      - { label: "SEO — Description", name: seoDescription, widget: text, required: false, hint: "Optional description override for search and social metadata." }
+      - { label: "SEO — Canonical URL", name: canonicalUrl, widget: string, required: false, hint: "Optional absolute canonical URL." }
+
+      - { label: "Internal — Editorial Notes", name: internalNotes, widget: text, required: false, hint: "Private editorial notes; not rendered publicly." }
+
+  - name: authors
+    label: Authors
+    folder: src/content/authors
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Name, name: name, widget: string, hint: "Public author name." }
+      - { label: Bio, name: bio, widget: text, required: false, hint: "Optional short author biography." }
+      - { label: Avatar, name: avatar, widget: image, required: false, hint: "Optional author portrait." }
+      - { label: Title, name: title, widget: string, required: false, hint: "Optional role or professional title." }
+      - { label: Credentials, name: credentials, widget: list, default: [], hint: "Professional credentials shown as a flat list." }
+      - { label: Website, name: website, widget: string, required: false, hint: "Optional absolute website URL." }
+      - label: Social Links
+        name: socialLinks
+        widget: list
+        default: []
+        hint: "Optional labeled profile links."
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: URL, name: url, widget: string }
+      - { label: Body, name: body, widget: markdown, required: false, hint: "Optional extended author Markdown content." }
+
+  - name: categories
+    label: Categories
+    folder: src/content/categories
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string, hint: "Public category title." }
+      - { label: Description, name: description, widget: text, required: false, hint: "Optional category summary." }
+      - { label: Featured, name: featured, widget: boolean, default: false, hint: "Include this category in featured selections." }
+      - { label: Order, name: order, widget: number, required: false, value_type: int, hint: "Optional integer used for manual ordering." }
+      - { label: Icon, name: icon, widget: string, required: false, hint: "Optional icon identifier." }
+      - { label: Color, name: color, widget: string, required: false, hint: "Optional color token or CSS color value." }
+      - { label: Body, name: body, widget: markdown, required: false, hint: "Optional extended category Markdown content." }
