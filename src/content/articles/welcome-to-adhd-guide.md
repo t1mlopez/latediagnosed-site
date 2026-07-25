@@ -1,7 +1,8 @@
 ---
 title: "Welcome to ADHD"
 description: "Placeholder ADHD guide."
-draft: false
+author: late-diagnosed
+status: draft
 ---
 
 # Welcome to ADHD

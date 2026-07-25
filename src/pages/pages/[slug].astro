@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import PublicLayout from "../../layouts/PublicLayout.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+
+  return pages
+    .filter((page) => page.data.status === "published")
+    .map((page) => ({
+      params: { slug: page.id },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+---
+
+<PublicLayout
+  title={page.data.seoTitle || page.data.title}
+  description={page.data.seoDescription || page.data.description}
+  image={page.data.heroImage}
+  canonicalUrl={page.data.canonicalUrl}
+  publishDate={page.data.publishDate?.toISOString()}
+  modifiedDate={(page.data.lastUpdated || page.data.publishDate)?.toISOString()}
+>
+  <ArticleLayout
+    title={page.data.title}
+    description={page.data.description}
+    publishDate={page.data.publishDate}
+    lastUpdated={page.data.lastUpdated}
+  >
+    <div set:html={page.rendered.html} />
+  </ArticleLayout>
+</PublicLayout>

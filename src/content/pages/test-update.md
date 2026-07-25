@@ -1,8 +1,9 @@
 ---
 title: "Test Update"
 description: "Testing update routing."
-pubDate: 2026-06-09
-draft: false
+author: late-diagnosed
+publishDate: 2026-06-09
+status: draft
 ---
 
 # Test Update
