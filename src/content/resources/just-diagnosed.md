@@ -6,7 +6,7 @@ categories:
 tags: []
 author: LateDiagnosed.Org
 publishDate: 2026-07-24T22:32:00.000-07:00
-status: draft
+status: published
 featured: false
 keyTakeaways:
   - Guide purpose and boundaries
