@@ -6,7 +6,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
   <main class="search-page">
     <section class="search-hero">
       <h1>Search Late Diagnosed</h1>
-      <p>Search articles, resource hubs, and future guides.</p>
+      <p>Search articles, resource hubs, and public pages.</p>
 
       <label class="sr-only" for="site-search">Search</label>
       <input
@@ -32,15 +32,22 @@ import PublicLayout from "../layouts/PublicLayout.astro";
       return String(value || "").toLowerCase();
     }
 
+    function normalizeList(value) {
+      return Array.isArray(value) ? normalize(value.join(" ")) : "";
+    }
+
     function scoreItem(item, query) {
       const q = normalize(query);
 
       let score = 0;
 
-      if (normalize(item.title).includes(q)) score += 10;
-      if (normalize(item.description).includes(q)) score += 6;
-      if (normalize(item.categories.join(" ")).includes(q)) score += 5;
-      if (normalize(item.tags.join(" ")).includes(q)) score += 4;
+      if (normalize(item.title).includes(q)) score += 12;
+      if (normalize(item.description).includes(q)) score += 8;
+      if (normalizeList(item.keyTakeaways).includes(q)) score += 8;
+      if (normalizeList(item.categories).includes(q)) score += 6;
+      if (normalizeList(item.tags).includes(q)) score += 4;
+      if (normalizeList(item.audience).includes(q)) score += 3;
+      if (normalize(item.difficulty).includes(q)) score += 3;
       if (normalize(item.body).includes(q)) score += 1;
 
       return score;
@@ -69,7 +76,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
                   <h2>${item.title}</h2>
                   <p>${item.description}</p>
                   ${
-                    item.categories?.length
+                    Array.isArray(item.categories) && item.categories.length
                       ? `<div class="search-result-tags">${item.categories
                           .map((category) => `<span>${category}</span>`)
                           .join("")}</div>`
