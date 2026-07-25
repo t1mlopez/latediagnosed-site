@@ -138,7 +138,7 @@ hasVideo: false
 - Choose one reliable starting resource instead of opening dozens at once.
 - Revisit information later; details often make more sense after personal patterns become visible.
 
-### Tim's details to incorporate
+### Details to incorporate
 
 - Learning terminology made previously confusing experiences easier to describe.
 - Understanding the mechanism reduced fear and made problem-solving possible.
@@ -180,7 +180,7 @@ hasVideo: false
 - What was the cost of getting through it?
 - Is this a recurring pattern?
 
-### Tim's details to incorporate
+### Details to incorporate
 
 - The body often reported overload before the mind had an explanation for it.
 - Exhaustion, tension, nervous energy, sensory pain, and recovery time were useful information.
