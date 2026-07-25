@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: t1mlopez/latediagnosed-site
-  branch: phase-12-content-system
+  branch: main
   base_url: https://fragrant-hall-b531.tim-0a7.workers.dev
 
 media_folder: public/uploads
