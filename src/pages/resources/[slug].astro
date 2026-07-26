@@ -44,9 +44,9 @@ export async function getStaticPaths() {
 const { resource, relatedArticles } = Astro.props;
 ---
 
-<PublicLayout title={`${resource.data.title} Resources`}>
+<PublicLayout title={resource.data.title}>
   <ArticleLayout
-    title={`${resource.data.title} Resources`}
+    title={resource.data.title}
     description={resource.data.description}
     author=""
     categories={resource.data.categories}
