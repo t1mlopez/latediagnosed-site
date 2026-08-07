@@ -84,6 +84,10 @@ Knowledge cannot change what happened, but it can change what you do next.
 
 **\[READ STORIES ABOUT HOW PEOPLE CAME TO TERMS WITH THEIR DIAGNOSIS]**
 
+
+
+**Late Diagnosed Acceptance** 
+
 Receiving a diagnosis is a starting point for learning. It is not a demand to understand everything immediately.
 
 Learn about the diagnosis and the different forms of support available, including therapy, coaching, and other helpful services. Then begin noticing how the diagnosis affects you specifically. People with the same diagnosis may experience it differently and require different kinds of support.
