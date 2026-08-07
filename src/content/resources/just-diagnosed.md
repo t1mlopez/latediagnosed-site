@@ -32,10 +32,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# I Was Just Diagnosed. Now What?
-
-*A gentle guide to your first days and weeks after receiving a diagnosis—what you may experience and how to begin caring for yourself.*
-
 ## Your brain may suddenly feel unfamiliar
 
 When a diagnosis finally becomes real, it can feel as though all familiarity with your own mind has disappeared.
