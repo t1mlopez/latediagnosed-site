@@ -69,8 +69,6 @@ const hasMediaLinks =
 
     <h1>{title}</h1>
 
-    <slot name="key-takeaways" />
-
     <p class="article-description">
       {description}
     </p>
@@ -114,6 +112,8 @@ const hasMediaLinks =
 
 <main class="article-shell">
   <article class="article-main">
+    <slot name="key-takeaways" />
+
     <div class="article-content">
       <slot />
     </div>
