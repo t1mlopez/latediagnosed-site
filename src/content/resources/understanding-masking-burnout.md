@@ -37,8 +37,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Understanding Masking & Burnout
-
 If you've recently learned you're autistic, ADHD, or both, you may start
 hearing two words constantly: **masking** and **burnout**.
 
