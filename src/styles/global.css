@@ -428,7 +428,17 @@ hr {
 }
 
 .key-takeaways-content ul {
-  margin-bottom: 0;
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: disc outside;
+}
+
+.key-takeaways-content li {
+  padding-left: 0.25rem;
+}
+
+.key-takeaways-content li + li {
+  margin-top: 0.75rem;
 }
 /* ===========================
    TABLE OF CONTENTS
