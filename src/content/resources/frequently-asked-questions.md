@@ -21,7 +21,6 @@ keyTakeaways:
   - Self-diagnosis can support understanding and practical changes without
     requiring formal diagnosis
   - Formal diagnosis is worth pursuing when it provides a meaningful benefit
-  - ""
 audience:
   - newly-diagnosed
   - self-discovery
