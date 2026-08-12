@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
+import KeyTakeaways from "../../components/KeyTakeaways.astro";
 
 export async function getStaticPaths() {
   const resources = await getCollection("resources");
@@ -53,6 +54,14 @@ const { resource, relatedArticles } = Astro.props;
     publishDate={resource.data.publishDate}
     lastUpdated={resource.data.lastUpdated}
   >
+    {resource.data.keyTakeaways.length > 0 && (
+      <KeyTakeaways slot="key-takeaways">
+        <ul>
+          {resource.data.keyTakeaways.map((takeaway) => <li>{takeaway}</li>)}
+        </ul>
+      </KeyTakeaways>
+    )}
+
     <div set:html={resource.rendered.html} />
 
     {relatedArticles.length > 0 && (
