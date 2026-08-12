@@ -36,8 +36,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Finding Assessments and Support
-
 Realizing that ADHD, autism, or another form of neurodivergence might explain parts of your life can answer one question while immediately creating several more.
 
 **How do I know whether this actually fits me?**
