@@ -35,8 +35,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Suspect ADHD or Autism?
-
 Maybe you've been watching videos about ADHD or autism and keep thinking, *Wait, I do that.*
 
 Maybe someone in your family was diagnosed and suddenly you started recognizing similarities in yourself. Maybe you've always known that certain things seem harder for you than they appear to be for other people, but you've never really understood why.
