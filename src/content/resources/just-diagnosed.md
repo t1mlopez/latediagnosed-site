@@ -27,8 +27,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Just Diagnosed?
-
 You finally have an answer.
 
 So why do you suddenly have **more questions?**
