@@ -15,7 +15,6 @@ keyTakeaways:
   - Self-understanding can replace harsh self-judgment with grace
   - Grief about not knowing sooner can coexist with hope for the future
   - Better information about your needs gives you more useful choices
-  - ""
 audience:
   - newly-diagnosed
   - self-discovery
