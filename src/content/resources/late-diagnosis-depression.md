@@ -15,22 +15,17 @@ publishDate: 2026-08-12T12:30:00.000-07:00
 status: published
 featured: true
 keyTakeaways:
-  - Late diagnosis can bring relief alongside grief
-  - burnout
-  - depression
-  - and identity disruption
-  - apparent skill regression may reflect exhaustion
-  - reduced masking
-  - lost coping strategies
-  - or increased awareness rather than permanent loss of ability
-  - practical accommodations such as reminders
-  - routines
-  - visible task systems
-  - and reduced sensory load can make daily life more manageable
-  - replacing self-judgment with curiosity and self-compassion helps identify
+  - Late diagnosis can bring relief alongside grief and burnout and depression
+    and identity disruption
+  - Apparent skill regression may reflect exhaustion or reduced masking or lost
+    coping strategies or increased awareness rather than permanent loss of
+    ability
+  - Practical accommodations such as reminders and routines and visible task
+    systems and reduced sensory load can make daily life more manageable
+  - Replacing self-judgment with curiosity and self-compassion helps identify
     the real causes of difficulties
-  - neurodivergence provides important context but coexisting depression should
-    still receive appropriate professional treatment.
+  - Neurodivergence provides important context but coexisting depression should
+    still receive appropriate professional treatment
 audience:
   - newly-diagnosed
   - self-discovery
