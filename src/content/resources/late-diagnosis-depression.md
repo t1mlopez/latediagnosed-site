@@ -43,8 +43,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Late Diagnosed Depression
-
 Getting diagnosed later in life can answer questions you may have been asking about yourself for decades.
 
 So why can finally getting those answers sometimes make you feel worse?
