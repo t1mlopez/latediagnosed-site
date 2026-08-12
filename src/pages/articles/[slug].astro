@@ -105,7 +105,7 @@ modifiedDate={(article.data.lastUpdated || article.data.publishDate)?.toISOStrin
     videoUrl={article.data.videoUrl}
   >
     {article.data.keyTakeaways.length > 0 && (
-      <KeyTakeaways>
+      <KeyTakeaways slot="key-takeaways">
         <ul>
           {article.data.keyTakeaways.map((takeaway) => <li>{takeaway}</li>)}
         </ul>
