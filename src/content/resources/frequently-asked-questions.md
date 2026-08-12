@@ -34,8 +34,6 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-# Late-Diagnosed FAQ: A Starting Place for ADHD, Autism, and AuDHD
-
 If you are newly diagnosed, wondering whether you might be neurodivergent, or trying to understand someone close to you, you probably have more questions than answers. This FAQ is a starting place—not a test, a diagnosis, or a complete guide.
 
 ## 1. What does “late diagnosed” mean?
