@@ -7,7 +7,7 @@ tags: []
 author: Tim Lopez
 publishDate: 2026-08-11T20:30:00.000-07:00
 status: published
-featured: false
+featured: true
 keyTakeaways:
   - A late diagnosis provides new information about the brain you have always had
   - Understanding present-day patterns can help you reinterpret your past with

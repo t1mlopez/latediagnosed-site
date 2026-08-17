@@ -14,7 +14,7 @@ publishDate: 2026-06-16
 
 status: published
 
-featured: true
+featured: false
 
 excerpt: ADHD resource hub.
 

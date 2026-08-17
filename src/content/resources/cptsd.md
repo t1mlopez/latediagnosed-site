@@ -15,7 +15,7 @@ publishDate: 2026-06-26
 
 status: published
 
-featured: true
+featured: false
 
 excerpt: CPTSD resource hub.
 

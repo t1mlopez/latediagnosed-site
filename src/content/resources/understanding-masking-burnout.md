@@ -13,7 +13,7 @@ tags: []
 author: LateDiagnosed.org
 publishDate: 2026-08-12T07:14:00.000-07:00
 status: published
-featured: false
+featured: true
 keyTakeaways:
   - Masking can become so automatic that you may not realize how much effort
     your everyday functioning requires

@@ -13,7 +13,7 @@ tags: []
 author: LateDiagnosed.org
 publishDate: 2026-08-11T20:51:00.000-07:00
 status: published
-featured: false
+featured: true
 keyTakeaways:
   - Curiosity is enough reason to explore ADHD or autism
   - Free screening tools can help you identify experiences worth examining more

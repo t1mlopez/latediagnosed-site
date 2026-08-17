@@ -14,7 +14,7 @@ tags: []
 author: LateDiagnosed.org
 publishDate: 2026-08-12T12:17:00.000-07:00
 status: published
-featured: false
+featured: true
 keyTakeaways:
   - Start with your lived experiences rather than trying to prove a label
   - Use screening tools to identify patterns worth exploring but not as a
@@ -563,4 +563,3 @@ And you are allowed to begin making your life more workable before every uncerta
 [11] The Neurodiversity Directory. https://www.theneurodiversitydirectory.com/
 
 [12] Psychology Today. “Find a Neurodivergence Therapist.” https://www.psychologytoday.com/us/therapists?category=neurodivergence
-
