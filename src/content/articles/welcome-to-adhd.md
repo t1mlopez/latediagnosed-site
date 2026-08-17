@@ -15,7 +15,7 @@ publishDate: 2026-06-16
 
 status: published
 
-featured: true
+featured: false
 
 excerpt: A starting point for understanding ADHD.
 

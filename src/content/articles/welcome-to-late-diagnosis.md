@@ -15,7 +15,7 @@ publishDate: 2026-06-16
 
 status: published
 
-featured: true
+featured: false
 
 excerpt: A short summary used for homepage cards and featured content.
 
