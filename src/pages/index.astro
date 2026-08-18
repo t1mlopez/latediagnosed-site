@@ -7,7 +7,6 @@ import StartHere from "../components/home/StartHere.astro";
 import Community from "../components/home/Community.astro";
 import Mission from "../components/home/Mission.astro";
 import FeaturedArticles from "../components/home/FeaturedArticles.astro";
-import Stories from "../components/home/Stories.astro";
 import Newsletter from "../components/home/Newsletter.astro";
 import Donate from "../components/home/Donate.astro";
 import { getCollection } from "astro:content";
@@ -53,8 +52,6 @@ const featuredArticles = (await getCollection("articles"))
   <Mission />
 
   <FeaturedArticles featuredArticles={featuredArticles} />
-
-  <Stories />
 
   <Newsletter />
 
