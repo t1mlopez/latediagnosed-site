@@ -7,7 +7,6 @@ import StartHere from "../components/home/StartHere.astro";
 import Community from "../components/home/Community.astro";
 import Mission from "../components/home/Mission.astro";
 import FeaturedArticles from "../components/home/FeaturedArticles.astro";
-import Newsletter from "../components/home/Newsletter.astro";
 import Donate from "../components/home/Donate.astro";
 import { getCollection } from "astro:content";
 
@@ -53,8 +52,6 @@ const featuredArticles = (await getCollection("articles"))
 
   <FeaturedArticles featuredArticles={featuredArticles} />
 
-  <Newsletter />
-
   <Donate />
 
   <Footer />
@@ -62,17 +59,6 @@ const featuredArticles = (await getCollection("articles"))
   <script is:inline>
     if (window.lucide) {
       window.lucide.createIcons();
-    }
-
-    const newsletterForm = document.getElementById('newsletter-form');
-    const newsletterSuccess = document.getElementById('newsletter-success');
-
-    if (newsletterForm && newsletterSuccess) {
-      newsletterForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        newsletterForm.classList.add('hidden');
-        newsletterSuccess.classList.remove('hidden');
-      });
     }
   </script>
 </body>
