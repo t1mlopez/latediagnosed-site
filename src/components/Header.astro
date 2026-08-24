@@ -1,5 +1,22 @@
+---
+const menuItems = [
+  { href: "/search", label: "Search" },
+  {
+    href: "https://discord.gg/rYUKq96WqJ",
+    label: "Community",
+    external: true,
+  },
+  { href: "/about", label: "About Us" },
+  {
+    href: "https://givebutter.com/late-diagnosed-donations-3akmpq",
+    label: "Donate",
+    external: true,
+  },
+];
+---
+
 <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
     <a
       href="/"
       class="font-heading text-xl font-bold text-[#1e2a5e] no-underline"
@@ -7,21 +24,42 @@
       LateDiagnosed.org
     </a>
 
-    <div class="hidden md:flex gap-6 text-sm">
-      <a href="/search" class="text-gray-600 hover:text-[#1e2a5e]">
-        Search
-      </a>
-      <a href="https://discord.gg/rYUKq96WqJ" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-[#1e2a5e]">
-        Community
-      </a>
+    <nav class="hidden md:flex gap-6 text-sm" aria-label="Primary navigation">
+      {menuItems.map((item) => (
+        <a
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noopener noreferrer" : undefined}
+          class="text-gray-600 hover:text-[#1e2a5e]"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
 
-      <a href="/about" class="text-gray-600 hover:text-[#1e2a5e]">
-        About Us
-      </a>
+    <details class="group md:hidden text-sm">
+      <summary
+        class="cursor-pointer list-none rounded-md px-3 py-2 font-bold text-[#1e2a5e] hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e] [&::-webkit-details-marker]:hidden"
+      >
+        Menu
+        <span class="inline-block ml-1 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+      </summary>
 
-      <a href="https://givebutter.com/late-diagnosed-donations-3akmpq" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-[#1e2a5e]">
-        Donate
-      </a>
-    </div>
+      <nav
+        class="absolute left-0 right-0 top-full flex flex-col border-t border-gray-100 bg-white px-6 py-2 shadow-lg"
+        aria-label="Mobile primary navigation"
+      >
+        {menuItems.map((item) => (
+          <a
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            class="border-b border-gray-100 py-3 text-gray-600 last:border-b-0 hover:text-[#1e2a5e]"
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </details>
   </div>
 </header>
