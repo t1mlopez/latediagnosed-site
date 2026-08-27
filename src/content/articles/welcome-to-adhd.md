@@ -1,7 +1,8 @@
 ---
 title: Welcome to ADHD
-description: A practical guide to understanding an ADHD diagnosis, caring for
+description: A practical guide to understanding late ADHD diagnosis, caring for
   yourself, exploring treatment, and building supports that work.
+slug: welcome-to-adhd
 excerpt: A starting point for understanding ADHD.
 heroImage: /images/placeholder.jpg
 categories:
@@ -13,8 +14,8 @@ tags:
   - Mental Health
   - Coping Skills
 author: LateDiagnosed.org
-publishDate: 2026-08-26T19:58:00.000-07:00
-lastUpdated: 2026-08-26
+publishDate: ""
+lastUpdated: ""
 status: published
 featured: false
 keyTakeaways: []
