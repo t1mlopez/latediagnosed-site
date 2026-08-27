@@ -14,7 +14,7 @@ tags:
   - Coping Skills
 author: LateDiagnosed.org
 publishDate: 2026-08-26T19:58:00.000-07:00
-lastUpdated: ""
+lastUpdated: 2026-08-26
 status: published
 featured: false
 keyTakeaways: []

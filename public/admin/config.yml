@@ -25,7 +25,7 @@ collections:
       - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
       - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
       - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
-      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional date of the latest substantive revision." }
       - label: "Core — Status"
         name: status
         widget: select
@@ -87,7 +87,7 @@ collections:
       - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
       - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
       - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
-      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional date of the latest substantive revision." }
       - label: "Core — Status"
         name: status
         widget: select
@@ -149,7 +149,7 @@ collections:
       - { label: "Core — Tags", name: tags, widget: list, default: [], hint: "Searchable topic tags." }
       - { label: "Core — Author", name: author, widget: string, default: late-diagnosed, hint: "Author entry slug." }
       - { label: "Core — Publish Date", name: publishDate, widget: datetime, required: false, hint: "Optional original publication date." }
-      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, required: false, hint: "Optional date of the latest substantive revision." }
+      - { label: "Core — Last Updated", name: lastUpdated, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Optional date of the latest substantive revision." }
       - label: "Core — Status"
         name: status
         widget: select
