@@ -29,12 +29,6 @@ hasAudio: true
 hasVideo: true
 ---
 
-  - ADHD
-  - adult ADHD
-  - mental health
-  - coping skills
----
-
 <a id="top"></a>
 
 # Welcome to ADHD
