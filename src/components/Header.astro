@@ -1,6 +1,15 @@
 ---
 const menuItems = [
   { href: "/", label: "Home" },
+  {
+    label: "Guides",
+    children: [
+      {
+        href: "/articles/welcome-to-adhd/",
+        label: "Welcome to Late Diagnosis ADHD",
+      },
+    ],
+  },
   { href: "/search", label: "Search" },
   {
     href: "https://discord.gg/rYUKq96WqJ",
@@ -25,16 +34,43 @@ const menuItems = [
       LateDiagnosed.org
     </a>
 
-    <nav class="hidden md:flex gap-6 text-sm" aria-label="Primary navigation">
+    <nav class="hidden md:flex items-center gap-6 text-sm" aria-label="Primary navigation">
       {menuItems.map((item) => (
-        <a
-          href={item.href}
-          target={item.external ? "_blank" : undefined}
-          rel={item.external ? "noopener noreferrer" : undefined}
-          class="text-gray-600 hover:text-[#1e2a5e]"
-        >
-          {item.label}
-        </a>
+        item.children ? (
+          <div class="relative group">
+            <button
+              type="button"
+              class="flex items-center gap-1 text-gray-600 hover:text-[#1e2a5e] focus:text-[#1e2a5e]"
+              aria-haspopup="true"
+            >
+              {item.label}
+              <span aria-hidden="true">▾</span>
+            </button>
+            <div
+              class="invisible absolute left-0 top-full z-50 min-w-64 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+            >
+              <div class="rounded-md border border-gray-100 bg-white py-2 shadow-lg">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="block whitespace-nowrap px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-[#1e2a5e]"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            class="text-gray-600 hover:text-[#1e2a5e]"
+          >
+            {item.label}
+          </a>
+        )
       ))}
     </nav>
 
@@ -51,14 +87,28 @@ const menuItems = [
         aria-label="Mobile primary navigation"
       >
         {menuItems.map((item) => (
-          <a
-            href={item.href}
-            target={item.external ? "_blank" : undefined}
-            rel={item.external ? "noopener noreferrer" : undefined}
-            class="border-b border-gray-100 py-3 text-gray-600 last:border-b-0 hover:text-[#1e2a5e]"
-          >
-            {item.label}
-          </a>
+          item.children ? (
+            <div class="border-b border-gray-100 py-3">
+              <div class="font-medium text-gray-600">{item.label}</div>
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="mt-2 block pl-4 text-gray-600 hover:text-[#1e2a5e]"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              class="border-b border-gray-100 py-3 text-gray-600 last:border-b-0 hover:text-[#1e2a5e]"
+            >
+              {item.label}
+            </a>
+          )
         ))}
       </nav>
     </details>
