@@ -2,14 +2,27 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { defineConfig, fontProviders } from 'astro/config';
+import node from '@astrojs/node';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://latediagnosed.org',
+  output: 'server',
+  adapter: node({ mode: 'standalone' }),
   integrations: [mdx(), sitemap()],
+
+  env: {
+    schema: {
+      OKTA_ISSUER: envField.string({ context: 'server', access: 'secret', optional: true }),
+      OKTA_CLIENT_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
+      OKTA_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+      OKTA_SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+      OKTA_PERMISSION_CLAIMS: envField.string({ context: 'server', access: 'secret', optional: true }),
+    },
+  },
 
   fonts: [
       {

@@ -1,4 +1,23 @@
-# Astro Starter Kit: Blog
+# LateDiagnosed.org
+
+## Okta accounts
+
+Accounts use Okta-hosted OpenID Connect sign-in. The site does not maintain a separate user/password database. Copy `.env.example` to `.env` and fill in the Okta values.
+
+Use the issuer supported by the tenant. This LateDiagnosed.org tenant uses its org authorization server (`https://latediagnosed.okta.com`); tenants with API Access Management may instead use a custom issuer such as `/oauth2/default`.
+
+Create an Okta **OIDC Web Application** with Authorization Code enabled and configure these redirect URIs:
+
+- Local sign-in: `http://localhost:4321/auth/callback`
+- Production sign-in: `https://latediagnosed.org/auth/callback`
+
+The app reads permission values from the ID-token claims listed in `OKTA_PERMISSION_CLAIMS` (by default `okta_groups`, `groups`, `roles`, and `permissions`). This Okta app uses the `okta_groups` federated claim because Okta reserves the standard `groups` and `permissions` names in this editor. Values are exposed as `Astro.locals.user.permissions`; use `requireUser()` or `requirePermission()` from `src/lib/auth/guards.ts` to protect pages and endpoints. Each guard returns either the authorized user or a `Response`; return that response from the page or endpoint before rendering protected content.
+
+Generate the session secret with at least 32 random bytes. Never commit `.env`.
+
+The production deployment must run the generated Node server (`node ./dist/server/entry.mjs`), not serve `dist/` as static files.
+
+## Original Astro starter notes
 
 ```sh
 npm create astro@latest -- --template blog

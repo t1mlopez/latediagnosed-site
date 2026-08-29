@@ -4,18 +4,9 @@ import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import KeyTakeaways from "../../components/KeyTakeaways.astro";
 
-export async function getStaticPaths() {
-  const pages = await getCollection("pages");
-
-  return pages
-    .filter((page) => page.data.status === "published")
-    .map((page) => ({
-      params: { slug: page.id },
-      props: { page },
-    }));
-}
-
-const { page } = Astro.props;
+const pages = await getCollection("pages");
+const page = pages.find((candidate) => candidate.id === Astro.params.slug);
+if (!page || page.data.status !== "published") return new Response("Not found", { status: 404 });
 ---
 
 <PublicLayout
