@@ -5,6 +5,10 @@
   "compatibility_date": "2026-08-29",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "routes": [
+    { "pattern": "latediagnosed.org", "custom_domain": true },
+    { "pattern": "www.latediagnosed.org/*", "zone_name": "latediagnosed.org" }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
