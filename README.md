@@ -15,7 +15,7 @@ The app reads permission values from the ID-token claims listed in `OKTA_PERMISS
 
 Generate the session secret with at least 32 random bytes. Never commit `.env`.
 
-The production deployment must run the generated Node server (`node ./dist/server/entry.mjs`), not serve `dist/` as static files.
+Production runs as an Astro 6 server-rendered Cloudflare Worker. Build with `npm run build` and deploy with `npm run deploy`; do not publish `dist/` as a static-only site.
 
 ## Original Astro starter notes
 

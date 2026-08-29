@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import KeyTakeaways from "../../components/KeyTakeaways.astro";
@@ -7,6 +7,7 @@ import KeyTakeaways from "../../components/KeyTakeaways.astro";
 const pages = await getCollection("pages");
 const page = pages.find((candidate) => candidate.id === Astro.params.slug);
 if (!page || page.data.status !== "published") return new Response("Not found", { status: 404 });
+const { Content } = await render(page);
 ---
 
 <PublicLayout
@@ -31,6 +32,6 @@ if (!page || page.data.status !== "published") return new Response("Not found", 
       </KeyTakeaways>
     )}
 
-    <div set:html={page.rendered.html} />
+    <Content />
   </ArticleLayout>
 </PublicLayout>

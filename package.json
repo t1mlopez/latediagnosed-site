@@ -9,13 +9,15 @@
     "dev": "astro dev",
     "build": "npm run check:frontmatter && astro build",
     "check:frontmatter": "node scripts/check-frontmatter-dates.mjs",
+    "check": "wrangler types && astro check",
     "preview": "astro preview",
+    "deploy": "npm run build && wrangler deploy",
     "astro": "astro",
     "new:article": "node scripts/new-article.mjs"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.7.0",
     "@astrojs/mdx": "^6.0.1",
-    "@astrojs/node": "^10.1.4",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.3.0",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^25.9.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.127.1"
   }
 }

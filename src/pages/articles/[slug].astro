@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
@@ -42,7 +42,7 @@ const wordCount = article.body
 
 const minutes = Math.max(1, Math.ceil(wordCount / 225));
 const readingTime = `${minutes} min read`;
-const headings = article.rendered?.metadata?.headings ?? [];
+const { Content, headings } = await render(article);
 
 const isComponentShowcase = article.id === "component-showcase";
 ---
@@ -122,7 +122,7 @@ modifiedDate={(article.data.lastUpdated || article.data.publishDate)?.toISOStrin
       </>
     )}
 
-    <div set:html={article.rendered.html} />
+    <Content />
 
     {relatedArticles.length > 0 && (
       <section class="related-articles-section">

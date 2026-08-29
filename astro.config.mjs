@@ -2,7 +2,7 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 import { defineConfig, envField, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -11,7 +11,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://latediagnosed.org',
   output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  adapter: cloudflare(),
   integrations: [mdx(), sitemap()],
 
   env: {

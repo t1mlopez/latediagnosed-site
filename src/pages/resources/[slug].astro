@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
@@ -8,6 +8,7 @@ import KeyTakeaways from "../../components/KeyTakeaways.astro";
 const resources = await getCollection("resources");
 const resource = resources.find((candidate) => candidate.id === Astro.params.slug);
 if (!resource || resource.data.status !== "published") return new Response("Not found", { status: 404 });
+const { Content } = await render(resource);
 
 const articles = await getCollection("articles");
 const relatedArticles = articles
@@ -42,7 +43,7 @@ const relatedArticles = articles
       </KeyTakeaways>
     )}
 
-    <div set:html={resource.rendered.html} />
+    <Content />
 
     {relatedArticles.length > 0 && (
       <section class="resource-related-section">

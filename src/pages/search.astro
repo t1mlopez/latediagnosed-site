@@ -23,20 +23,33 @@ import PublicLayout from "../layouts/PublicLayout.astro";
   </main>
 
   <script>
-    const input = document.getElementById("site-search");
-    const resultsEl = document.getElementById("search-results");
+    interface SearchItem {
+      url: string;
+      type: string;
+      title: string;
+      description: string;
+      keyTakeaways?: string[];
+      categories?: string[];
+      tags?: string[];
+      audience?: string[];
+      difficulty?: string;
+      body?: string;
+    }
 
-    let searchIndex = [];
+    const input = document.querySelector<HTMLInputElement>("#site-search")!;
+    const resultsEl = document.querySelector<HTMLElement>("#search-results")!;
 
-    function normalize(value) {
+    let searchIndex: SearchItem[] = [];
+
+    function normalize(value: unknown): string {
       return String(value || "").toLowerCase();
     }
 
-    function normalizeList(value) {
+    function normalizeList(value: unknown): string {
       return Array.isArray(value) ? normalize(value.join(" ")) : "";
     }
 
-    function scoreItem(item, query) {
+    function scoreItem(item: SearchItem, query: string): number {
       const q = normalize(query);
 
       let score = 0;
@@ -53,7 +66,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
       return score;
     }
 
-    function renderResults(items, query) {
+    function renderResults(items: SearchItem[], query: string) {
       if (!query.trim()) {
         resultsEl.innerHTML = '<p class="search-empty">Start typing to search the library.</p>';
         return;
@@ -92,7 +105,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
 
     async function initSearch() {
       const response = await fetch("/search.json");
-      searchIndex = await response.json();
+      searchIndex = await response.json() as SearchItem[];
 
       input.addEventListener("input", () => {
         const query = input.value;
