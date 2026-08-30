@@ -61,7 +61,7 @@ export async function readLoginTransaction(cookies: AstroCookies): Promise<Login
 }
 
 export function clearLoginTransaction(cookies: AstroCookies) {
-  cookies.delete(TRANSACTION_COOKIE, { path: '/' });
+  cookies.delete(TRANSACTION_COOKIE, cookieOptions);
 }
 
 export async function setSession(cookies: AstroCookies, session: AuthSession) {
@@ -77,5 +77,5 @@ export async function readSession(cookies: AstroCookies): Promise<AuthSession | 
 }
 
 export function clearSession(cookies: AstroCookies) {
-  cookies.delete(SESSION_COOKIE, { path: '/' });
+  cookies.delete(SESSION_COOKIE, cookieOptions);
 }
