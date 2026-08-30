@@ -1,6 +1,11 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const optionalDate = z.preprocess(
+  (value) => value === "" || value == null ? undefined : value,
+  z.coerce.date().optional(),
+);
+
 const contentSchema = z.object({
   title: z.string(),
   description: z.string(),
@@ -10,8 +15,8 @@ const contentSchema = z.object({
 
   author: z.string(),
 
-  publishDate: z.coerce.date().optional(),
-  lastUpdated: z.coerce.date().optional(),
+  publishDate: optionalDate,
+  lastUpdated: optionalDate,
 
   status: z.enum(["draft", "published", "archived"]).default("draft"),
 
@@ -44,7 +49,7 @@ const contentSchema = z.object({
     .default([]),
 
   reviewedBy: z.string().optional(),
-  reviewDate: z.coerce.date().optional(),
+  reviewDate: optionalDate,
   reviewNote: z.string().optional(),
 
   // SEO metadata

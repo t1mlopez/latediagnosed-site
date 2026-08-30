@@ -1,30 +1,36 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  resources?: CollectionEntry<'resources'>[];
+}
+
 const { resources = [] } = Astro.props;
 
-const iconMap = {
+const iconMap: Record<string, string> = {
   ADHD: "zap",
   Autism: "infinity",
   AuDHD: "sparkles",
   CPTSD: "shield",
 };
 
-const colorMap = {
+const colorMap: Record<string, string> = {
   ADHD: "#1e2a5e",
   Autism: "#4a2068",
   AuDHD: "#4a2068",
   CPTSD: "#1e2a5e",
 };
 
-function getPrimaryCategory(resource) {
+function getPrimaryCategory(resource: CollectionEntry<'resources'>): string {
   return resource.data.categories?.[0] || resource.data.title;
 }
 
-function getIcon(resource) {
+function getIcon(resource: CollectionEntry<'resources'>): string {
   const category = getPrimaryCategory(resource);
   return iconMap[category] || "book-open";
 }
 
-function getColor(resource) {
+function getColor(resource: CollectionEntry<'resources'>): string {
   const category = getPrimaryCategory(resource);
   return colorMap[category] || "#1e2a5e";
 }

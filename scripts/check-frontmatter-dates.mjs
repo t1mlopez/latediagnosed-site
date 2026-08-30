@@ -44,6 +44,8 @@ for (const file of await markdownFiles(contentRoot)) {
     if (!field || !dateFields.has(field[1])) continue;
 
     const value = unquote((field[2] ?? "").trim());
+    if (!value) continue;
+
     const isScalarDate = value && !/^[{[]/.test(value) && !Number.isNaN(Date.parse(value));
     const matchesFieldFormat = field[1] !== "lastUpdated" || scalarDate.test(value);
     if (!isScalarDate || !matchesFieldFormat) {

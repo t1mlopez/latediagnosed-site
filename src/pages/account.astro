@@ -1,0 +1,26 @@
+---
+import PublicLayout from '../layouts/PublicLayout.astro';
+import { requireUser } from '../lib/auth/guards';
+
+const auth = requireUser(Astro);
+if (auth instanceof Response) return auth;
+const user = auth;
+---
+
+<PublicLayout title="Your account" description="Your Late Diagnosed account.">
+  <main class="mx-auto max-w-3xl px-6 py-20">
+    <h1 class="font-heading mb-4 text-4xl text-[#1e2a5e]">Your account</h1>
+    <p class="mb-8 text-gray-700">Signed in through Okta as <strong>{user.name || user.email || user.preferredUsername || user.id}</strong>.</p>
+
+    <section class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <h2 class="font-heading mb-3 text-2xl text-[#1e2a5e]">Access</h2>
+      {user.permissions.length > 0 ? (
+        <ul class="list-disc space-y-1 pl-6 text-gray-700">
+          {user.permissions.map((permission) => <li>{permission}</li>)}
+        </ul>
+      ) : (
+        <p class="text-gray-700">Your Okta account currently has no application permissions.</p>
+      )}
+    </section>
+  </main>
+</PublicLayout>

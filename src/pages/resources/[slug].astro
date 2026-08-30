@@ -1,48 +1,29 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 import KeyTakeaways from "../../components/KeyTakeaways.astro";
 
-export async function getStaticPaths() {
-  const resources = await getCollection("resources");
-  const articles = await getCollection("articles");
+const resources = await getCollection("resources");
+const resource = resources.find((candidate) => candidate.id === Astro.params.slug);
+if (!resource || resource.data.status !== "published") return new Response("Not found", { status: 404 });
+const { Content } = await render(resource);
 
-  return resources
-    .filter((resource) => resource.data.status === "published")
-    .map((resource) => {
-      const relatedArticles = articles
-        .filter(
-          (article) =>
-            article.data.status === "published" &&
-            article.data.categories?.some((category) =>
-              resource.data.categories?.includes(category)
-            )
-        )
-        .sort((a, b) => {
-          const aDate = a.data.publishDate
-            ? new Date(a.data.publishDate).getTime()
-            : 0;
-
-          const bDate = b.data.publishDate
-            ? new Date(b.data.publishDate).getTime()
-            : 0;
-
-          return bDate - aDate;
-        });
-
-      return {
-        params: { slug: resource.id },
-        props: {
-          resource,
-          relatedArticles,
-        },
-      };
-    });
-}
-
-const { resource, relatedArticles } = Astro.props;
+const articles = await getCollection("articles");
+const relatedArticles = articles
+  .filter(
+    (article) =>
+      article.data.status === "published" &&
+      article.data.categories?.some((category) =>
+        resource.data.categories?.includes(category)
+      )
+  )
+  .sort((a, b) => {
+    const aDate = a.data.publishDate ? new Date(a.data.publishDate).getTime() : 0;
+    const bDate = b.data.publishDate ? new Date(b.data.publishDate).getTime() : 0;
+    return bDate - aDate;
+  });
 ---
 
 <PublicLayout title={resource.data.title}>
@@ -62,7 +43,7 @@ const { resource, relatedArticles } = Astro.props;
       </KeyTakeaways>
     )}
 
-    <div set:html={resource.rendered.html} />
+    <Content />
 
     {relatedArticles.length > 0 && (
       <section class="resource-related-section">
