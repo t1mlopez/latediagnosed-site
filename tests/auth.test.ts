@@ -95,6 +95,8 @@ test('browser-served CMS files contain no privileged credential material', async
   assert.doesNotMatch(browserPayload, /GITHUB_APP_PRIVATE_KEY|GITHUB_CLIENT_SECRET|OKTA_CLIENT_SECRET/);
   assert.doesNotMatch(browserPayload, /Authorization:\s*[`'"]?Bearer/i);
   assert.doesNotMatch(browserPayload, /fragrant-hall-b531|base_url:\s*https?:/);
+  assert.match(browserPayload, /form\.method = "POST"/);
+  assert.match(browserPayload, /window\.location\.replace\("\/auth\/login\?returnTo=\/admin\/"\)/);
 });
 
 test('CMS gateway accepts only the configured repository and branch', () => {

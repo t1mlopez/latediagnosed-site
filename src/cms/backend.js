@@ -5,6 +5,7 @@
   var BRANCH = "main";
   var SESSION_URL = "/api/cms/session";
   var REPOSITORY_URL = "/api/cms/repository";
+  var redirectingToLogin = false;
 
   function showRepositoryAuthorizationFailure(message) {
     var panel = document.getElementById("repository-authorization-failure");
@@ -31,8 +32,11 @@
   async function responseJson(response) {
     var result = await response.json().catch(function () { return {}; });
     if (response.status === 401) {
-      window.location.assign("/auth/login?returnTo=/admin/");
-      throw new Error("Your Content Center session has expired.");
+      if (!redirectingToLogin) {
+        redirectingToLogin = true;
+        window.location.replace("/auth/login?returnTo=/admin/");
+      }
+      return new Promise(function () {});
     }
     if (!response.ok) {
       var message = typeof result.error === "string"
@@ -93,10 +97,15 @@
     return this.authenticate();
   };
 
-  OktaCmsBackend.prototype.logout = async function () {
+  OktaCmsBackend.prototype.logout = function () {
     this.csrf = null;
-    await fetch("/auth/logout", { method: "POST", credentials: "same-origin" });
-    window.location.assign("/");
+    var form = document.createElement("form");
+    form.method = "POST";
+    form.action = "/auth/logout";
+    form.hidden = true;
+    document.body.appendChild(form);
+    form.submit();
+    return Promise.resolve();
   };
 
   OktaCmsBackend.prototype.getToken = function () {
