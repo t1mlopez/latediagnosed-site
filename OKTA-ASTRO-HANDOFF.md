@@ -2,7 +2,7 @@
 
 Updated: August 30, 2026
 
-## Okta-only editor login candidate (preview verified; production pending)
+## Okta-only editor login architecture (production verified)
 
 The repository now contains the preferred long-term architecture requested after the legacy GitHub OAuth popup appeared blank:
 
@@ -14,7 +14,7 @@ The repository now contains the preferred long-term architecture requested after
 - GitHub App private keys and installation tokens never appear in `config.yml`, `backend.js`, CMS responses, or browser storage. Repository commits are attributed to the App; Okta remains authoritative for editor identity and eligibility.
 - `wrangler.preview.jsonc` defines the route-free `latediagnosed-web-cms-preview` Worker. Preview passed sign-in, denial, content edit, media upload, cleanup, and gateway-policy checks before production promotion.
 
-The approved GitHub App **LateDiagnosed Content Center** was created and installed only on `t1mlopez/latediagnosed-site` with **Contents: read and write** plus implicit **Metadata: read-only**. Webhooks, GitHub user authorization, device flow, callback URLs, and other repository or organization permissions are disabled. Its encrypted credentials are configured on the preview Worker; production credentials remain pending explicit promotion approval.
+The approved GitHub App **LateDiagnosed Content Center** is installed only on `t1mlopez/latediagnosed-site` with **Contents: read and write** plus implicit **Metadata: read-only**. Webhooks, GitHub user authorization, device flow, callback URLs, and other repository or organization permissions are disabled. Its credentials are encrypted secrets on preview and production Workers.
 
 New encrypted secret names, for both preview and later production:
 
@@ -30,11 +30,11 @@ The Okta **Content Center** initiate-login URI remains:
 
 The session is still an encrypted authorization snapshot expiring at the earlier of the Okta ID-token expiration and eight hours. Every gateway call rechecks that snapshot, but there is no live group lookup. Removing `CMS Editors` takes effect on the next login and no later than session expiry; Content Center logout clears the Astro session immediately. Rotating `OKTA_SESSION_SECRET` performs emergency global session revocation.
 
-Automated checks cover exact permission behavior, anonymous redirect, malformed/tampered/expired sessions, safe `returnTo`, repository and branch rejection, traversal, writes outside approved content/media folders, origin rejection, CSRF subject/expiry/tampering, and browser credential leakage. Preview Worker version `46bebca6-5b53-4441-9cb2-42dae44a191c` passed a real Okta SSO launch directly into Decap, content/media listing, a reversible draft and image commit, cleanup, and rejection checks. The temporary preview callback was removed afterward. The Content Center initiate-login URI is now `https://latediagnosed.org/auth/login?returnTo=/admin/`. Production remains on version `134ccc63-2294-4b2f-ab7e-f4747415b53a` pending confirmed production secret configuration and deployment.
+Automated checks cover exact permission behavior, anonymous redirect, malformed/tampered/expired sessions, safe `returnTo`, repository and branch rejection, traversal, writes outside approved content/media folders, origin rejection, CSRF subject/expiry/tampering, and browser credential leakage. Preview Worker version `46bebca6-5b53-4441-9cb2-42dae44a191c` and production passed real Okta SSO launch directly into Decap, content/media listing, reversible draft and image commits, Decap UI save/delete, cleanup, and rejection checks. The temporary preview callback was removed afterward. The Content Center initiate-login URI is `https://latediagnosed.org/auth/login?returnTo=/admin/`. Production source commits are `376a8fa` (gateway) and `eb96e83` (logout navigation); automatic deployment version `79679e11-fc6d-48b6-9442-483a1eb98a41` was verified.
 
-## CMS authorization update (August 30, 2026)
+## Historical transitional CMS authorization update (superseded August 30, 2026)
 
-The currently deployed production version adopts the explicitly allowed **transitional** Decap architecture. The local candidate above replaces it after staging verification:
+The former production version adopted the explicitly allowed **transitional** Decap architecture. It has been replaced by the production architecture above:
 
 - Okta is the identity and CMS-eligibility source of truth.
 - The exact, case-sensitive Okta-derived permission `CMS Editors` is required at the `latediagnosed-web` Worker boundary for `/admin`, `/admin/`, and every `/admin/*` static asset.
@@ -95,7 +95,7 @@ Use `npx wrangler secret put NAME` interactively and never print values. For rot
 
 ### One-login gateway decision
 
-The server-side gateway and custom Decap backend are implemented in the local candidate described above. The remaining gated step is explicit approval to create/install the GitHub App and configure its three encrypted secret values on the preview Worker. Those values are not used by the currently deployed transitional release.
+The server-side gateway and custom Decap backend described above are now deployed. The GitHub App is installed and its three values are encrypted Worker secrets; no GitHub credential is returned to Decap or the browser.
 
 ### Verification and deployment
 
@@ -103,7 +103,7 @@ Run `npm run test`, `npm run check`, `npm run build`, and `npx wrangler deploy -
 
 Production verification must cover login, account, `/api/me`, the `CMS Editors` claim, anonymous redirect, permitted CMS load, 403 denial, GitHub content listing/editing, media upload to `public/uploads`, the Okta tile target, and logout. Do not change production DNS for this transitional Worker update.
 
-### Deployment status
+### Historical transitional deployment status (superseded)
 
 Deployed to the existing production `latediagnosed-web` Worker on August 30, 2026:
 
