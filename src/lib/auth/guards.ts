@@ -1,4 +1,5 @@
 import type { APIContext, AstroGlobal } from 'astro';
+import { permissionForbiddenResponse } from './responses';
 import type { AuthUser } from './types';
 
 type Context = APIContext | AstroGlobal;
@@ -21,7 +22,7 @@ export function requirePermission(context: Context, permission: string): AuthUse
   if (result instanceof Response) return result;
   const user = result;
   if (!hasPermission(user, permission)) {
-    return new Response('Forbidden', { status: 403 });
+    return permissionForbiddenResponse();
   }
   return user;
 }

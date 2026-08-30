@@ -1,5 +1,6 @@
 import * as oidc from 'openid-client';
 import { getAuthConfig } from './config';
+export { safeReturnTo } from './return-to';
 
 let cachedClient: Promise<oidc.Configuration> | undefined;
 
@@ -13,16 +14,6 @@ export function getOidcClient(): Promise<oidc.Configuration> {
     );
   }
   return cachedClient;
-}
-
-export function safeReturnTo(value: string | null): string {
-  if (!value) return '/account';
-
-  const base = new URL('https://latediagnosed.invalid');
-  const target = new URL(value, base);
-  if (target.origin !== base.origin || !value.startsWith('/')) return '/account';
-
-  return `${target.pathname}${target.search}${target.hash}`;
 }
 
 export { oidc };

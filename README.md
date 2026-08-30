@@ -17,6 +17,69 @@ Generate the session secret with at least 32 random bytes. Never commit `.env`.
 
 Production runs as an Astro 6 server-rendered Cloudflare Worker. Build with `npm run build` and deploy with `npm run deploy`; do not publish `dist/` as a static-only site.
 
+## Content Center / Decap CMS access
+
+Content Center uses Okta as its only interactive login and authorization source:
+
+1. **Okta authenticates the person and decides CMS eligibility.** The `okta_groups` ID-token claim becomes an application permission. The CMS shell, configuration, backend JavaScript, and preview CSS live outside `public/` and are served by an allowlisted Astro server route, so middleware requires the exact, case-sensitive `CMS Editors` permission before returning any CMS byte.
+2. **A same-origin Decap backend reuses that signed Astro session.** Decap does not open a GitHub popup or receive a GitHub token. It obtains a short-lived, subject-bound CSRF token from `/api/cms/session` and calls only the high-level `/api/cms/repository` and `/api/cms/media` routes.
+3. **The Worker performs repository operations as a GitHub App installation.** It mints an installation token on the server, scopes each token request to `t1mlopez/latediagnosed-site` and `contents: write`, and never returns the App private key or installation token to the browser. The gateway accepts only repository `t1mlopez/latediagnosed-site`, branch `main`, Markdown below the configured `src/content/*` collection folders, and supported images below `public/uploads`.
+
+GitHub remains the content store, but editors do not authenticate to GitHub. Repository commits are made by the GitHub App, while Okta remains authoritative for which people may invoke the gateway. Never place a GitHub personal access token, App private key, installation token, OAuth client secret, or other privileged credential in browser JavaScript or `config.yml`.
+
+The Okta application tile named **Content Center** must use this initiate-login URI:
+
+```text
+https://latediagnosed.org/auth/login?returnTo=/admin/
+```
+
+Anonymous `/admin/` requests are redirected to that same application path. Signed-in users without `CMS Editors` receive a friendly HTTP 403 response. `/account` remains a separate, useful authenticated account page.
+
+### Session and group-removal behavior
+
+The encrypted Astro session is an authorization snapshot of the Okta ID-token claims. Its expiry is the earlier of the ID token expiry and eight hours after login. The gateway checks that session and `CMS Editors` on every operation, but it does not call Okta to revalidate group membership during an existing session. Removing `CMS Editors` therefore removes CMS access on the next login and no later than the current Astro session expiry. Content Center logout clears the Astro session immediately. For urgent global revocation, rotate `OKTA_SESSION_SECRET`; this signs out every site user.
+
+### Configuration and secrets
+
+The `latediagnosed-web` Worker requires these encrypted Cloudflare secret names:
+
+- `OKTA_ISSUER`
+- `OKTA_CLIENT_ID`
+- `OKTA_CLIENT_SECRET`
+- `OKTA_SESSION_SECRET`
+- `OKTA_PERMISSION_CLAIMS`
+- `GITHUB_APP_ID`
+- `GITHUB_APP_INSTALLATION_ID`
+- `GITHUB_APP_PRIVATE_KEY`
+
+Set them interactively with `npx wrangler secret put NAME`; use `--config wrangler.preview.jsonc` for the isolated preview Worker. Never put their values in Wrangler configuration, source control, logs, browser responses, or chat. The GitHub App must be installed for **only** `t1mlopez/latediagnosed-site`, with **Contents: read and write** and the implicit **Metadata: read-only** permission. Webhooks, user authorization, callback URLs, client secrets, issues, pull requests, administration, actions, and organization permissions are not required.
+
+To rotate a GitHub App private key, create a second App key, update `GITHUB_APP_PRIVATE_KEY` through Cloudflare encrypted secrets, verify preview and production, then delete the old key in GitHub. Rotate the App or installation IDs only when replacing/reinstalling the App. Rotating `OKTA_CLIENT_SECRET` also requires changing the Okta application value. Rotating `OKTA_SESSION_SECRET` invalidates all active site sessions.
+
+### Local development and verification
+
+Copy `.env.example` to the ignored `.env`, provide local Okta values, and keep the localhost callback registered in Okta. Then run:
+
+```sh
+npm run test
+npm run check
+npm run build
+npx wrangler deploy --dry-run
+npm run dev
+```
+
+For local repository operations, put development GitHub App values in the ignored `.env`; do not reuse a production private key unless that access is deliberate. Verify `/auth/login?returnTo=/admin/`, `/account`, `/api/me`, all three CMS authorization outcomes, content listing/editing, media upload, and logout. Unit tests cover permission decisions, safe return targets, tampered/malformed/expired sessions, exact repository and branch enforcement, traversal, write-path restrictions, origin, CSRF expiry/tampering, and browser credential leakage.
+
+### Deployment and rollback
+
+Before production deployment, record `npx wrangler deployments list --name latediagnosed-web` and `npx wrangler versions list --name latediagnosed-web`. Build, deploy the route-free staging Worker with `npx wrangler deploy --config wrangler.preview.jsonc`, then configure preview secrets with `npx wrangler secret put NAME --config wrangler.preview.jsonc`. Add its exact `/auth/callback` URL to the Okta application only for preview testing. Complete authorization, content edit, and media tests there before `npx wrangler deploy` promotes production. No DNS change is required for the preview Worker.
+
+The CMS files must not be moved back under `public/admin`. Local Wrangler testing showed that public CMS files could be served asset-first without invoking Astro middleware. Keeping them in `src/cms` and serving only `index.html`, `config.yml`, `backend.js`, and `preview.css` through `src/pages/admin/[...asset].ts` makes the authorization boundary deterministic while allowing ordinary public assets to remain asset-first.
+
+Rollback with `npx wrangler rollback VERSION_ID`. The currently deployed transitional version recorded on August 30, 2026 is `134ccc63-2294-4b2f-ab7e-f4747415b53a`; the earlier rollback version is `75ad6821-ffa4-4945-83e1-feb409cad6e2`, and the repository rollback commit is `6ea998c69779980f6af59209297cb79ae08deaf7`. Cloudflare rollback does not remove the GitHub App or revert the Okta tile, so keep the legacy OAuth Worker available until the gateway production verification is complete.
+
+The GitHub App **LateDiagnosed Content Center** is installed only on `t1mlopez/latediagnosed-site`. The route-free preview Worker `latediagnosed-web-cms-preview` was deployed as version `46bebca6-5b53-4441-9cb2-42dae44a191c` and verified through a real Okta SSO flow on August 30, 2026. Decap opened directly on the Articles collection without a GitHub login or popup; content/media listing, a reversible draft and image commit, cleanup, repository/branch/path/origin/CSRF rejection, and browser credential-leak checks passed. The temporary preview Okta callback was removed after validation. Production remains on the transitional version until the separately confirmed production secret configuration and deployment.
+
 ## Original Astro starter notes
 
 ```sh

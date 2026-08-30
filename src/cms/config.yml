@@ -1,8 +1,7 @@
 backend:
-  name: github
+  name: latediagnosed
   repo: t1mlopez/latediagnosed-site
   branch: main
-  base_url: https://fragrant-hall-b531.tim-0a7.workers.dev
 
 media_folder: public/uploads
 public_folder: /uploads

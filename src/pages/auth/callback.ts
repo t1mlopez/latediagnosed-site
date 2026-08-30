@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getAuthConfig } from '../../lib/auth/config';
 import { clearLoginTransaction, readLoginTransaction, setSession } from '../../lib/auth/cookies';
 import { getOidcClient, oidc } from '../../lib/auth/oidc';
+import { expiredLoginResponse, loginFailureResponse } from '../../lib/auth/responses';
 import type { AuthUser } from '../../lib/auth/types';
 
 function claimStrings(claims: Record<string, unknown>, names: string[]): string[] {
@@ -17,15 +18,20 @@ function claimStrings(claims: Record<string, unknown>, names: string[]): string[
 export const GET: APIRoute = async ({ cookies, redirect, request, url }) => {
   const transaction = await readLoginTransaction(cookies);
   clearLoginTransaction(cookies);
-  if (!transaction) return new Response('Login session expired. Please try again.', { status: 400 });
+  if (!transaction) return expiredLoginResponse();
 
-  const client = await getOidcClient();
-  const tokens = await oidc.authorizationCodeGrant(client, request, {
-    pkceCodeVerifier: transaction.codeVerifier,
-    expectedState: transaction.state,
-    expectedNonce: transaction.nonce,
-    idTokenExpected: true,
-  });
+  let tokens;
+  try {
+    const client = await getOidcClient();
+    tokens = await oidc.authorizationCodeGrant(client, request, {
+      pkceCodeVerifier: transaction.codeVerifier,
+      expectedState: transaction.state,
+      expectedNonce: transaction.nonce,
+      idTokenExpected: true,
+    });
+  } catch {
+    return loginFailureResponse();
+  }
   const claims = tokens.claims();
   if (!claims?.sub) return new Response('Okta did not return a valid user identity.', { status: 401 });
 

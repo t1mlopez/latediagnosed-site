@@ -1,6 +1,8 @@
 import { defineMiddleware } from 'astro:middleware';
+import { CMS_LOGIN_PATH, cmsAccessDecision, isCmsPath } from './lib/auth/cms';
 import { clearSession, readSession } from './lib/auth/cookies';
 import { SESSION_COOKIE } from './lib/auth/config';
+import { cmsForbiddenResponse } from './lib/auth/responses';
 
 export const onRequest = defineMiddleware(async (context, next) => {
   if (context.url.hostname === 'www.latediagnosed.org') {
@@ -15,6 +17,19 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (!session && context.cookies.has(SESSION_COOKIE)) clearSession(context.cookies);
   } catch {
     context.locals.user = null;
+  }
+
+  if (isCmsPath(context.url.pathname)) {
+    const decision = cmsAccessDecision(context.locals.user);
+    if (decision === 'login') return context.redirect(CMS_LOGIN_PATH);
+    if (decision === 'forbidden') return cmsForbiddenResponse();
+    if (context.url.pathname === '/admin') return context.redirect('/admin/', 308);
+
+    const response = await next();
+    response.headers.set('Cache-Control', 'private, no-store');
+    response.headers.set('Referrer-Policy', 'same-origin');
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    return response;
   }
 
   return next();

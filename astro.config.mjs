@@ -21,6 +21,9 @@ export default defineConfig({
       OKTA_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       OKTA_SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       OKTA_PERMISSION_CLAIMS: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_APP_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_APP_INSTALLATION_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
+      GITHUB_APP_PRIVATE_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
 
