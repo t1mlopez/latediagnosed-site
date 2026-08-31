@@ -23,26 +23,11 @@ const launchers = getVisibleLaunchers(user.permissions);
 ---
 
 <PublicLayout title="Content Center" description="Your Late Diagnosed Content Center.">
-  <header class="relative w-full overflow-hidden min-h-[70vh]" aria-labelledby="content-center-greeting">
-    <picture>
-      <source
-        media="(max-width: 767px)"
-        srcset="/images/hero-forest-1280.webp"
-        type="image/webp"
-      />
-      <img
-        class="absolute inset-0 w-full h-full object-cover object-center"
-        src="/images/hero-forest-2560.webp"
-        alt=""
-        width="2560"
-        height="1920"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </picture>
-    <div class="absolute inset-0 bg-gradient-to-r from-[#1e2a5eee] to-[#4a2068cc]"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[70vh] py-24">
+  <header
+    class="w-full min-h-[70vh] bg-gradient-to-r from-[#1e2a5e] to-[#4a2068]"
+    aria-labelledby="content-center-greeting"
+  >
+    <div class="max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[70vh] py-24">
       <p class="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/80">Content Center</p>
       <h1 id="content-center-greeting" class="font-heading text-white mb-4 text-4xl md:text-5xl font-bold max-w-4xl">
         Hi, {greetingName}
