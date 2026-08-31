@@ -15,22 +15,21 @@ Reuse the production website patterns in:
 - `src/styles/global.css`
 - `src/layouts/PublicLayout.astro`
 - `src/components/Header.astro`
-- `src/components/home/Hero.astro`
 - `src/components/home/StartHere.astro`
 - `src/pages/internal/design-system.astro`
 
-The Content Center hero intentionally keeps the homepage's navy/purple visual treatment but **does not use the forest photograph**:
+The Content Center does **not** use a large hero, photograph, or gradient block. The greeting area and launcher area sit on one continuous soft gray/lavender page background (`#f8f6fb`).
 
-- full-width `min-h-[70vh]` hero
-- solid navy-to-purple gradient: `from-[#1e2a5e] to-[#4a2068]`
-- the same `max-w-6xl`, `px-6`, `py-24`, white Playfair heading treatment
-- no background image or decorative photograph
+Greeting treatment:
 
-The greeting and Founder's Club/organizational-role badges live inside that gradient hero rather than on a separate white account header.
+- compact `max-w-6xl` content area rather than a hero
+- navy Playfair greeting
+- purple Content Center eyebrow label
+- Founder's Club and organizational roles displayed as restrained pill badges
+- the same `#f8f6fb` background continues directly into the launcher section
 
-The launcher area intentionally reuses the homepage `StartHere.astro` section/card pattern:
+The launcher area reuses the homepage `StartHere.astro` card treatment:
 
-- `max-w-6xl mx-auto px-6 py-20`
 - centered Playfair section heading
 - white cards with `rounded-xl`, light gray borders, subtle shadows and restrained hover behavior
 - Lucide icons in navy/purple tinted circular wells
