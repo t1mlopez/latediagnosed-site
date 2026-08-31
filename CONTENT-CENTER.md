@@ -110,7 +110,7 @@ Do not duplicate the WebMail registry entry for Staff, Volunteer, or another pop
 
 If a destination changes, update the single registry definition rather than editing the page component.
 
-## Display roles
+## Display roles and Founder's Club
 
 Display roles are mapped separately from launcher entitlements in `DISPLAY_ROLE_MAPPINGS`.
 
@@ -121,7 +121,7 @@ Initial labels:
 - Donor
 - Staff
 
-Founder is universal and honorary on the Content Center. It is not an Okta access entitlement and grants no downstream permission.
+**Founder's Club** is a universal honorary designation shown to Content Center users. It is not an Okta access entitlement and grants no downstream permission.
 
 Display-role mappings and application access must remain separate unless an explicit, documented access decision deliberately uses the same group.
 
