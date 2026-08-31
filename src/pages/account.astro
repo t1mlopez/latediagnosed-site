@@ -1,25 +1,105 @@
 ---
 import PublicLayout from '../layouts/PublicLayout.astro';
 import { requireUser } from '../lib/auth/guards';
+import { getDisplayRoles, getVisibleLaunchers } from '../lib/content-center';
 
 const auth = requireUser(Astro);
 if (auth instanceof Response) return auth;
 const user = auth;
+
+function firstNameFromName(name?: string): string | undefined {
+  const value = name?.trim();
+  return value ? value.split(/\s+/)[0] : undefined;
+}
+
+function formatMemberSince(value?: string): string | undefined {
+  if (!value) return undefined;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+}
+
+const greetingName =
+  user.preferredFirstName ||
+  user.firstName ||
+  firstNameFromName(user.name) ||
+  user.preferredUsername ||
+  'there';
+const memberSince = formatMemberSince(user.memberSince);
+const displayRoles = getDisplayRoles(user.permissions);
+const launchers = getVisibleLaunchers(user.permissions);
 ---
 
-<PublicLayout title="Your account" description="Your Late Diagnosed account.">
-  <main class="mx-auto max-w-3xl px-6 py-20">
-    <h1 class="font-heading mb-4 text-4xl text-[#1e2a5e]">Your account</h1>
-    <p class="mb-8 text-gray-700">Signed in through Okta as <strong>{user.name || user.email || user.preferredUsername || user.id}</strong>.</p>
+<PublicLayout title="Content Center" description="Your Late Diagnosed Content Center.">
+  <main class="max-w-6xl mx-auto px-6 py-16 md:py-20">
+    <section class="mb-14" aria-labelledby="content-center-greeting">
+      <p class="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#4a2068]">Content Center</p>
+      <h1 id="content-center-greeting" class="font-heading mb-3 text-4xl md:text-5xl font-bold text-[#1e2a5e]">
+        Hi, {greetingName}
+      </h1>
 
-    <section class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-      <h2 class="font-heading mb-3 text-2xl text-[#1e2a5e]">Access</h2>
-      {user.permissions.length > 0 ? (
-        <ul class="list-disc space-y-1 pl-6 text-gray-700">
-          {user.permissions.map((permission) => <li>{permission}</li>)}
-        </ul>
-      ) : (
-        <p class="text-gray-700">Your Okta account currently has no application permissions.</p>
+      <div class="flex flex-wrap items-center gap-2 text-sm">
+        <span class="text-gray-600">
+          {memberSince ? `Member since ${memberSince}` : 'Member since date pending'}
+        </span>
+        <span class="rounded-full border border-[#e7e0ef] bg-[#f8f6fb] px-3 py-1 font-semibold text-[#4a2068]">
+          Founder
+        </span>
+        {displayRoles.map((role) => (
+          <span class="rounded-full border border-gray-200 bg-white px-3 py-1 font-medium text-gray-600">
+            {role}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="content-center-access">
+      <div class="text-center mb-12">
+        <h2 id="content-center-access" class="font-heading mb-4 text-[#1e2a5e] font-bold text-3xl">
+          What would you like to access?
+        </h2>
+        <p class="text-lg text-gray-700">Select from the options below.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {launchers.map((launcher) => (
+          <a
+            href={launcher.href}
+            target={launcher.external ? '_blank' : undefined}
+            rel={launcher.external ? 'noopener noreferrer' : undefined}
+            class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e]"
+          >
+            <div class:list={[
+              'w-10 h-10 rounded-full flex items-center justify-center mb-3',
+              launcher.tone === 'purple' ? 'bg-[#4a2068]/10' : 'bg-[#1e2a5e]/10',
+            ]}>
+              <i
+                data-lucide={launcher.icon}
+                class:list={[
+                  'w-5 h-5',
+                  launcher.tone === 'purple' ? 'text-[#4a2068]' : 'text-[#1e2a5e]',
+                ]}
+                aria-hidden="true"
+              ></i>
+            </div>
+            <h3 class:list={[
+              'font-semibold mb-2 text-xl',
+              launcher.tone === 'purple' ? 'text-[#4a2068]' : 'text-[#1e2a5e]',
+            ]}>
+              {launcher.label}
+            </h3>
+            <p class="text-sm text-gray-600">{launcher.description}</p>
+          </a>
+        ))}
+      </div>
+
+      {launchers.length === 0 && (
+        <div class="rounded-xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+          <p class="m-0 text-gray-600">No Content Center applications are currently assigned to your account.</p>
+        </div>
       )}
     </section>
   </main>
