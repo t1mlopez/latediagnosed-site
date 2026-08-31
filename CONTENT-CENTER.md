@@ -19,15 +19,14 @@ Reuse the production website patterns in:
 - `src/components/home/StartHere.astro`
 - `src/pages/internal/design-system.astro`
 
-The Content Center hero intentionally reuses the homepage hero treatment directly:
+The Content Center hero intentionally keeps the homepage's navy/purple visual treatment but **does not use the forest photograph**:
 
-- `/images/hero-forest-1280.webp` on mobile
-- `/images/hero-forest-2560.webp` on larger screens
 - full-width `min-h-[70vh]` hero
-- exact navy-to-purple overlay: `from-[#1e2a5eee] to-[#4a2068cc]`
+- solid navy-to-purple gradient: `from-[#1e2a5e] to-[#4a2068]`
 - the same `max-w-6xl`, `px-6`, `py-24`, white Playfair heading treatment
+- no background image or decorative photograph
 
-The greeting and Founder's Club/organizational-role badges live inside that hero rather than on a separate white account header.
+The greeting and Founder's Club/organizational-role badges live inside that gradient hero rather than on a separate white account header.
 
 The launcher area intentionally reuses the homepage `StartHere.astro` section/card pattern:
 
