@@ -15,19 +15,29 @@ Reuse the production website patterns in:
 - `src/styles/global.css`
 - `src/layouts/PublicLayout.astro`
 - `src/components/Header.astro`
+- `src/components/home/Hero.astro`
 - `src/components/home/StartHere.astro`
 - `src/pages/internal/design-system.astro`
 
-Core visual conventions:
+The Content Center hero intentionally reuses the homepage hero treatment directly:
 
-- Playfair Display headings
-- Libre Franklin body copy
-- Navy `#1e2a5e`
-- Deep purple `#4a2068`
-- Soft lavender `#f8f6fb`
-- Text gray `#4b5563`
-- White cards, light borders, rounded-xl corners, subtle shadows, restrained motion
-- Lucide icons in small tinted circular wells
+- `/images/hero-forest-1280.webp` on mobile
+- `/images/hero-forest-2560.webp` on larger screens
+- full-width `min-h-[70vh]` hero
+- exact navy-to-purple overlay: `from-[#1e2a5eee] to-[#4a2068cc]`
+- the same `max-w-6xl`, `px-6`, `py-24`, white Playfair heading treatment
+
+The greeting and Founder's Club/organizational-role badges live inside that hero rather than on a separate white account header.
+
+The launcher area intentionally reuses the homepage `StartHere.astro` section/card pattern:
+
+- `max-w-6xl mx-auto px-6 py-20`
+- centered Playfair section heading
+- white cards with `rounded-xl`, light gray borders, subtle shadows and restrained hover behavior
+- Lucide icons in navy/purple tinted circular wells
+- responsive `sm:grid-cols-2 lg:grid-cols-3` layout
+
+The launcher section heading is **What would you like to access?** and intentionally has **no subtext beneath it**.
 
 ## Identity/session contract
 
