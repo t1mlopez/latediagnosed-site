@@ -5,6 +5,14 @@ import { getOidcClient, oidc } from '../../lib/auth/oidc';
 import { expiredLoginResponse, loginFailureResponse } from '../../lib/auth/responses';
 import type { AuthUser } from '../../lib/auth/types';
 
+function claimString(claims: Record<string, unknown>, names: string[]): string | undefined {
+  for (const name of names) {
+    const value = claims[name];
+    if (typeof value === 'string' && value.trim()) return value.trim();
+  }
+  return undefined;
+}
+
 function claimStrings(claims: Record<string, unknown>, names: string[]): string[] {
   const values = names.flatMap((name) => {
     const value = claims[name];
@@ -35,13 +43,17 @@ export const GET: APIRoute = async ({ cookies, redirect, request, url }) => {
   const claims = tokens.claims();
   if (!claims?.sub) return new Response('Okta did not return a valid user identity.', { status: 401 });
 
+  const normalizedClaims = claims as Record<string, unknown>;
   const authConfig = getAuthConfig();
   const user: AuthUser = {
     id: claims.sub,
-    email: typeof claims.email === 'string' ? claims.email : undefined,
-    name: typeof claims.name === 'string' ? claims.name : undefined,
-    preferredUsername: typeof claims.preferred_username === 'string' ? claims.preferred_username : undefined,
-    permissions: claimStrings(claims as Record<string, unknown>, authConfig.permissionClaims),
+    email: claimString(normalizedClaims, ['email']),
+    name: claimString(normalizedClaims, ['name']),
+    preferredUsername: claimString(normalizedClaims, ['preferred_username']),
+    firstName: claimString(normalizedClaims, ['given_name', 'first_name', 'firstName']),
+    preferredFirstName: claimString(normalizedClaims, ['preferred_first_name', 'preferredFirstName', 'nickname']),
+    memberSince: claimString(normalizedClaims, ['member_since', 'memberSince', 'membership_start_date', 'membershipStartDate']),
+    permissions: claimStrings(normalizedClaims, authConfig.permissionClaims),
   };
   const tokenExpiry = typeof claims.exp === 'number' ? claims.exp * 1000 : Date.now() + 60 * 60 * 1000;
   const expiresAt = Math.min(tokenExpiry, Date.now() + 8 * 60 * 60 * 1000);

@@ -3,6 +3,9 @@ export interface AuthUser {
   email?: string;
   name?: string;
   preferredUsername?: string;
+  firstName?: string;
+  preferredFirstName?: string;
+  memberSince?: string;
   permissions: string[];
 }
 
