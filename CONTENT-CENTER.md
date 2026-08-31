@@ -18,7 +18,9 @@ Reuse the production website patterns in:
 - `src/components/home/StartHere.astro`
 - `src/pages/internal/design-system.astro`
 
-The Content Center does **not** use a large hero, photograph, or gradient block. The greeting area and launcher area sit on one continuous soft gray/lavender page background (`#f8f6fb`).
+Immediately below the white site header, the Content Center includes a short decorative LateDiagnosed navy-to-purple band (`#1e2a5e` → `#4a2068`). It contains no photograph and no account content. It is a visual separator between the global site header and the Content Center body.
+
+The greeting area and launcher area below that band sit on one continuous soft gray/lavender page background (`#f8f6fb`).
 
 Greeting treatment:
 
