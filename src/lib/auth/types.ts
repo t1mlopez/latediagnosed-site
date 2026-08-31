@@ -5,7 +5,6 @@ export interface AuthUser {
   preferredUsername?: string;
   firstName?: string;
   preferredFirstName?: string;
-  memberSince?: string;
   permissions: string[];
 }
 

@@ -26,7 +26,7 @@ export const CONTENT_CENTER_LAUNCHERS: readonly ContentCenterLauncher[] = [
     label: 'WebMail',
     description: 'Open your Late Diagnosed email.',
     icon: 'mail',
-    href: 'https://outlook.office.com/mail/',
+    href: 'https://outlook.cloud.microsoft/mail/',
     allowedGroups: ['Content Center - WebMail'],
     accessMode: 'any',
     external: true,

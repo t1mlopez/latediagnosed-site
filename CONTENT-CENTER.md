@@ -39,7 +39,6 @@ The server-side Okta callback normalizes only the fields needed by the applicati
 - preferred username
 - first name
 - preferred first name
-- optional member-since value
 - permission/group strings
 
 Preferred first name is resolved from the first available Okta claim in this order:
@@ -54,14 +53,7 @@ First name is resolved from:
 2. `first_name`
 3. `firstName`
 
-Member-since is resolved from:
-
-1. `member_since`
-2. `memberSince`
-3. `membership_start_date`
-4. `membershipStartDate`
-
-The current OIDC request uses the standard `openid profile email` scopes. A custom member-since claim must be configured in Okta if the date is not already present in the ID token. Until that authoritative claim exists, the UI deliberately reports that the member-since date is pending rather than inventing a date.
+The current OIDC request uses the standard `openid profile email` scopes. No member-since field is shown or required by the Content Center.
 
 ## Application/action registry
 
@@ -111,7 +103,7 @@ Do not duplicate the WebMail registry entry for Staff, Volunteer, or another pop
 
 ## Initial destinations
 
-- WebMail: Microsoft 365 Outlook Web (`https://outlook.office.com/mail/`)
+- WebMail: Microsoft Outlook Web (`https://outlook.cloud.microsoft/mail/`)
 - Content Editor: `/admin/`
 - Confluence: Late Diagnosed internal Confluence Home space
 - Donate: existing Givebutter donation page

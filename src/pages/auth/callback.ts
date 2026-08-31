@@ -52,7 +52,6 @@ export const GET: APIRoute = async ({ cookies, redirect, request, url }) => {
     preferredUsername: claimString(normalizedClaims, ['preferred_username']),
     firstName: claimString(normalizedClaims, ['given_name', 'first_name', 'firstName']),
     preferredFirstName: claimString(normalizedClaims, ['preferred_first_name', 'preferredFirstName', 'nickname']),
-    memberSince: claimString(normalizedClaims, ['member_since', 'memberSince', 'membership_start_date', 'membershipStartDate']),
     permissions: claimStrings(normalizedClaims, authConfig.permissionClaims),
   };
   const tokenExpiry = typeof claims.exp === 'number' ? claims.exp * 1000 : Date.now() + 60 * 60 * 1000;

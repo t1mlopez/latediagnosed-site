@@ -12,23 +12,12 @@ function firstNameFromName(name?: string): string | undefined {
   return value ? value.split(/\s+/)[0] : undefined;
 }
 
-function formatMemberSince(value?: string): string | undefined {
-  if (!value) return undefined;
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    year: 'numeric',
-  }).format(date);
-}
-
 const greetingName =
   user.preferredFirstName ||
   user.firstName ||
   firstNameFromName(user.name) ||
   user.preferredUsername ||
   'there';
-const memberSince = formatMemberSince(user.memberSince);
 const displayRoles = getDisplayRoles(user.permissions);
 const launchers = getVisibleLaunchers(user.permissions);
 ---
@@ -42,9 +31,6 @@ const launchers = getVisibleLaunchers(user.permissions);
       </h1>
 
       <div class="flex flex-wrap items-center gap-2 text-sm">
-        <span class="text-gray-600">
-          {memberSince ? `Member since ${memberSince}` : 'Member since date pending'}
-        </span>
         <span class="rounded-full border border-[#e7e0ef] bg-[#f8f6fb] px-3 py-1 font-semibold text-[#4a2068]">
           Founder
         </span>
