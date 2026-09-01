@@ -4,6 +4,10 @@ import PublicLayout from "../layouts/PublicLayout.astro";
 const donationUrl = "https://givebutter.com/late-diagnosed-donations-3akmpq";
 const contactEmail = "info@latediagnosed.org";
 
+const researchMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Survey%20Interest`;
+const volunteerMailto = `mailto:${contactEmail}?subject=Volunteer%20with%20LateDiagnosed.org`;
+const storyMailto = `mailto:${contactEmail}?subject=Tell%20My%20Story%20-%20LateDiagnosed.org`;
+
 const involvementCards = [
   {
     href: "#surveys",
@@ -12,7 +16,7 @@ const involvementCards = [
     description: "Turn lived experience into data.",
   },
   {
-    href: "#volunteer",
+    href: volunteerMailto,
     icon: "users",
     title: "Volunteer",
     description: "Put your skills toward something meaningful.",
@@ -23,26 +27,13 @@ const involvementCards = [
     title: "Donate",
     description: "Help fund resources, research, and outreach.",
   },
+  {
+    href: storyMailto,
+    icon: "message-circle",
+    title: "Tell Your Story",
+    description: "Help someone else recognize themselves.",
+  },
 ];
-
-const volunteerSkills = [
-  "Writing",
-  "Research",
-  "Design",
-  "Technology",
-  "Accessibility",
-  "Social Media",
-  "Data",
-  "Community",
-  "Fundraising",
-  "Education",
-  "Events",
-  "Outreach",
-];
-
-const researchMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Survey%20Interest`;
-const volunteerMailto = `mailto:${contactEmail}?subject=Volunteer%20with%20LateDiagnosed.org`;
-const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20Expertise`;
 ---
 
 <PublicLayout
@@ -84,7 +75,7 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
           <h2 class="font-heading text-3xl font-bold text-[#1e2a5e] md:text-4xl">How would you like to get involved?</h2>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {involvementCards.map((card) => (
             <a href={card.href} class="group rounded-2xl border border-slate-200 bg-white p-6 no-underline shadow-sm transition duration-200 hover:-translate-y-1 hover:border-purple-200 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4a2068]">
               <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f3eef7] text-[#4a2068] transition group-hover:bg-[#4a2068] group-hover:text-white">
@@ -151,47 +142,6 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
       </div>
     </section>
 
-    <section id="volunteer" class="scroll-mt-24 bg-[#f7f8fb] px-6 py-20 md:py-28">
-      <div class="mx-auto max-w-6xl">
-        <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <div class="mb-7 flex flex-wrap gap-2.5">
-              {volunteerSkills.map((skill) => (
-                <span class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">{skill}</span>
-              ))}
-            </div>
-
-            <div class="flex aspect-[4/3] items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white/70 p-7 text-center">
-              <div class="max-w-sm">
-                <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#f3eef7] text-[#4a2068]">
-                  <i data-lucide="image" class="h-5 w-5"></i>
-                </div>
-                <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4a2068]">Image placeholder</p>
-                <p class="mb-0 text-sm leading-6 text-slate-600">
-                  Suggested: candid collaboration — someone editing, designing, coding, planning, or meeting with another volunteer. It should feel like useful work being done, not a posed “teamwork” photo.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">Volunteer</p>
-            <h2 class="font-heading mb-5 text-3xl font-bold text-[#1e2a5e] md:text-5xl">You already have something we need.</h2>
-            <p class="mb-5 text-lg leading-8 text-slate-700">
-              You do not need to work in healthcare or neurodiversity to contribute something meaningful.
-            </p>
-            <p class="mb-7 text-base leading-7 text-slate-600">
-              Some volunteers may join an ongoing team. Others may contribute a few hours to a single project. We want to make room for both.
-            </p>
-            <div class="flex flex-wrap gap-3">
-              <a href={volunteerMailto} class="rounded-lg bg-[#1e2a5e] px-6 py-3 font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-lg">Explore Volunteer Opportunities</a>
-              <a href={expertiseMailto} class="rounded-lg border border-[#1e2a5e]/20 bg-white px-6 py-3 font-bold text-[#1e2a5e] no-underline transition hover:border-[#1e2a5e]/40 hover:shadow-md">Offer Your Expertise</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="donate" class="scroll-mt-24 relative overflow-hidden bg-[#1e2a5e] px-6 py-20 text-white md:py-28">
       <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#4a2068]/45 to-transparent" aria-hidden="true"></div>
       <div class="relative mx-auto max-w-6xl">
@@ -232,7 +182,9 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
       </div>
     </section>
 
-    <!-- Deferred Get Involved sections are tracked in WEB-29, WEB-30, and WEB-31. -->
+    <!-- Volunteer section intentionally hidden; Volunteer tile routes to email. -->
+    <!-- Tell Your Story tile is exposed as an email expression-of-interest; full story section remains tracked in WEB-30. -->
+    <!-- Discord moderation and Website Feedback remain deferred in WEB-31. -->
 
     <section class="bg-[#faf9fc] px-6 py-16 md:py-20">
       <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white px-6 py-8 shadow-sm md:px-8">
