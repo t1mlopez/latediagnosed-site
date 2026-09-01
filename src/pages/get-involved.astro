@@ -6,7 +6,6 @@ const contactEmail = "info@latediagnosed.org";
 
 const researchMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Survey%20Interest`;
 const volunteerMailto = `mailto:${contactEmail}?subject=Volunteer%20with%20LateDiagnosed.org`;
-const storyMailto = `mailto:${contactEmail}?subject=Tell%20My%20Story%20-%20LateDiagnosed.org`;
 
 const involvementCards = [
   {
@@ -28,7 +27,7 @@ const involvementCards = [
     description: "Help fund resources, research, and outreach.",
   },
   {
-    href: storyMailto,
+    href: "/tell-your-story",
     icon: "message-circle",
     title: "Tell Your Story",
     description: "Help someone else recognize themselves.",
@@ -183,7 +182,7 @@ const involvementCards = [
     </section>
 
     <!-- Volunteer section intentionally hidden; Volunteer tile routes to email. -->
-    <!-- Tell Your Story tile is exposed as an email expression-of-interest; full story section remains tracked in WEB-30. -->
+    <!-- Tell Your Story now routes to the dedicated /tell-your-story intake page tracked in WEB-30. -->
     <!-- Discord moderation and Website Feedback remain deferred in WEB-31. -->
 
     <section class="bg-[#faf9fc] px-6 py-16 md:py-20">
