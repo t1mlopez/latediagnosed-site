@@ -2,6 +2,32 @@
 const menuItems = [
   { href: "/", label: "Home" },
   {
+    label: "Start Here",
+    children: [
+      { href: "/resources/just-diagnosed/", label: "Just Diagnosed?" },
+      {
+        href: "/resources/suspect-adhd-or-autism/",
+        label: "Suspect ADHD or Autism?",
+      },
+      {
+        href: "/resources/understanding-masking-burnout/",
+        label: "Understanding Masking & Burnout",
+      },
+      {
+        href: "/resources/finding-assessments-and-support/",
+        label: "Finding Assessments & Support",
+      },
+      {
+        href: "/resources/late-diagnosis-depression/",
+        label: "Late Diagnosis Depression",
+      },
+      {
+        href: "/resources/frequently-asked-questions/",
+        label: "Frequently Asked Questions",
+      },
+    ],
+  },
+  {
     label: "Guides",
     children: [
       {
@@ -10,7 +36,7 @@ const menuItems = [
       },
     ],
   },
-  { href: "/search", label: "Search" },
+  { href: "/search", label: "Search", iconOnly: true },
   {
     href: "https://discord.gg/rYUKq96WqJ",
     label: "Community",
@@ -63,6 +89,27 @@ const user = Astro.locals.user;
               </div>
             </div>
           </div>
+        ) : item.iconOnly ? (
+          <a
+            href={item.href}
+            aria-label={item.label}
+            title={item.label}
+            class="inline-flex items-center justify-center text-gray-600 hover:text-[#1e2a5e]"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </a>
         ) : (
           <a
             href={item.href}
@@ -111,6 +158,27 @@ const user = Astro.locals.user;
                 </a>
               ))}
             </div>
+          ) : item.iconOnly ? (
+            <a
+              href={item.href}
+              aria-label={item.label}
+              title={item.label}
+              class="flex w-fit items-center border-b border-gray-100 py-3 text-gray-600 hover:text-[#1e2a5e]"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </a>
           ) : (
             <a
               href={item.href}
