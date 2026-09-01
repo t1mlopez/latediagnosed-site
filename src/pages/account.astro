@@ -24,7 +24,7 @@ const launchers = getVisibleLaunchers(user.permissions);
 
 <PublicLayout title="Content Center" description="Your Late Diagnosed Content Center.">
   <div
-    class="h-20 md:h-24"
+    class="content-center-band"
     style="background: linear-gradient(90deg, #1e2a5e 0%, #4a2068 100%);"
     aria-hidden="true"
   ></div>
@@ -94,4 +94,16 @@ const launchers = getVisibleLaunchers(user.permissions);
       )}
     </section>
   </main>
+
+  <style>
+    .content-center-band {
+      height: 20rem;
+    }
+
+    @media (min-width: 768px) {
+      .content-center-band {
+        height: 24rem;
+      }
+    }
+  </style>
 </PublicLayout>
