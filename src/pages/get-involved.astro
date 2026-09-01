@@ -2,7 +2,6 @@
 import PublicLayout from "../layouts/PublicLayout.astro";
 
 const donationUrl = "https://givebutter.com/late-diagnosed-donations-3akmpq";
-const discordUrl = "https://discord.gg/rYUKq96WqJ";
 const contactEmail = "info@latediagnosed.org";
 
 const involvementCards = [
@@ -24,24 +23,6 @@ const involvementCards = [
     title: "Donate",
     description: "Help fund resources, research, and outreach.",
   },
-  {
-    href: "#story",
-    icon: "quote",
-    title: "Share Your Story",
-    description: "Help someone else recognize themselves.",
-  },
-  {
-    href: "#discord",
-    icon: "message-circle",
-    title: "Join Our Discord Team",
-    description: "Help us build a healthier community.",
-  },
-  {
-    href: "#feedback",
-    icon: "message-square",
-    title: "Give Feedback",
-    description: "Help make LateDiagnosed.org better.",
-  },
 ];
 
 const volunteerSkills = [
@@ -62,13 +43,11 @@ const volunteerSkills = [
 const researchMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Survey%20Interest`;
 const volunteerMailto = `mailto:${contactEmail}?subject=Volunteer%20with%20LateDiagnosed.org`;
 const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20Expertise`;
-const storyMailto = `mailto:${contactEmail}?subject=Share%20My%20Story%20with%20LateDiagnosed.org`;
-const feedbackMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Website%20Feedback`;
 ---
 
 <PublicLayout
   title="Get Involved | Late Diagnosed"
-  description="Give your time, experience, expertise, story, feedback, or financial support to help LateDiagnosed.org reach more people."
+  description="Give your time, experience, expertise, or financial support to help LateDiagnosed.org reach more people."
 >
   <main class="get-involved bg-white text-slate-700">
     <section class="relative overflow-hidden bg-gradient-to-br from-[#1e2a5e] via-[#28366f] to-[#4a2068] text-white">
@@ -236,80 +215,7 @@ const feedbackMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Websi
       </div>
     </section>
 
-    <section id="story" class="scroll-mt-24 px-6 py-20 md:py-28">
-      <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div>
-          <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">Share your story</p>
-          <blockquote class="story-quote font-heading mb-8 border-0 p-0 text-3xl font-bold leading-tight text-[#1e2a5e] md:text-5xl">
-            “Someone may be where you were six months ago, ten years ago, or yesterday.”
-          </blockquote>
-          <a href={storyMailto} class="inline-flex items-center gap-2 rounded-lg bg-[#4a2068] px-6 py-3 font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-lg">
-            Tell Your Story <span aria-hidden="true">→</span>
-          </a>
-        </div>
-
-        <div class="space-y-5">
-          <div class="flex aspect-[16/10] items-center justify-center rounded-3xl border-2 border-dashed border-purple-200 bg-[#faf9fc] p-7 text-center">
-            <div class="max-w-sm">
-              <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#4a2068] shadow-sm">
-                <i data-lucide="image" class="h-5 w-5"></i>
-              </div>
-              <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4a2068]">Image placeholder</p>
-              <p class="mb-0 text-sm leading-6 text-slate-600">
-                Suggested: an authentic portrait or environmental photo of a community member whose story is featured, ideally paired later with a short first-person quote. Use real contributors with clear permission rather than anonymous stock models when possible.
-              </p>
-            </div>
-          </div>
-
-          <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm md:p-9">
-            <h3 class="mb-4 text-2xl font-bold text-[#1e2a5e]">Your experience may help someone recognize their own.</h3>
-            <p class="text-base leading-7 text-slate-600">
-              Stories submitted to LateDiagnosed.org may be considered for articles, videos, awareness campaigns, educational content, or community storytelling.
-            </p>
-            <p class="text-base leading-7 text-slate-600">
-              Submitting a story does not automatically mean it will be published. Permission and intended use should be clear before identifiable material is shared publicly.
-            </p>
-            <div class="mt-6 rounded-2xl bg-[#f8f5fa] p-5 text-base font-bold text-[#4a2068]">
-              You remain in control of what you share.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#faf9fc] px-6 py-20 md:py-24">
-      <div class="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">
-        <article id="discord" class="scroll-mt-24 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm md:p-9">
-          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#eef1f8] text-[#1e2a5e]">
-            <i data-lucide="shield-check" class="h-6 w-6"></i>
-          </div>
-          <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4a2068]">Discord moderators needed</p>
-          <h2 class="font-heading mb-4 text-3xl font-bold text-[#1e2a5e]">Help us take care of the community.</h2>
-          <p class="mb-6 text-base leading-7 text-slate-600">
-            Moderators help welcome members, guide conversations, maintain community standards, and recognize when something needs escalation. You do not need to have every answer — consistency, care, and good judgment matter more.
-          </p>
-          <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="font-bold text-[#4a2068] no-underline">Join the Moderator Team <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article id="feedback" class="scroll-mt-24 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm md:p-9">
-          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#f3eef7] text-[#4a2068]">
-            <i data-lucide="message-square" class="h-6 w-6"></i>
-          </div>
-          <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4a2068]">Website feedback</p>
-          <h2 class="font-heading mb-4 text-3xl font-bold text-[#1e2a5e]">Help us make this better.</h2>
-          <div class="mb-6 grid grid-cols-2 gap-2 text-sm text-slate-600">
-            <span>Found something confusing?</span>
-            <span>Couldn’t find what you needed?</span>
-            <span>Something broken?</span>
-            <span>Missing an important topic?</span>
-          </div>
-          <p class="mb-6 text-base leading-7 text-slate-600">
-            You do not need to be a web expert. Sometimes the most useful feedback is simply: “I was looking for this, and I couldn’t find it.”
-          </p>
-          <a href={feedbackMailto} class="font-bold text-[#4a2068] no-underline">Tell Us <span aria-hidden="true">→</span></a>
-        </article>
-      </div>
-    </section>
+    <!-- Deferred Get Involved sections are tracked in WEB-29, WEB-30, and WEB-31. -->
 
     <section class="px-6 py-20 text-center md:py-28">
       <div class="mx-auto max-w-4xl rounded-3xl bg-gradient-to-br from-[#f4f1f7] to-[#eef1f8] px-6 py-14 md:px-12">
@@ -342,11 +248,6 @@ const feedbackMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Websi
     .get-involved p,
     .get-involved blockquote {
       margin-top: 0;
-    }
-
-    .story-quote::before,
-    .story-quote::after {
-      content: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
