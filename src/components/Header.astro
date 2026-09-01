@@ -36,7 +36,6 @@ const menuItems = [
       },
     ],
   },
-  { href: "/search", label: "Search", iconOnly: true },
   {
     href: "https://discord.gg/rYUKq96WqJ",
     label: "Community",
@@ -89,27 +88,6 @@ const user = Astro.locals.user;
               </div>
             </div>
           </div>
-        ) : item.iconOnly ? (
-          <a
-            href={item.href}
-            aria-label={item.label}
-            title={item.label}
-            class="inline-flex items-center justify-center text-gray-600 hover:text-[#1e2a5e]"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-5 w-5"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </a>
         ) : (
           <a
             href={item.href}
@@ -131,6 +109,26 @@ const user = Astro.locals.user;
       ) : (
         <a href="/auth/login" class="font-semibold text-[#1e2a5e]">Sign in</a>
       )}
+      <a
+        href="/search"
+        aria-label="Search"
+        title="Search"
+        class="inline-flex items-center justify-center text-gray-600 hover:text-[#1e2a5e]"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-5 w-5"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+      </a>
     </nav>
 
     <details class="group md:hidden text-sm">
@@ -158,27 +156,6 @@ const user = Astro.locals.user;
                 </a>
               ))}
             </div>
-          ) : item.iconOnly ? (
-            <a
-              href={item.href}
-              aria-label={item.label}
-              title={item.label}
-              class="flex w-fit items-center border-b border-gray-100 py-3 text-gray-600 hover:text-[#1e2a5e]"
-            >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="h-5 w-5"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-            </a>
           ) : (
             <a
               href={item.href}
@@ -193,13 +170,33 @@ const user = Astro.locals.user;
         {user ? (
           <>
             <a href="/account" class="border-b border-gray-100 py-3 font-semibold text-[#1e2a5e]">Account</a>
-            <form action="/auth/logout" method="post" class="py-3">
+            <form action="/auth/logout" method="post" class="border-b border-gray-100 py-3">
               <button type="submit" class="cursor-pointer text-gray-600">Sign out</button>
             </form>
           </>
         ) : (
-          <a href="/auth/login" class="py-3 font-semibold text-[#1e2a5e]">Sign in</a>
+          <a href="/auth/login" class="border-b border-gray-100 py-3 font-semibold text-[#1e2a5e]">Sign in</a>
         )}
+        <a
+          href="/search"
+          aria-label="Search"
+          title="Search"
+          class="flex w-fit items-center py-3 text-gray-600 hover:text-[#1e2a5e]"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-5 w-5"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </a>
       </nav>
     </details>
   </div>
