@@ -76,7 +76,7 @@ const user = Astro.locals.user;
       ))}
       {user ? (
         <>
-          <a href="/account" class="font-semibold text-[#1e2a5e]">Content Center</a>
+          <a href="/tools" class="font-semibold text-[#1e2a5e]">Tools</a>
           <form action="/auth/logout" method="post">
             <button type="submit" class="cursor-pointer text-gray-600 hover:text-[#1e2a5e]">Sign out</button>
           </form>
@@ -124,7 +124,7 @@ const user = Astro.locals.user;
         ))}
         {user ? (
           <>
-            <a href="/account" class="border-b border-gray-100 py-3 font-semibold text-[#1e2a5e]">Content Center</a>
+            <a href="/tools" class="border-b border-gray-100 py-3 font-semibold text-[#1e2a5e]">Tools</a>
             <form action="/auth/logout" method="post" class="py-3">
               <button type="submit" class="cursor-pointer text-gray-600">Sign out</button>
             </form>
