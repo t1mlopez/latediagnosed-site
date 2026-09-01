@@ -214,18 +214,33 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
 
     <!-- Deferred Get Involved sections are tracked in WEB-29, WEB-30, and WEB-31. -->
 
-    <section class="px-6 py-20 text-center md:py-28">
-      <div class="mx-auto max-w-4xl rounded-3xl bg-gradient-to-br from-[#f4f1f7] to-[#eef1f8] px-6 py-14 md:px-12">
-        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">However you contribute</p>
-        <h2 class="font-heading mb-5 text-3xl font-bold text-[#1e2a5e] md:text-5xl">You’re part of this.</h2>
-        <p class="mx-auto mb-8 max-w-2xl text-lg leading-8 text-slate-700">
-          Your time matters. Your experience matters. Your knowledge matters. Your voice matters.
-        </p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="#volunteer" class="rounded-lg bg-[#1e2a5e] px-6 py-3 font-bold text-white no-underline">Volunteer</a>
-          <a href="#surveys" class="rounded-lg border border-[#1e2a5e]/15 bg-white px-6 py-3 font-bold text-[#1e2a5e] no-underline">Take a Survey</a>
-          <a href={donationUrl} target="_blank" rel="noopener noreferrer" class="rounded-lg bg-[#4a2068] px-6 py-3 font-bold text-white no-underline">Donate</a>
+    <section class="bg-[#faf9fc] px-6 py-16 md:py-20">
+      <div class="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white px-6 py-8 shadow-sm md:px-8">
+        <div class="mb-5">
+          <h2 class="font-heading mb-2 text-2xl font-bold text-[#1e2a5e] md:text-3xl">Get email updates</h2>
+          <p class="mb-0 text-sm leading-6 text-slate-600">
+            Occasional updates about new resources, community surveys, and ways to get involved.
+          </p>
         </div>
+
+        <form id="email-updates-form" class="flex flex-col gap-3 sm:flex-row" novalidate>
+          <label for="email-updates-address" class="sr-only">Email address</label>
+          <input
+            id="email-updates-address"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="Email address"
+            class="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-800 outline-none transition focus:border-[#4a2068] focus:ring-2 focus:ring-[#4a2068]/15"
+          />
+          <button type="submit" class="rounded-lg bg-[#4a2068] px-6 py-3 text-base font-bold text-white transition hover:bg-[#3d1a57] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4a2068]">
+            Sign me up
+          </button>
+        </form>
+        <p class="mb-0 mt-3 text-xs leading-5 text-slate-500">
+          For now, signup is completed by email. A direct mailing-list connection is tracked in WEB-32.
+        </p>
       </div>
     </section>
   </main>
@@ -258,5 +273,24 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
     if (window.lucide) {
       window.lucide.createIcons();
     }
+
+    const emailUpdatesForm = document.getElementById("email-updates-form");
+    const emailUpdatesInput = document.getElementById("email-updates-address");
+
+    emailUpdatesForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!(emailUpdatesInput instanceof HTMLInputElement)) return;
+
+      if (!emailUpdatesInput.checkValidity()) {
+        emailUpdatesInput.reportValidity();
+        return;
+      }
+
+      const email = emailUpdatesInput.value.trim();
+      const subject = encodeURIComponent("Subscribe me to LateDiagnosed.org email updates");
+      const body = encodeURIComponent(`Please add ${email} to LateDiagnosed.org email updates.`);
+      window.location.href = `mailto:info@latediagnosed.org?subject=${subject}&body=${body}`;
+    });
   </script>
 </PublicLayout>
