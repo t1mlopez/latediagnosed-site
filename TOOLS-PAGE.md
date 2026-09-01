@@ -13,7 +13,7 @@ The page is a launcher and identity surface. It is not the authorization boundar
 ## User-facing naming
 
 - Page/product name: **Tools Page**
-- Visible page label: **Tools and Additional Resources**
+- Webpage header: **Tools and Additional Resources**
 - Authenticated top-navigation label: **Tools**
 - The Tools navigation item is rendered only when `Astro.locals.user` contains an authenticated session.
 - The `/tools` route also enforces authentication server-side through `requireUser()`.
@@ -24,24 +24,36 @@ Reuse the production website patterns in:
 
 - `src/styles/global.css`
 - `src/layouts/PublicLayout.astro`
+- `src/layouts/ArticleLayout.astro`
 - `src/components/Header.astro`
 - `src/components/home/StartHere.astro`
 - `src/pages/internal/design-system.astro`
 
-Immediately below the white site header, the Tools Page includes a decorative LateDiagnosed navy-to-purple band (`#1e2a5e` → `#4a2068`). It contains no photograph and no account content.
+### Webpage header
 
-Current band sizing:
+The Tools Page uses the same shared article-header treatment as article pages such as **Welcome to ADHD**.
 
-- 20rem below 768px
-- 24rem at 768px and above
+`Tools and Additional Resources` is the page H1 inside the existing `.article-hero` / `.article-hero-inner` structure. This deliberately reuses the production article styling rather than maintaining a separate Tools-specific purple band.
 
-The greeting area and launcher area below that band sit on one continuous soft gray/lavender page background (`#f8f6fb`).
+The shared article treatment currently provides:
+
+- `linear-gradient(135deg, #1e2a5e, #4a2068)`
+- `5rem 1.5rem` hero padding
+- `900px` centered inner width
+- white Playfair Display H1
+- responsive H1 sizing with `clamp(2.5rem, 6vw, 4.5rem)`
+- no photograph/background image
+
+The title is not repeated in the gray content area.
+
+### Main content
+
+The greeting and launcher area below the article-style header sit on one continuous soft gray/lavender page background (`#f8f6fb`).
 
 Greeting treatment:
 
-- compact `max-w-6xl` content area rather than a hero
-- visible label **Tools and Additional Resources**
-- navy Playfair greeting
+- compact `max-w-6xl` content area
+- navy Playfair `Hi, <name>` heading
 - Founder's Club and organizational roles displayed as restrained pill badges
 - the same `#f8f6fb` background continues directly into the launcher section
 
