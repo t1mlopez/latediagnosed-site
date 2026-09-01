@@ -26,20 +26,17 @@ const launchers = getVisibleLaunchers(user.permissions);
   title="Tools and Additional Resources"
   description="Late Diagnosed tools and additional resources for authenticated users."
 >
-  <div
-    class="tools-page-band"
-    style="background: linear-gradient(90deg, #1e2a5e 0%, #4a2068 100%);"
-    aria-hidden="true"
-  ></div>
+  <section class="article-hero" aria-labelledby="tools-page-title">
+    <div class="article-hero-inner">
+      <h1 id="tools-page-title">Tools and Additional Resources</h1>
+    </div>
+  </section>
 
   <main class="bg-[#f8f6fb]">
     <section class="max-w-6xl mx-auto px-6 pt-14 pb-8" aria-labelledby="tools-page-greeting">
-      <p class="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#4a2068]">
-        Tools and Additional Resources
-      </p>
-      <h1 id="tools-page-greeting" class="font-heading mb-4 text-4xl md:text-5xl font-bold text-[#1e2a5e]">
+      <h2 id="tools-page-greeting" class="font-heading mb-4 text-4xl md:text-5xl font-bold text-[#1e2a5e]">
         Hi, {greetingName}
-      </h1>
+      </h2>
 
       <div class="flex flex-wrap items-center gap-2 text-sm">
         <span class="rounded-full border border-[#ded3e8] bg-white/70 px-3 py-1 font-semibold text-[#4a2068]">
@@ -99,16 +96,4 @@ const launchers = getVisibleLaunchers(user.permissions);
       )}
     </section>
   </main>
-
-  <style>
-    .tools-page-band {
-      height: 20rem;
-    }
-
-    @media (min-width: 768px) {
-      .tools-page-band {
-        height: 24rem;
-      }
-    }
-  </style>
 </PublicLayout>
