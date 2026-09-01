@@ -1,0 +1,28 @@
+---
+interface Props {
+  href: string;
+  icon: string;
+  title: string;
+  description: string;
+  accent?: "navy" | "purple";
+}
+
+const {
+  href,
+  icon,
+  title,
+  description,
+  accent = "navy",
+} = Astro.props;
+
+const accentText = accent === "purple" ? "text-[#4a2068]" : "text-[#1e2a5e]";
+const accentBg = accent === "purple" ? "bg-[#4a2068]/10" : "bg-[#1e2a5e]/10";
+---
+
+<a href={href} class="block rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow bg-white no-underline">
+  <div class={`w-10 h-10 rounded-full ${accentBg} flex items-center justify-center mb-3`}>
+    <i data-lucide={icon} class={`${accentText} w-5 h-5`}></i>
+  </div>
+  <h3 class={`font-semibold mb-2 ${accentText} text-xl`}>{title}</h3>
+  <p class="text-sm text-gray-600">{description}</p>
+</a>
