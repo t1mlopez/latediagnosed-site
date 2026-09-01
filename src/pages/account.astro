@@ -5,22 +5,96 @@ import { requireUser } from '../lib/auth/guards';
 const auth = requireUser(Astro);
 if (auth instanceof Response) return auth;
 const user = auth;
+
+const accountTools = [
+  {
+    label: 'Email',
+    description: 'Open your Late Diagnosed email.',
+    icon: 'mail',
+    href: 'https://outlook.cloud.microsoft/mail/',
+  },
+  {
+    label: 'Confluence',
+    description: 'Open the Late Diagnosed internal knowledge base.',
+    icon: 'book-open',
+    href: 'https://latediagnosed.atlassian.net/wiki/spaces/Home/overview?homepageId=15532201',
+  },
+  {
+    label: 'Jira',
+    description: 'Open Late Diagnosed projects and tasks.',
+    icon: 'square-check-big',
+    href: 'https://latediagnosed.atlassian.net/jira/',
+  },
+];
+
+const debugFields = [
+  ['Account ID', user.id],
+  ['Email', user.email],
+  ['Username', user.preferredUsername],
+  ['Name', user.name],
+].filter((field): field is [string, string] => Boolean(field[1]));
 ---
 
 <PublicLayout title="Your account" description="Your Late Diagnosed account.">
-  <main class="mx-auto max-w-3xl px-6 py-20">
+  <main class="mx-auto max-w-4xl px-6 py-20">
     <h1 class="font-heading mb-4 text-4xl text-[#1e2a5e]">Your account</h1>
-    <p class="mb-8 text-gray-700">Signed in through Okta as <strong>{user.name || user.email || user.preferredUsername || user.id}</strong>.</p>
+    <p class="mb-10 text-gray-700">Signed in through Okta as <strong>{user.name || user.email || user.preferredUsername || user.id}</strong>.</p>
 
-    <section class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-      <h2 class="font-heading mb-3 text-2xl text-[#1e2a5e]">Access</h2>
-      {user.permissions.length > 0 ? (
-        <ul class="list-disc space-y-1 pl-6 text-gray-700">
-          {user.permissions.map((permission) => <li>{permission}</li>)}
-        </ul>
-      ) : (
-        <p class="text-gray-700">Your Okta account currently has no application permissions.</p>
-      )}
+    <section aria-labelledby="account-tools-title">
+      <h2 id="account-tools-title" class="font-heading mb-4 text-2xl text-[#1e2a5e]">Tools and resources</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {accountTools.map((tool) => (
+          <a
+            href={tool.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block rounded-xl border border-gray-200 bg-white p-5 no-underline shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e]"
+          >
+            <span class="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#1e2a5e]/10">
+              <i data-lucide={tool.icon} class="h-5 w-5 text-[#1e2a5e]" aria-hidden="true"></i>
+            </span>
+            <h3 class="mb-2 text-lg font-semibold text-[#1e2a5e]">{tool.label}</h3>
+            <p class="m-0 text-sm text-gray-600">{tool.description}</p>
+          </a>
+        ))}
+      </div>
     </section>
+
+    <section class="mt-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm" aria-labelledby="account-actions-title">
+      <h2 id="account-actions-title" class="font-heading mb-2 text-2xl text-[#1e2a5e]">Account actions</h2>
+      <p class="text-gray-700">Sign out of your Late Diagnosed account on this device.</p>
+      <form action="/auth/logout" method="post" class="mt-5">
+        <button
+          type="submit"
+          class="cursor-pointer rounded-md bg-[#1e2a5e] px-5 py-3 font-semibold text-white hover:bg-[#4a2068] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e]"
+        >
+          Sign out
+        </button>
+      </form>
+    </section>
+
+    <details class="group mt-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <summary class="cursor-pointer list-none font-semibold text-[#1e2a5e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e] [&::-webkit-details-marker]:hidden">
+        <span class="inline-flex items-center gap-2">
+          Debug information
+          <span class="transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
+        </span>
+      </summary>
+      <div class="mt-5 rounded-lg bg-[#f8f6fb] p-4 text-sm text-gray-700">
+        <p class="mt-0">Use this information when troubleshooting sign-in or access problems.</p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-[max-content_1fr]">
+          {debugFields.map(([label, value]) => (
+            <>
+              <dt class="font-semibold text-[#1e2a5e]">{label}</dt>
+              <dd class="m-0 break-all">{value}</dd>
+            </>
+          ))}
+          <dt class="font-semibold text-[#1e2a5e]">Access claims</dt>
+          <dd class="m-0 break-words">{user.permissions.length > 0 ? user.permissions.join(', ') : 'None provided'}</dd>
+        </dl>
+      </div>
+    </details>
   </main>
+
+  <script is:inline>window.lucide?.createIcons();</script>
 </PublicLayout>
