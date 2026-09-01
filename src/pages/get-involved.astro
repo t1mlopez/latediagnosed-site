@@ -83,38 +83,53 @@ const involvementCards = [
           </a>
         </div>
 
-        <div class="space-y-5">
-          <div class="flex aspect-[16/9] items-center justify-center rounded-3xl border-2 border-dashed border-purple-200 bg-gradient-to-br from-[#faf7fc] to-[#eef1f8] p-8 text-center">
-            <div class="max-w-md">
-              <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#4a2068] shadow-sm">
-                <i data-lucide="image" class="h-5 w-5"></i>
-              </div>
-              <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-[#4a2068]">Image placeholder</p>
-              <p class="mb-0 text-sm leading-6 text-slate-600">
-                Suggested: a real community member completing a survey, or a subtle editorial image showing many individual voices becoming one shared set of insights. Avoid generic charts or clinical stock photography.
-              </p>
-            </div>
-          </div>
+        <div class="rounded-3xl border border-purple-100 bg-[#f8f5fa] p-6 shadow-sm md:p-8" aria-label="Decorative charts and graphs illustration">
+          <svg viewBox="0 0 720 430" role="img" aria-labelledby="community-data-graphic-title community-data-graphic-desc" class="h-auto w-full">
+            <title id="community-data-graphic-title">Community data illustration</title>
+            <desc id="community-data-graphic-desc">A decorative illustration with a bar chart, line graph, and pie chart representing community survey data.</desc>
 
-          <div class="rounded-3xl border border-purple-100 bg-[#f8f5fa] p-6 md:p-8">
-            <div class="grid gap-3 md:grid-cols-4 md:items-stretch">
-              {[
-                ["01", "Your Experience"],
-                ["02", "Community Data"],
-                ["03", "Better Resources"],
-                ["04", "Greater Awareness"],
-              ].map(([number, label], index) => (
-                <div class="relative rounded-2xl bg-white p-5 text-center shadow-sm">
-                  <div class="mb-2 text-xs font-bold tracking-[0.18em] text-purple-500">{number}</div>
-                  <div class="text-sm font-bold leading-5 text-[#1e2a5e]">{label}</div>
-                  {index < 3 && <span class="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-xl font-bold text-purple-300 md:block" aria-hidden="true">→</span>}
-                </div>
-              ))}
-            </div>
-            <p class="mb-0 mt-6 text-sm leading-6 text-slate-600">
-              We use aggregated community insight to identify patterns, shape educational resources, support outreach, guide future programs, and tell the story of late diagnosis with data behind it.
-            </p>
-          </div>
+            <rect x="20" y="20" width="680" height="390" rx="28" fill="#ffffff" />
+
+            <g transform="translate(65 70)">
+              <rect width="260" height="145" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+              <line x1="35" y1="112" x2="225" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <rect x="52" y="72" width="28" height="40" rx="5" fill="#8b6aa7" />
+              <rect x="98" y="50" width="28" height="62" rx="5" fill="#4a2068" />
+              <rect x="144" y="32" width="28" height="80" rx="5" fill="#1e2a5e" />
+              <rect x="190" y="58" width="28" height="54" rx="5" fill="#6f4f8d" />
+            </g>
+
+            <g transform="translate(365 70)">
+              <rect width="290" height="145" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+              <line x1="32" y1="112" x2="255" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <line x1="32" y1="34" x2="32" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <polyline points="42,96 86,78 126,86 168,56 210,62 248,34" fill="none" stroke="#4a2068" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="42" cy="96" r="6" fill="#1e2a5e" />
+              <circle cx="86" cy="78" r="6" fill="#1e2a5e" />
+              <circle cx="126" cy="86" r="6" fill="#1e2a5e" />
+              <circle cx="168" cy="56" r="6" fill="#1e2a5e" />
+              <circle cx="210" cy="62" r="6" fill="#1e2a5e" />
+              <circle cx="248" cy="34" r="6" fill="#1e2a5e" />
+            </g>
+
+            <g transform="translate(65 250)">
+              <rect width="590" height="115" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+
+              <g transform="translate(92 57)">
+                <circle r="40" fill="#1e2a5e" />
+                <path d="M0 0 L0 -40 A40 40 0 0 1 38 12 Z" fill="#4a2068" />
+                <path d="M0 0 L38 12 A40 40 0 0 1 -20 35 Z" fill="#9b7ab5" />
+                <path d="M0 0 L-20 35 A40 40 0 0 1 0 -40 Z" fill="#d9cce5" />
+                <circle r="18" fill="#faf9fc" />
+              </g>
+
+              <g transform="translate(185 30)">
+                <rect x="0" y="0" width="150" height="12" rx="6" fill="#d9cce5" />
+                <rect x="0" y="28" width="205" height="12" rx="6" fill="#8b6aa7" />
+                <rect x="0" y="56" width="250" height="12" rx="6" fill="#1e2a5e" />
+              </g>
+            </g>
+          </svg>
         </div>
       </div>
     </section>
