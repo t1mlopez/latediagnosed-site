@@ -8,23 +8,40 @@ import {
   type ToolsPageLauncher,
 } from '../src/lib/tools-page.ts';
 
-test('universal actions remain visible without application entitlements', () => {
-  assert.deepEqual(getVisibleLaunchers([]).map((launcher) => launcher.id), ['donate']);
+test('Okta remains visible without application entitlements', () => {
+  assert.deepEqual(getVisibleLaunchers([]).map((launcher) => launcher.id), ['okta']);
 });
 
-test('Tools entitlements expose the matching launcher', () => {
-  const visible = getVisibleLaunchers(['Tools - WebMail', 'Tools - Confluence']);
-  assert.deepEqual(visible.map((launcher) => launcher.id), ['webmail', 'confluence', 'donate']);
+test('Tools entitlements expose matching launchers in configured order', () => {
+  const visible = getVisibleLaunchers([
+    'Tools - Content Editor',
+    'Tools - WebMail',
+    'Tools - Confluence',
+    'Tools - Jira',
+  ]);
+  assert.deepEqual(
+    visible.map((launcher) => launcher.id),
+    ['content-editor', 'webmail', 'okta', 'confluence', 'jira'],
+  );
 });
 
 test('legacy Content Center entitlements remain accepted during migration', () => {
   const visible = getVisibleLaunchers(['Content Center - WebMail', 'Content Center - Confluence']);
-  assert.deepEqual(visible.map((launcher) => launcher.id), ['webmail', 'confluence', 'donate']);
+  assert.deepEqual(visible.map((launcher) => launcher.id), ['webmail', 'okta', 'confluence']);
 });
 
 test('existing CMS Editors permission continues to expose Content Editor', () => {
   const visible = getVisibleLaunchers(['CMS Editors']);
-  assert.equal(visible.some((launcher) => launcher.id === 'content-editor'), true);
+  assert.deepEqual(visible.map((launcher) => launcher.id), ['content-editor', 'okta']);
+});
+
+test('Donate is no longer part of the Tools Page registry', () => {
+  assert.equal(TOOLS_PAGE_LAUNCHERS.some((launcher) => launcher.id === 'donate'), false);
+});
+
+test('Jira requires its Tools entitlement', () => {
+  assert.equal(getVisibleLaunchers([]).some((launcher) => launcher.id === 'jira'), false);
+  assert.equal(getVisibleLaunchers(['Tools - Jira']).some((launcher) => launcher.id === 'jira'), true);
 });
 
 test('a launcher with multiple allowed groups uses ANY access by default and renders once', () => {
@@ -61,7 +78,7 @@ test('ALL access requires every configured group', () => {
 test('duplicate registry IDs never render duplicate cards', () => {
   const original = TOOLS_PAGE_LAUNCHERS[0];
   assert.ok(original);
-  assert.equal(getVisibleLaunchers(['Tools - WebMail'], [original, original]).length, 1);
+  assert.equal(getVisibleLaunchers(['Tools - Content Editor'], [original, original]).length, 1);
 });
 
 test('organizational roles are derived separately from application entitlements', () => {
