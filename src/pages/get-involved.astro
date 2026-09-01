@@ -155,16 +155,13 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
       <div class="mx-auto max-w-6xl">
         <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">Volunteer</p>
-            <h2 class="font-heading mb-5 text-3xl font-bold text-[#1e2a5e] md:text-5xl">You already have something we need.</h2>
-            <p class="mb-5 text-lg leading-8 text-slate-700">
-              You do not need to work in healthcare or neurodiversity to contribute something meaningful.
-            </p>
-            <p class="text-base leading-7 text-slate-600">
-              Some volunteers may join an ongoing team. Others may contribute a few hours to a single project. We want to make room for both.
-            </p>
+            <div class="mb-7 flex flex-wrap gap-2.5">
+              {volunteerSkills.map((skill) => (
+                <span class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">{skill}</span>
+              ))}
+            </div>
 
-            <div class="mt-8 flex aspect-[4/3] items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white/70 p-7 text-center">
+            <div class="flex aspect-[4/3] items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-white/70 p-7 text-center">
               <div class="max-w-sm">
                 <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#f3eef7] text-[#4a2068]">
                   <i data-lucide="image" class="h-5 w-5"></i>
@@ -178,11 +175,14 @@ const expertiseMailto = `mailto:${contactEmail}?subject=Offer%20Professional%20E
           </div>
 
           <div>
-            <div class="mb-7 flex flex-wrap gap-2.5">
-              {volunteerSkills.map((skill) => (
-                <span class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">{skill}</span>
-              ))}
-            </div>
+            <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">Volunteer</p>
+            <h2 class="font-heading mb-5 text-3xl font-bold text-[#1e2a5e] md:text-5xl">You already have something we need.</h2>
+            <p class="mb-5 text-lg leading-8 text-slate-700">
+              You do not need to work in healthcare or neurodiversity to contribute something meaningful.
+            </p>
+            <p class="mb-7 text-base leading-7 text-slate-600">
+              Some volunteers may join an ongoing team. Others may contribute a few hours to a single project. We want to make room for both.
+            </p>
             <div class="flex flex-wrap gap-3">
               <a href={volunteerMailto} class="rounded-lg bg-[#1e2a5e] px-6 py-3 font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-lg">Explore Volunteer Opportunities</a>
               <a href={expertiseMailto} class="rounded-lg border border-[#1e2a5e]/20 bg-white px-6 py-3 font-bold text-[#1e2a5e] no-underline transition hover:border-[#1e2a5e]/40 hover:shadow-md">Offer Your Expertise</a>
