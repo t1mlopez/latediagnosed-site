@@ -6,24 +6,45 @@ const auth = requireUser(Astro);
 if (auth instanceof Response) return auth;
 const user = auth;
 
+const contentEditorGroups = ['Tools - Content Editor', 'Content Center - Content Editor', 'CMS Editors'];
+const hasContentEditorAccess = contentEditorGroups.some((group) => user.permissions.includes(group));
+
 const accountTools = [
   {
     label: 'Email',
     description: 'Open your Late Diagnosed email.',
     icon: 'mail',
     href: 'https://outlook.cloud.microsoft/mail/',
+    external: true,
+    tone: 'navy' as const,
   },
+  ...(hasContentEditorAccess
+    ? [
+        {
+          label: 'Content Editor',
+          description: 'Create and update Late Diagnosed website content.',
+          icon: 'file-pen-line',
+          href: '/admin/',
+          external: false,
+          tone: 'purple' as const,
+        },
+      ]
+    : []),
   {
     label: 'Confluence',
     description: 'Open the Late Diagnosed internal knowledge base.',
     icon: 'book-open',
     href: 'https://latediagnosed.atlassian.net/wiki/spaces/Home/overview?homepageId=15532201',
+    external: true,
+    tone: 'navy' as const,
   },
   {
     label: 'Jira',
     description: 'Open Late Diagnosed projects and tasks.',
     icon: 'square-check-big',
     href: 'https://latediagnosed.atlassian.net/jira/',
+    external: true,
+    tone: 'navy' as const,
   },
 ];
 
@@ -42,18 +63,31 @@ const debugFields = [
 
     <section aria-labelledby="account-tools-title">
       <h2 id="account-tools-title" class="font-heading mb-4 text-2xl text-[#1e2a5e]">Tools and resources</h2>
-      <div class="grid gap-4 sm:grid-cols-3">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {accountTools.map((tool) => (
           <a
             href={tool.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={tool.external ? '_blank' : undefined}
+            rel={tool.external ? 'noopener noreferrer' : undefined}
             class="block rounded-xl border border-gray-200 bg-white p-5 no-underline shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e]"
           >
-            <span class="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#1e2a5e]/10">
-              <i data-lucide={tool.icon} class="h-5 w-5 text-[#1e2a5e]" aria-hidden="true"></i>
+            <span class:list={[
+              'mb-3 flex h-10 w-10 items-center justify-center rounded-full',
+              tool.tone === 'purple' ? 'bg-[#4a2068]/10' : 'bg-[#1e2a5e]/10',
+            ]}>
+              <i
+                data-lucide={tool.icon}
+                class:list={[
+                  'h-5 w-5',
+                  tool.tone === 'purple' ? 'text-[#4a2068]' : 'text-[#1e2a5e]',
+                ]}
+                aria-hidden="true"
+              ></i>
             </span>
-            <h3 class="mb-2 text-lg font-semibold text-[#1e2a5e]">{tool.label}</h3>
+            <h3 class:list={[
+              'mb-2 text-lg font-semibold',
+              tool.tone === 'purple' ? 'text-[#4a2068]' : 'text-[#1e2a5e]',
+            ]}>{tool.label}</h3>
             <p class="m-0 text-sm text-gray-600">{tool.description}</p>
           </a>
         ))}
