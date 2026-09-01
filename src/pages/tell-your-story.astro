@@ -4,18 +4,18 @@ import PublicLayout from "../layouts/PublicLayout.astro";
 
 <PublicLayout
   title="Tell Your Story | Late Diagnosed"
-  description="Share your late-diagnosis story with LateDiagnosed.org and tell us how you would like it to be handled."
+  description="Share your late-diagnosis story with LateDiagnosed.org."
 >
   <main class="bg-white text-slate-700">
     <header class="border-b border-slate-200 bg-white">
       <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-slate-500">Community stories</p>
+        <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-slate-500">Your story matters</p>
         <h1 class="font-heading mb-5 max-w-4xl text-4xl font-bold leading-tight text-[#1e2a5e] md:text-5xl">Tell your story.</h1>
         <p class="mb-5 max-w-3xl text-xl leading-8 text-slate-700">
           Someone may be where you were six months ago, ten years ago, or yesterday.
         </p>
         <p class="mb-0 max-w-3xl text-base leading-7 text-slate-600">
-          Share as much or as little as feels right. Submitting your story lets Late Diagnosed review it and contact you. It does <strong>not</strong> give us automatic permission to publish it.
+          There is no perfect way to tell your story. Share what feels meaningful to you. We’ll read it, and if we think part of it could help others, we’ll reach out to you first.
         </p>
       </div>
     </header>
@@ -24,11 +24,11 @@ import PublicLayout from "../layouts/PublicLayout.astro";
       <div class="mx-auto grid max-w-5xl gap-4 md:grid-cols-2">
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-[#1e2a5e]">
-            <i data-lucide="shield-check" class="h-5 w-5"></i>
+            <i data-lucide="heart-handshake" class="h-5 w-5"></i>
           </div>
-          <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">You stay in control</h2>
+          <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">You choose what happens next</h2>
           <p class="mb-0 text-sm leading-6 text-slate-600">
-            If we want to use your story publicly, we will contact you first and confirm the specific content, attribution, and intended use.
+            If we would like to share part of your story, we’ll check with you first about the wording, how you’re identified, and where it would appear.
           </p>
         </div>
 
@@ -36,9 +36,9 @@ import PublicLayout from "../layouts/PublicLayout.astro";
           <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-[#1e2a5e]">
             <i data-lucide="mail" class="h-5 w-5"></i>
           </div>
-          <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">Review before sending</h2>
+          <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">Take your time</h2>
           <p class="mb-0 text-sm leading-6 text-slate-600">
-            For now, this page prepares an email to Late Diagnosed with your answers so you can review exactly what is being sent before you send it.
+            When you’re finished, we’ll open an email with your answers so you can look everything over, change anything you want, and send it when you’re ready.
           </p>
         </div>
       </div>
@@ -47,11 +47,11 @@ import PublicLayout from "../layouts/PublicLayout.astro";
     <section class="px-6 py-14 md:py-20">
       <form id="story-form" class="mx-auto max-w-5xl space-y-10" novalidate>
         <fieldset class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">About you</legend>
+          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">A little about you</legend>
 
           <div class="mt-5 grid gap-6 md:grid-cols-2">
             <div>
-              <label for="preferred-name" class="mb-2 block text-sm font-bold text-slate-700">Preferred name</label>
+              <label for="preferred-name" class="mb-2 block text-sm font-bold text-slate-700">What should we call you?</label>
               <input id="preferred-name" name="preferredName" type="text" autocomplete="name" required class="w-full rounded-lg border border-slate-300 px-4 py-3 text-base outline-none transition focus:border-[#1e2a5e] focus:ring-2 focus:ring-[#1e2a5e]/10" />
             </div>
 
@@ -61,7 +61,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
             </div>
 
             <div>
-              <label for="location" class="mb-2 block text-sm font-bold text-slate-700">Location <span class="font-normal text-slate-500">(optional)</span></label>
+              <label for="location" class="mb-2 block text-sm font-bold text-slate-700">Where are you from? <span class="font-normal text-slate-500">(optional)</span></label>
               <input id="location" name="location" type="text" autocomplete="address-level1" placeholder="City, state/region, or country" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-base outline-none transition focus:border-[#1e2a5e] focus:ring-2 focus:ring-[#1e2a5e]/10" />
             </div>
 
@@ -80,7 +80,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
           </div>
 
           <div class="mt-7">
-            <p class="mb-3 text-sm font-bold text-slate-700">If your story is eventually used, how would you prefer to be identified?</p>
+            <p class="mb-3 text-sm font-bold text-slate-700">If we ever share your story, how would you like us to identify you?</p>
             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 "Full name",
@@ -99,39 +99,40 @@ import PublicLayout from "../layouts/PublicLayout.astro";
         </fieldset>
 
         <fieldset class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">Your experience</legend>
+          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">Your story</legend>
 
           <div class="mt-5 space-y-6">
             <div>
-              <label for="context" class="mb-2 block text-sm font-bold text-slate-700">What does late diagnosis or late discovery mean in your story? <span class="font-normal text-slate-500">(optional)</span></label>
+              <label for="context" class="mb-2 block text-sm font-bold text-slate-700">A little context <span class="font-normal text-slate-500">(optional)</span></label>
+              <p class="mb-3 text-sm leading-6 text-slate-500">What does late diagnosis or late discovery mean in your life?</p>
               <textarea id="context" name="context" rows="4" maxlength="1500" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-base leading-7 outline-none transition focus:border-[#1e2a5e] focus:ring-2 focus:ring-[#1e2a5e]/10"></textarea>
             </div>
 
             <div>
-              <label for="story" class="mb-2 block text-sm font-bold text-slate-700">Tell us your story</label>
-              <p class="mb-3 text-sm leading-6 text-slate-500">You can talk about what led to discovery or diagnosis, what changed afterward, what was difficult, what helped, or what you wish someone had told you.</p>
+              <label for="story" class="mb-2 block text-sm font-bold text-slate-700">What would you like to share?</label>
+              <p class="mb-3 text-sm leading-6 text-slate-500">You might write about what led you here, what changed after discovering or understanding your neurodivergence, something that was hard, something that helped, or simply something you wish more people understood.</p>
               <textarea id="story" name="story" rows="12" maxlength="5000" required class="w-full rounded-lg border border-slate-300 px-4 py-3 text-base leading-7 outline-none transition focus:border-[#1e2a5e] focus:ring-2 focus:ring-[#1e2a5e]/10"></textarea>
             </div>
 
             <div>
-              <label for="takeaway" class="mb-2 block text-sm font-bold text-slate-700">What would you want another late-diagnosed person to take from your story? <span class="font-normal text-slate-500">(optional)</span></label>
+              <label for="takeaway" class="mb-2 block text-sm font-bold text-slate-700">Is there anything you hope someone else takes from your story? <span class="font-normal text-slate-500">(optional)</span></label>
               <textarea id="takeaway" name="takeaway" rows="5" maxlength="2000" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-base leading-7 outline-none transition focus:border-[#1e2a5e] focus:ring-2 focus:ring-[#1e2a5e]/10"></textarea>
             </div>
           </div>
         </fieldset>
 
         <fieldset class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">How we may contact you about it</legend>
-          <p class="mt-5 mb-5 text-sm leading-6 text-slate-600">These choices tell us what you might be open to discussing. They are not publication permission.</p>
+          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">What might you be open to?</legend>
+          <p class="mt-5 mb-5 text-sm leading-6 text-slate-600">Choose anything that sounds okay to talk about. Nothing you select here commits you to saying yes later.</p>
 
           <div class="grid gap-3 md:grid-cols-2">
             {[
               ["Website article or written profile", "Website article"],
               ["Short excerpt for social media", "Social media excerpt"],
-              ["Video or audio interview", "Video/audio interview"],
+              ["Video or audio conversation", "Video/audio interview"],
               ["Educational materials or presentations", "Educational materials"],
               ["Awareness or fundraising campaign", "Awareness/fundraising campaign"],
-              ["I’m not sure — contact me first", "Contact me first"],
+              ["I’m not sure yet — just reach out", "Contact me first"],
             ].map(([label, value]) => (
               <label class="flex items-start gap-3 rounded-xl border border-slate-200 bg-[#faf9fc] p-4 text-sm text-slate-700">
                 <input type="checkbox" name="possibleUse" value={value} class="mt-0.5 h-4 w-4" />
@@ -142,41 +143,42 @@ import PublicLayout from "../layouts/PublicLayout.astro";
         </fieldset>
 
         <fieldset class="rounded-3xl border border-slate-200 bg-[#f8fafc] p-6 md:p-8">
-          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">Consent</legend>
-          <div class="mt-5 space-y-4">
+          <legend class="px-2 text-xl font-bold text-[#1e2a5e]">Before you send</legend>
+          <p class="mt-5 mb-5 text-sm leading-6 text-slate-600">Just a few quick confirmations so we handle your story the way you expect.</p>
+          <div class="space-y-4">
             <label class="flex items-start gap-3 text-sm leading-6 text-slate-700">
               <input type="checkbox" name="reviewConsent" required class="mt-1 h-4 w-4 shrink-0" />
-              <span><strong>I consent to Late Diagnosed receiving and reviewing the information I submit and contacting me about my story.</strong></span>
+              <span>It’s okay for Late Diagnosed to read my story and email me about it.</span>
             </label>
 
             <label class="flex items-start gap-3 text-sm leading-6 text-slate-700">
               <input type="checkbox" name="publicationUnderstanding" required class="mt-1 h-4 w-4 shrink-0" />
-              <span><strong>I understand that submitting this form does not grant Late Diagnosed permission to publish my story.</strong> If Late Diagnosed wants to use my story publicly, I will be contacted to confirm the specific content, attribution, and intended use first.</span>
+              <span>If Late Diagnosed would like to share my story publicly, please check with me first about what will be used, how I’ll be identified, and where it will appear.</span>
             </label>
 
             <label class="flex items-start gap-3 text-sm leading-6 text-slate-700">
               <input type="checkbox" name="privacyConsent" required class="mt-1 h-4 w-4 shrink-0" />
-              <span>I have read the <a href="/privacy-policy" class="font-semibold text-[#1e2a5e] underline">Privacy Policy</a> and understand that I should only share information I am comfortable sending to Late Diagnosed by email.</span>
+              <span>I’ve read the <a href="/privacy-policy" class="font-semibold text-[#1e2a5e] underline">Privacy Policy</a>.</span>
             </label>
           </div>
         </fieldset>
 
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:flex md:items-center md:justify-between md:gap-8">
           <div class="mb-5 md:mb-0">
-            <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">Ready to send it?</h2>
-            <p class="mb-0 max-w-2xl text-sm leading-6 text-slate-600">Selecting the button will prepare an email to Late Diagnosed with your answers. You can review or edit the email before sending.</p>
+            <h2 class="mb-2 text-lg font-bold text-[#1e2a5e]">Ready when you are.</h2>
+            <p class="mb-0 max-w-2xl text-sm leading-6 text-slate-600">We’ll open an email with your answers. Give it one last look, change anything you want, and send it when it feels right.</p>
           </div>
           <button type="submit" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#1e2a5e] px-6 py-3 font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e2a5e]">
-            Prepare my story email <span aria-hidden="true">→</span>
+            Review and send my story <span aria-hidden="true">→</span>
           </button>
         </div>
 
-        <div id="story-fallback" hidden class="rounded-2xl border border-amber-200 bg-amber-50 p-6">
-          <h2 class="mb-2 text-lg font-bold text-slate-800">If your email app did not open</h2>
-          <p class="mb-4 text-sm leading-6 text-slate-700">Your formatted submission is below. Copy it and email it to <a href="mailto:info@latediagnosed.org" class="font-semibold underline">info@latediagnosed.org</a>.</p>
-          <textarea id="story-output" readonly rows="14" class="w-full rounded-lg border border-amber-300 bg-white px-4 py-3 text-sm leading-6 text-slate-800"></textarea>
+        <div id="story-fallback" hidden class="rounded-2xl border border-slate-200 bg-[#faf9fc] p-6">
+          <h2 class="mb-2 text-lg font-bold text-slate-800">Need another way to send it?</h2>
+          <p class="mb-4 text-sm leading-6 text-slate-700">If your email app didn’t open, your story is still here. Copy it below and email it to <a href="mailto:info@latediagnosed.org" class="font-semibold underline">info@latediagnosed.org</a>.</p>
+          <textarea id="story-output" readonly rows="14" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm leading-6 text-slate-800"></textarea>
           <div class="mt-3 flex items-center gap-3">
-            <button id="copy-story" type="button" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700">Copy submission</button>
+            <button id="copy-story" type="button" class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700">Copy my story</button>
             <span id="copy-status" class="text-sm text-slate-600" aria-live="polite"></span>
           </div>
         </div>
@@ -233,9 +235,9 @@ import PublicLayout from "../layouts/PublicLayout.astro";
         "POSSIBLE USES I AM OPEN TO DISCUSSING",
         possibleUses.length ? possibleUses.join(", ") : "None selected / contact me before discussing use",
         "",
-        "CONSENT",
-        "Consent to receive/review/contact: Yes",
-        "Understands separate publication permission is required: Yes",
+        "CONFIRMATIONS",
+        "Okay to receive/review/contact: Yes",
+        "Please check with me before public use: Yes",
         "Privacy Policy acknowledged: Yes",
       ].join("\n");
 
