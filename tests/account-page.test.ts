@@ -17,9 +17,19 @@ test('account page owns sign out and keeps debug information collapsed', () => {
   assert.doesNotMatch(accountSource, /<details[^>]*\sopen(?:\s|>)/);
 });
 
-test('account page includes Email, Confluence, and Jira widgets without visible access UI', () => {
-  assert.match(accountSource, /label: 'Email'/);
-  assert.match(accountSource, /label: 'Confluence'/);
-  assert.match(accountSource, /label: 'Jira'/);
+test('account page includes Email, Content Editor, Confluence, and Jira widgets without visible access UI', () => {
+  const emailIndex = accountSource.indexOf("label: 'Email'");
+  const contentEditorIndex = accountSource.indexOf("label: 'Content Editor'");
+  const confluenceIndex = accountSource.indexOf("label: 'Confluence'");
+  const jiraIndex = accountSource.indexOf("label: 'Jira'");
+
+  assert.ok(emailIndex >= 0);
+  assert.ok(contentEditorIndex > emailIndex);
+  assert.ok(confluenceIndex > contentEditorIndex);
+  assert.ok(jiraIndex > confluenceIndex);
+  assert.match(accountSource, /href: '\/admin\/'/);
+  assert.match(accountSource, /'Tools - Content Editor'/);
+  assert.match(accountSource, /'Content Center - Content Editor'/);
+  assert.match(accountSource, /'CMS Editors'/);
   assert.doesNotMatch(accountSource, />Access<\/h2>/);
 });
