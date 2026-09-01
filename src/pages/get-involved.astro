@@ -45,9 +45,9 @@ const involvementCards = [
   description="Give your time, experience, expertise, or financial support to help LateDiagnosed.org reach more people."
 >
   <main class="get-involved bg-white text-slate-700">
-    <section class="article-hero">
+    <section class="article-hero get-involved-hero">
       <div class="article-hero-inner">
-        <h1>There’s more than one way to make a difference.</h1>
+        <h1>There’s many ways you can help.</h1>
       </div>
     </section>
 
@@ -214,12 +214,33 @@ const involvementCards = [
       padding: 0 !important;
     }
 
+    .get-involved-hero {
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+    }
+
+    .get-involved-hero .article-hero-inner {
+      width: 100%;
+    }
+
+    .get-involved-hero h1 {
+      max-width: 760px;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+    }
+
     .get-involved h1,
     .get-involved h2,
     .get-involved h3,
     .get-involved p,
     .get-involved blockquote {
       margin-top: 0;
+    }
+
+    @media (max-width: 720px) {
+      .get-involved-hero {
+        min-height: 300px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
