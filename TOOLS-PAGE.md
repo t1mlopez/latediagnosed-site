@@ -112,23 +112,29 @@ Each launcher supports:
 - enabled state
 - navy/purple visual tone
 
-The initial registry contains:
+The reviewed launcher order is:
 
-- WebMail
-- Content Editor
-- Confluence
-- Donate
+1. Content Editor
+2. WebMail
+3. Okta
+4. Confluence
+5. Jira
 
-Donate has no access group and is therefore universal by default for authenticated Tools Page users.
+**Donate has been removed from the Tools Page.**
+
+Okta has no launcher entitlement because every current Tools Page user is already authenticated through the Late Diagnosed Okta organization. It is therefore universally visible to authenticated Tools Page users. This can be revisited if the future identity architecture includes users who do not have Okta accounts.
 
 ## Entitlement naming
 
-The canonical convention is now:
+The canonical convention is:
 
-- `Tools - WebMail`
 - `Tools - Content Editor`
+- `Tools - WebMail`
 - `Tools - Confluence`
+- `Tools - Jira`
 - future: `Tools - <Application Name>`
+
+Okta is currently universal to authenticated Tools Page users and does not require a `Tools - Okta` entitlement.
 
 To avoid breaking existing access during the rename, the registry temporarily accepts the previous aliases:
 
@@ -159,10 +165,11 @@ Do not duplicate a registry entry for Staff, Volunteer, or another population.
 
 ## Initial destinations
 
-- WebMail: Microsoft Outlook Web (`https://outlook.cloud.microsoft/mail/`)
 - Content Editor: `/admin/`
+- WebMail: Microsoft Outlook Web (`https://outlook.cloud.microsoft/mail/`)
+- Okta: Late Diagnosed Okta end-user dashboard (`https://latediagnosed.okta.com/app/UserHome`)
 - Confluence: Late Diagnosed internal Confluence Home space
-- Donate: existing Givebutter donation page
+- Jira: Late Diagnosed Jira (`https://latediagnosed.atlassian.net/jira/`)
 
 If a destination changes, update the single registry definition rather than editing the page component.
 
@@ -183,14 +190,15 @@ Display-role mappings and application access must remain separate unless an expl
 
 ## Adding an application/action
 
-1. Create or identify the appropriate Okta access group(s), using `Tools - <Application Name>` for new groups.
+1. Create or identify the appropriate Okta access group(s), using `Tools - <Application Name>` for new restricted launchers.
 2. Ensure those groups are included in the server-side permission claim configured by `OKTA_PERMISSION_CLAIMS`.
 3. Add one registry record to `TOOLS_PAGE_LAUNCHERS`.
 4. Configure its label, description, icon, URL, order, tone, and `allowedGroups`.
-5. Use `accessMode: 'all'` only when every configured group is genuinely required; otherwise omit it or use `any`.
-6. Verify a qualifying user sees exactly one card.
-7. Verify a non-qualifying user does not see the card.
-8. Verify the downstream application still enforces its own authorization.
+5. Omit `allowedGroups` only when the launcher is intentionally universal for every authenticated Tools Page user.
+6. Use `accessMode: 'all'` only when every configured group is genuinely required; otherwise omit it or use `any`.
+7. Verify a qualifying user sees exactly one card.
+8. Verify a non-qualifying user does not see restricted cards.
+9. Verify the downstream application still enforces its own authorization.
 
 ## Adding/changing a display role
 
@@ -208,3 +216,5 @@ Direct requests to `/tools` still require a valid authenticated session through 
 ## Current implementation dependency
 
 The Okta application/tile has historically used the **Content Center** name and has sent users directly to `/admin/`. When the reviewed Tools Page becomes the normal authenticated landing page, the Okta application should be renamed to **Tools Page** and its initiate-login target should use `/auth/login?returnTo=/tools` (or an equivalent flow that lands at `/tools`).
+
+Jira visibility now expects the new `Tools - Jira` entitlement. Users without that exact entitlement will not see the Jira card even though Atlassian remains responsible for its own downstream access controls.
