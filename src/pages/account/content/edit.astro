@@ -1,0 +1,9 @@
+---
+import PublicLayout from '../../../layouts/PublicLayout.astro';
+import ContentEditorForm from '../../../components/ContentEditorForm.astro';
+import '../../../styles/content-editor.css';
+const path = Astro.url.searchParams.get('path') || '';
+---
+<PublicLayout title="Edit content" description="Edit Late Diagnosed content.">
+  <ContentEditorForm path={path} />
+</PublicLayout>

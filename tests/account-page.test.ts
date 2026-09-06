@@ -27,9 +27,7 @@ test('account page includes Email, Content Editor, Confluence, and Jira widgets 
   assert.ok(contentEditorIndex > emailIndex);
   assert.ok(confluenceIndex > contentEditorIndex);
   assert.ok(jiraIndex > confluenceIndex);
-  assert.match(accountSource, /href: '\/admin\/'/);
-  assert.match(accountSource, /'Tools - Content Editor'/);
-  assert.match(accountSource, /'Content Center - Content Editor'/);
-  assert.match(accountSource, /'CMS Editors'/);
+  assert.match(accountSource, /href: '\/account\/content\/'/);
+  assert.match(accountSource, /user\.permissions\.includes\(CMS_PERMISSION\)/);
   assert.doesNotMatch(accountSource, />Access<\/h2>/);
 });

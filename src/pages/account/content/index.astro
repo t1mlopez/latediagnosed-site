@@ -1,0 +1,90 @@
+---
+import PublicLayout from '../../../layouts/PublicLayout.astro';
+import '../../../styles/content-editor.css';
+---
+
+<PublicLayout title="Content Editor" description="Create and manage Late Diagnosed content.">
+  <div class="content-editor-page">
+    <header class="editor-hero">
+      <div class="editor-hero-inner">
+        <h1>Content Editor</h1>
+        <p>Write, review, and publish articles in the same calm, clear environment as the Late Diagnosed website.</p>
+      </div>
+    </header>
+    <main class="editor-wrap">
+      <div class="editor-toolbar">
+        <div class="editor-list-controls">
+          <label class="sr-only" for="content-search">Search content</label>
+          <input id="content-search" type="search" placeholder="Search content" />
+          <label class="sr-only" for="content-type">Content type</label>
+          <select id="content-type">
+            <option value="">All content</option>
+            <option value="articles">Articles</option>
+            <option value="resources">Resources</option>
+            <option value="pages">Pages</option>
+          </select>
+          <label class="sr-only" for="content-status">Status</label>
+          <select id="content-status">
+            <option value="">All statuses</option>
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+        <a class="editor-link editor-button-primary" href="/account/content/new/">＋ New article</a>
+      </div>
+      <p id="list-status" class="editor-status" role="status">Loading content…</p>
+      <section class="editor-card content-table-wrap" aria-label="Content">
+        <table class="content-table">
+          <thead><tr><th>Subject</th><th>Status</th><th>Type</th><th>Publication</th><th>Tags</th></tr></thead>
+          <tbody id="content-rows"></tbody>
+        </table>
+        <p id="empty-state" class="empty-state" hidden>No content matches these filters.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // @ts-nocheck -- Cloudflare's generated DOM names conflict with browser DOM types in Astro client scripts.
+    const rows = document.querySelector<HTMLTableSectionElement>('#content-rows');
+    const status = document.querySelector<HTMLElement>('#list-status');
+    const empty = document.querySelector<HTMLElement>('#empty-state');
+    const search = document.querySelector<HTMLInputElement>('#content-search');
+    const type = document.querySelector<HTMLSelectElement>('#content-type');
+    const state = document.querySelector<HTMLSelectElement>('#content-status');
+    let entries: Array<Record<string, any>> = [];
+
+    function cell(text: string) { const td = document.createElement('td'); td.textContent = text; return td; }
+    function render() {
+      if (!rows || !empty) return;
+      const query = search?.value.trim().toLowerCase() || '';
+      const filtered = entries.filter((entry) =>
+        (!type?.value || entry.collection === type.value) &&
+        (!state?.value || entry.status === state.value) &&
+        (!query || `${entry.title} ${entry.tagline} ${(entry.tags || []).join(' ')}`.toLowerCase().includes(query))
+      ).sort((a, b) => String(b.publishDate || '').localeCompare(String(a.publishDate || '')) || a.title.localeCompare(b.title));
+      rows.replaceChildren();
+      for (const entry of filtered) {
+        const tr = document.createElement('tr');
+        const titleCell = document.createElement('td');
+        const link = document.createElement('a');
+        link.className = 'content-title';
+        link.href = `/account/content/edit/?path=${encodeURIComponent(entry.path)}`;
+        link.textContent = entry.title;
+        titleCell.append(link);
+        const statusCell = document.createElement('td');
+        const pill = document.createElement('span');
+        pill.className = 'status-pill'; pill.dataset.status = entry.status; pill.textContent = entry.status;
+        statusCell.append(pill);
+        tr.append(titleCell, statusCell, cell(entry.collection.replace(/s$/, '')), cell(entry.publishDate ? new Date(entry.publishDate).toLocaleString() : 'Not set'), cell((entry.tags || []).join(', ') || '—'));
+        rows.append(tr);
+      }
+      empty.hidden = filtered.length !== 0;
+    }
+    [search, type, state].forEach((control) => control?.addEventListener('input', render));
+    fetch('/api/cms/content', { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+      .then(async (response) => { const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Content could not be loaded.'); return data; })
+      .then((data) => { entries = data.entries; if (status) { status.textContent = `${entries.length} items`; status.dataset.kind = 'success'; } render(); })
+      .catch((error) => { if (status) { status.textContent = error.message; status.dataset.kind = 'error'; } });
+  </script>
+</PublicLayout>

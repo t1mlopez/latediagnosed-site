@@ -1,5 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { CMS_LOGIN_PATH, cmsAccessDecision, isCmsPath } from './lib/auth/cms';
+import { cmsAccessDecision, cmsLoginPath, isCmsPath } from './lib/auth/cms';
 import { clearSession, readSession } from './lib/auth/cookies';
 import { SESSION_COOKIE } from './lib/auth/config';
 import { cmsForbiddenResponse } from './lib/auth/responses';
@@ -21,7 +21,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (isCmsPath(context.url.pathname)) {
     const decision = cmsAccessDecision(context.locals.user);
-    if (decision === 'login') return context.redirect(CMS_LOGIN_PATH);
+    if (decision === 'login') return context.redirect(cmsLoginPath(context.url.pathname, context.url.search));
     if (decision === 'forbidden') return cmsForbiddenResponse();
     if (context.url.pathname === '/admin') return context.redirect('/admin/', 308);
 

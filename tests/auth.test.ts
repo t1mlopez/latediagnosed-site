@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { CMS_LOGIN_PATH, cmsAccessDecision, isCmsPath } from '../src/lib/auth/cms.ts';
+import { CMS_LOGIN_PATH, cmsAccessDecision, cmsLoginPath, isCmsPath } from '../src/lib/auth/cms.ts';
 import { sealAuthValue, unsealAuthValue } from '../src/lib/auth/crypto.ts';
 import { safeReturnTo } from '../src/lib/auth/return-to.ts';
 import { cmsForbiddenResponse, expiredLoginResponse } from '../src/lib/auth/responses.ts';
@@ -25,12 +25,16 @@ test('CMS paths include the page and its static assets only', () => {
   assert.equal(isCmsPath('/admin'), true);
   assert.equal(isCmsPath('/admin/'), true);
   assert.equal(isCmsPath('/admin/config.yml'), true);
+  assert.equal(isCmsPath('/account/content/'), true);
+  assert.equal(isCmsPath('/account/content/edit/'), true);
   assert.equal(isCmsPath('/administrator'), false);
+  assert.equal(isCmsPath('/account/contentious'), false);
 });
 
 test('anonymous CMS access requires the canonical Okta login flow', () => {
   assert.equal(cmsAccessDecision(null), 'login');
   assert.equal(CMS_LOGIN_PATH, '/auth/login?returnTo=/admin/');
+  assert.equal(cmsLoginPath('/account/content/edit/', '?path=src%2Fcontent%2Farticles%2Fhello.md'), '/auth/login?returnTo=%2Faccount%2Fcontent%2Fedit%2F%3Fpath%3Dsrc%252Fcontent%252Farticles%252Fhello.md');
 });
 
 test('the exact CMS Editors permission authorizes CMS access', () => {

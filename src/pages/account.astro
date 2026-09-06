@@ -1,13 +1,11 @@
 ---
 import PublicLayout from '../layouts/PublicLayout.astro';
 import { requireUser } from '../lib/auth/guards';
+import { CMS_PERMISSION } from '../lib/auth/cms';
 
 const auth = requireUser(Astro);
 if (auth instanceof Response) return auth;
 const user = auth;
-
-const contentEditorGroups = ['Tools - Content Editor', 'Content Center - Content Editor', 'CMS Editors'];
-const hasContentEditorAccess = contentEditorGroups.some((group) => user.permissions.includes(group));
 
 const accountTools = [
   {
@@ -18,13 +16,13 @@ const accountTools = [
     external: true,
     tone: 'navy' as const,
   },
-  ...(hasContentEditorAccess
+  ...(user.permissions.includes(CMS_PERMISSION)
     ? [
         {
           label: 'Content Editor',
-          description: 'Create and update Late Diagnosed website content.',
+          description: 'Write, review, and publish Late Diagnosed content.',
           icon: 'file-pen-line',
-          href: '/admin/',
+          href: '/account/content/',
           external: false,
           tone: 'purple' as const,
         },
