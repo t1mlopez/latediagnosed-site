@@ -12,15 +12,24 @@ tags:
 
 author: late-diagnosed
 
-publishDate: 2026-06-26
+publishDate: 2026-06-26T00:00:00.000Z
 
-status: published
+status: draft
 
 featured: false
 
 excerpt: AuDHD resource hub.
 
 heroImage: /images/placeholder.jpg
+audience: []
+keyTakeaways: []
+relatedArticles: []
+relatedResources: []
+relatedGuides: []
+hasPdf: false
+hasAudio: false
+hasVideo: false
+slug: audhd
 ---
 
 AuDHD Resource Hub
