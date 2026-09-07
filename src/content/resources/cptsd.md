@@ -11,15 +11,24 @@ tags:
 
 author: late-diagnosed
 
-publishDate: 2026-06-26
+publishDate: 2026-06-26T00:00:00.000Z
 
-status: published
+status: draft
 
-featured: true
+featured: false
 
 excerpt: CPTSD resource hub.
 
 heroImage: /images/placeholder.jpg
+audience: []
+keyTakeaways: []
+relatedArticles: []
+relatedResources: []
+relatedGuides: []
+hasPdf: false
+hasAudio: false
+hasVideo: false
+slug: cptsd
 ---
 
 CPTSD Resource Hub

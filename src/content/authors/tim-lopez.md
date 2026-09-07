@@ -1,4 +1,4 @@
 ---
 name: Tim Lopez
-bio: Founder of Late Diagnosed.
+bio: Managing Director of LateDiagnosed.org
 ---

@@ -7,10 +7,6 @@ import StartHere from "../components/home/StartHere.astro";
 import Community from "../components/home/Community.astro";
 import Mission from "../components/home/Mission.astro";
 import FeaturedArticles from "../components/home/FeaturedArticles.astro";
-import ResourceLibrary from "../components/home/ResourceLibrary.astro";
-import PractitionerLibrary from "../components/home/PractitionerLibrary.astro";
-import Stories from "../components/home/Stories.astro";
-import Newsletter from "../components/home/Newsletter.astro";
 import Donate from "../components/home/Donate.astro";
 import { getCollection } from "astro:content";
 
@@ -23,17 +19,6 @@ const featuredArticles = (await getCollection("articles"))
     return bDate - aDate;
   })
   .slice(0, 3);
-const resourceOrder = ["ADHD", "Autism", "AuDHD", "CPTSD"];
-
-const featuredResources = (await getCollection("resources"))
-  .filter((resource) => resource.data.status === "published" && resource.data.featured)
-  .sort((a, b) => {
-    const aIndex = resourceOrder.indexOf(a.data.title);
-    const bIndex = resourceOrder.indexOf(b.data.title);
-
-    return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-  })
-  .slice(0, 6);
 ---
 <!doctype html>
 <html lang="en">
@@ -60,41 +45,20 @@ const featuredResources = (await getCollection("resources"))
   <Validation />
 
   <StartHere />
-<!--
-  <Community /> 
-  -->
+
+  <Community />
 
   <Mission />
-<!--
+
   <FeaturedArticles featuredArticles={featuredArticles} />
 
-  <ResourceLibrary resources={featuredResources} />
-
-  <PractitionerLibrary />
-
-  <Stories />
-
-  <Newsletter />
-
   <Donate />
-  -->
 
   <Footer />
 
   <script is:inline>
     if (window.lucide) {
       window.lucide.createIcons();
-    }
-
-    const newsletterForm = document.getElementById('newsletter-form');
-    const newsletterSuccess = document.getElementById('newsletter-success');
-
-    if (newsletterForm && newsletterSuccess) {
-      newsletterForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        newsletterForm.classList.add('hidden');
-        newsletterSuccess.classList.remove('hidden');
-      });
     }
   </script>
 </body>

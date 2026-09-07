@@ -1,0 +1,162 @@
+---
+interface Props { path?: string }
+const { path = '' } = Astro.props;
+---
+<div class="content-editor-page" id="content-editor" data-path={path}>
+  <header class="editor-hero"><div class="editor-hero-inner"><h1 id="editor-heading">New article</h1><p>Focus on the story first. Publishing details and specialist controls are available when you need them.</p></div></header>
+  <main class="editor-wrap">
+    <div class="editor-toolbar">
+      <a class="editor-link" href="/account/content/">← All content</a>
+      <div class="editor-actions">
+        <button class="editor-button editor-button-secondary" id="preview-button" type="submit" form="editor-form" formaction="/account/content/preview/" formmethod="post" formtarget="preview-frame">Preview</button>
+        <button class="editor-button editor-button-secondary" id="draft-button" type="button">Save draft</button>
+        <button class="editor-button editor-button-primary" id="publish-button" type="button">Publish</button>
+      </div>
+    </div>
+    <p class="editor-status" id="editor-status" role="status">Preparing editor…</p>
+    <form class="editor-card editor-form" id="editor-form">
+      <div class="editor-grid">
+        <div class="editor-field editor-field-full"><label for="title">Subject</label><input id="title" name="title" required maxlength="200" autocomplete="off" /><p class="editor-hint">The public article title.</p></div>
+        <div class="editor-field editor-field-full"><label for="description">Tagline</label><textarea id="description" name="description" maxlength="600"></textarea><p class="editor-hint">A clear one- or two-sentence summary for readers and search results.</p></div>
+        <div class="editor-field editor-field-full"><label for="tags">Tags</label><input id="tags" name="tags" placeholder="ADHD, late diagnosis, executive function" /><p class="editor-hint">Separate tags with commas.</p></div>
+        <div class="editor-field"><label for="publish-date">Date</label><input id="publish-date" name="publishDate" type="date" required /></div>
+        <div class="editor-field"><label for="publish-time">Time</label><input id="publish-time" name="publishTime" type="time" required /></div>
+        <div class="editor-field editor-field-full"><label for="body">Body</label><textarea class="body-editor" id="body" name="body" required spellcheck="true" placeholder="Start writing here…"></textarea><p class="editor-hint">Markdown is supported. Use ## for section headings, **bold** for emphasis, and - for lists.</p></div>
+      </div>
+
+      <details class="editor-disclosure">
+        <summary>Advanced</summary>
+        <div class="editor-disclosure-content editor-grid">
+          <div class="editor-field"><label for="collection">Content type</label><select id="collection"><option value="articles">Article</option><option value="resources">Resource</option><option value="pages">Page</option></select></div>
+          <div class="editor-field"><label for="author">Author</label><input id="author" value="late-diagnosed" /></div>
+          <div class="editor-field editor-field-full"><label for="categories">Categories</label><input id="categories" placeholder="ADHD, Late Diagnosis" /></div>
+          <div class="editor-field editor-field-full"><label for="excerpt">Short excerpt</label><textarea id="excerpt"></textarea></div>
+          <div class="editor-field editor-field-full"><label for="hero-image">Hero image</label><input id="hero-image" placeholder="/uploads/example.webp" /></div>
+          <label class="editor-check editor-field-full"><input id="featured" type="checkbox" /> Featured content</label>
+        </div>
+      </details>
+
+      <details class="editor-disclosure">
+        <summary>Super User / Technical</summary>
+        <div class="editor-disclosure-content editor-grid">
+          <p class="editor-hint editor-field-full">These controls cover the complete shared article schema. Full metadata JSON below also preserves fields the editor does not recognize.</p>
+          <div class="editor-field"><label for="slug">URL slug</label><input id="slug" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" /></div>
+          <div class="editor-field"><label for="last-updated">Last updated</label><input id="last-updated" type="date" /></div>
+          <div class="editor-field"><label for="difficulty">Difficulty</label><select id="difficulty"><option value="">Not set</option><option>beginner</option><option>intermediate</option><option>advanced</option></select></div>
+          <div class="editor-field"><label for="audience">Audience</label><input id="audience" placeholder="newly-diagnosed, practitioners" /></div>
+          <div class="editor-field editor-field-full"><label for="takeaways">Key takeaways</label><textarea id="takeaways" placeholder="One takeaway per line"></textarea></div>
+          <div class="editor-field"><label for="reviewed-by">Reviewed by</label><input id="reviewed-by" /></div>
+          <div class="editor-field"><label for="review-date">Review date</label><input id="review-date" type="date" /></div>
+          <div class="editor-field editor-field-full"><label for="review-note">Review note</label><textarea id="review-note"></textarea></div>
+          <div class="editor-field"><label for="seo-title">SEO title</label><input id="seo-title" /></div>
+          <div class="editor-field"><label for="canonical-url">Canonical URL</label><input id="canonical-url" type="url" /></div>
+          <div class="editor-field editor-field-full"><label for="seo-description">SEO description</label><textarea id="seo-description"></textarea></div>
+          <div class="editor-field"><label for="related-articles">Related articles</label><input id="related-articles" placeholder="slug-one, slug-two" /></div>
+          <div class="editor-field"><label for="related-resources">Related resources</label><input id="related-resources" /></div>
+          <div class="editor-field editor-field-full"><label for="related-guides">Related guides</label><input id="related-guides" /></div>
+          <label class="editor-check"><input id="has-pdf" type="checkbox" /> Has PDF</label><div class="editor-field"><label for="pdf-url">PDF URL</label><input id="pdf-url" /></div>
+          <label class="editor-check"><input id="has-audio" type="checkbox" /> Has audio</label><div class="editor-field"><label for="audio-url">Audio URL</label><input id="audio-url" /></div>
+          <label class="editor-check"><input id="has-video" type="checkbox" /> Has video</label><div class="editor-field"><label for="video-url">Video URL</label><input id="video-url" /></div>
+          <div class="editor-field editor-field-full"><label for="internal-notes">Internal editorial notes</label><textarea id="internal-notes"></textarea></div>
+          <div class="editor-field editor-field-full"><label for="metadata-json">Complete metadata (JSON)</label><textarea class="technical-json" id="metadata-json" spellcheck="false"></textarea><p class="editor-hint">Unknown frontmatter fields are retained here. Invalid JSON will block saving.</p></div>
+        </div>
+      </details>
+    </form>
+  </main>
+
+  <dialog class="preview-dialog" id="preview-dialog">
+    <div class="preview-bar"><strong>Article preview</strong><button class="editor-button editor-button-secondary" id="close-preview" type="button">Close</button></div>
+    <iframe class="preview-frame" name="preview-frame" title="Article preview" sandbox=""></iframe>
+  </dialog>
+</div>
+
+<script>
+  // @ts-nocheck -- Cloudflare's generated DOM names conflict with browser DOM types in Astro client scripts.
+  const root = document.querySelector<HTMLElement>('#content-editor')!;
+  const form = document.querySelector<HTMLFormElement>('#editor-form')!;
+  const message = document.querySelector<HTMLElement>('#editor-status')!;
+  const heading = document.querySelector<HTMLElement>('#editor-heading')!;
+  const dialog = document.querySelector<HTMLDialogElement>('#preview-dialog')!;
+  const byId = <T extends HTMLElement>(id: string) => document.querySelector<T>(`#${id}`)!;
+  const rawValue = (id: string) => byId<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(id).value;
+  const value = (id: string) => rawValue(id).trim();
+  const setValue = (id: string, next: unknown) => { byId<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(id).value = typeof next === 'string' ? next : ''; };
+  const setChecked = (id: string, next: unknown) => { byId<HTMLInputElement>(id).checked = next === true; };
+  const commaList = (text: string) => text.split(',').map((item) => item.trim()).filter(Boolean);
+  const lineList = (text: string) => text.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+  let metadata: Record<string, any> = {};
+  let csrf = '';
+  let originalPath = root.dataset.path || '';
+  let expectedSha = '';
+  let dirty = false;
+
+  function localParts(input?: unknown) {
+    const parsed = typeof input === 'string' ? new Date(input) : new Date();
+    const date = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+    const pad = (part: number) => String(part).padStart(2, '0');
+    return { date: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`, time: `${pad(date.getHours())}:${pad(date.getMinutes())}` };
+  }
+  function show(text: string, kind = '') { message.textContent = text; message.dataset.kind = kind; }
+  function optional(target: Record<string, any>, key: string, next: unknown) { if (next === '' || next == null || (Array.isArray(next) && !next.length)) delete target[key]; else target[key] = next; }
+  function populate(entry?: Record<string, any>) {
+    metadata = { ...(entry?.metadata || { status: 'draft', author: 'late-diagnosed', categories: [], tags: [], featured: false, keyTakeaways: [], audience: [], relatedArticles: [], relatedResources: [], relatedGuides: [], hasPdf: false, hasAudio: false, hasVideo: false }) };
+    originalPath = entry?.path || originalPath;
+    expectedSha = entry?.sha || '';
+    heading.textContent = entry ? `Edit ${metadata.title || 'content'}` : 'New article';
+    setValue('title', metadata.title); setValue('description', metadata.description); setValue('tags', Array.isArray(metadata.tags) ? metadata.tags.join(', ') : '');
+    setValue('body', entry?.body || ''); setValue('collection', entry?.collection || 'articles'); setValue('slug', entry?.slug || '');
+    const parts = localParts(metadata.publishDate); setValue('publish-date', parts.date); setValue('publish-time', parts.time);
+    setValue('author', metadata.author || 'late-diagnosed'); setValue('categories', Array.isArray(metadata.categories) ? metadata.categories.join(', ') : '');
+    setValue('excerpt', metadata.excerpt); setValue('hero-image', metadata.heroImage); setChecked('featured', metadata.featured);
+    setValue('last-updated', typeof metadata.lastUpdated === 'string' ? metadata.lastUpdated.slice(0, 10) : ''); setValue('difficulty', metadata.difficulty); setValue('audience', Array.isArray(metadata.audience) ? metadata.audience.join(', ') : '');
+    setValue('takeaways', Array.isArray(metadata.keyTakeaways) ? metadata.keyTakeaways.join('\n') : ''); setValue('reviewed-by', metadata.reviewedBy); setValue('review-date', typeof metadata.reviewDate === 'string' ? metadata.reviewDate.slice(0, 10) : ''); setValue('review-note', metadata.reviewNote);
+    setValue('seo-title', metadata.seoTitle); setValue('seo-description', metadata.seoDescription); setValue('canonical-url', metadata.canonicalUrl);
+    setValue('related-articles', Array.isArray(metadata.relatedArticles) ? metadata.relatedArticles.join(', ') : ''); setValue('related-resources', Array.isArray(metadata.relatedResources) ? metadata.relatedResources.join(', ') : ''); setValue('related-guides', Array.isArray(metadata.relatedGuides) ? metadata.relatedGuides.join(', ') : '');
+    setChecked('has-pdf', metadata.hasPdf); setValue('pdf-url', metadata.pdfUrl); setChecked('has-audio', metadata.hasAudio); setValue('audio-url', metadata.audioUrl); setChecked('has-video', metadata.hasVideo); setValue('video-url', metadata.videoUrl); setValue('internal-notes', metadata.internalNotes);
+    setValue('metadata-json', JSON.stringify(metadata, null, 2)); dirty = false;
+  }
+  function collectMetadata() {
+    let next: Record<string, any>;
+    try { next = JSON.parse(value('metadata-json') || '{}'); } catch { throw new Error('Complete metadata must contain valid JSON.'); }
+    if (!next || Array.isArray(next) || typeof next !== 'object') throw new Error('Complete metadata must be a JSON object.');
+    next.title = value('title'); optional(next, 'description', value('description')); next.tags = commaList(value('tags'));
+    const instant = new Date(`${value('publish-date')}T${value('publish-time')}:00`);
+    if (Number.isNaN(instant.getTime())) throw new Error('Choose a valid date and time.');
+    next.publishDate = instant.toISOString();
+    next.author = value('author') || 'late-diagnosed'; next.categories = commaList(value('categories')); next.featured = byId<HTMLInputElement>('featured').checked;
+    optional(next, 'excerpt', value('excerpt')); optional(next, 'heroImage', value('hero-image')); optional(next, 'lastUpdated', value('last-updated'));
+    optional(next, 'difficulty', value('difficulty')); next.audience = commaList(value('audience')); next.keyTakeaways = lineList(value('takeaways'));
+    optional(next, 'reviewedBy', value('reviewed-by')); optional(next, 'reviewDate', value('review-date')); optional(next, 'reviewNote', value('review-note'));
+    optional(next, 'seoTitle', value('seo-title')); optional(next, 'seoDescription', value('seo-description')); optional(next, 'canonicalUrl', value('canonical-url'));
+    next.relatedArticles = commaList(value('related-articles')); next.relatedResources = commaList(value('related-resources')); next.relatedGuides = commaList(value('related-guides'));
+    next.hasPdf = byId<HTMLInputElement>('has-pdf').checked; optional(next, 'pdfUrl', value('pdf-url')); next.hasAudio = byId<HTMLInputElement>('has-audio').checked; optional(next, 'audioUrl', value('audio-url')); next.hasVideo = byId<HTMLInputElement>('has-video').checked; optional(next, 'videoUrl', value('video-url')); optional(next, 'internalNotes', value('internal-notes'));
+    return next;
+  }
+  async function save(intent: 'draft' | 'publish') {
+    const button = intent === 'publish' ? byId<HTMLButtonElement>('publish-button') : byId<HTMLButtonElement>('draft-button');
+    try {
+      const next = collectMetadata();
+      let slug = value('slug');
+      if (!slug) slug = value('title').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 100);
+      if (!slug) throw new Error('Add a subject so the editor can create a URL.');
+      button.disabled = true; show(intent === 'publish' ? 'Publishing…' : 'Saving draft…');
+      const response = await fetch('/api/cms/content', { method: 'POST', credentials: 'same-origin', headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-CMS-CSRF': csrf }, body: JSON.stringify({ collection: value('collection'), slug, originalPath: originalPath || undefined, expectedSha: expectedSha || undefined, metadata: next, body: rawValue('body'), intent }) });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || 'The content could not be saved.');
+      originalPath = data.path; expectedSha = data.sha; metadata = { ...next, status: data.status }; setValue('slug', data.slug); setValue('metadata-json', JSON.stringify(metadata, null, 2)); dirty = false;
+      history.replaceState({}, '', `/account/content/edit/?path=${encodeURIComponent(data.path)}`);
+      show(intent === 'publish' ? 'Published. The repository update is complete.' : 'Draft saved to the repository.', 'success');
+    } catch (error) { show(error instanceof Error ? error.message : 'The content could not be saved.', 'error'); }
+    finally { button.disabled = false; }
+  }
+  form.addEventListener('input', () => { dirty = true; });
+  form.addEventListener('submit', () => { dialog.showModal(); });
+  window.addEventListener('beforeunload', (event) => { if (dirty) event.preventDefault(); });
+  byId<HTMLButtonElement>('draft-button').addEventListener('click', () => save('draft'));
+  byId<HTMLButtonElement>('publish-button').addEventListener('click', () => save('publish'));
+  byId<HTMLButtonElement>('close-preview').addEventListener('click', () => dialog.close());
+  Promise.all([
+    fetch('/api/cms/session', { credentials: 'same-origin', headers: { Accept: 'application/json' } }).then(async (response) => { const data = await response.json(); if (!response.ok) throw new Error(data.error); csrf = data.csrf; }),
+    originalPath ? fetch(`/api/cms/content?path=${encodeURIComponent(originalPath)}`, { credentials: 'same-origin', headers: { Accept: 'application/json' } }).then(async (response) => { const data = await response.json(); if (!response.ok) throw new Error(data.error); return data.entry; }) : Promise.resolve(undefined),
+  ]).then(([, entry]) => { populate(entry); show(entry ? 'Content loaded.' : 'New draft ready.', 'success'); }).catch((error) => { show(error.message || 'The editor could not be opened.', 'error'); form.querySelectorAll('input, textarea, select, button').forEach((control) => control.setAttribute('disabled', '')); });
+</script>

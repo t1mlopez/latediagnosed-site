@@ -1,0 +1,202 @@
+---
+import PublicLayout from "../layouts/PublicLayout.astro";
+import HomeActionCard from "../components/home/HomeActionCard.astro";
+
+const donationUrl = "https://givebutter.com/late-diagnosed-donations-3akmpq";
+const contactEmail = "info@latediagnosed.org";
+
+const researchMailto = `mailto:${contactEmail}?subject=LateDiagnosed.org%20Survey%20Interest`;
+const volunteerMailto = `mailto:${contactEmail}?subject=Volunteer%20with%20LateDiagnosed.org`;
+
+const involvementCards = [
+  {
+    href: "#surveys",
+    icon: "clipboard-list",
+    title: "Take a Survey",
+    description: "Turn lived experience into data.",
+    accent: "navy" as const,
+  },
+  {
+    href: volunteerMailto,
+    icon: "users",
+    title: "Volunteer",
+    description: "Put your skills toward something meaningful.",
+    accent: "purple" as const,
+  },
+  {
+    href: "#donate",
+    icon: "heart",
+    title: "Donate",
+    description: "Help fund resources, research, and outreach.",
+    accent: "navy" as const,
+  },
+  {
+    href: "/tell-your-story",
+    icon: "message-circle",
+    title: "Tell Your Story",
+    description: "Help someone else recognize themselves.",
+    accent: "purple" as const,
+  },
+];
+---
+
+<PublicLayout
+  title="Get Involved | Late Diagnosed"
+  description="Give your time, experience, expertise, or financial support to help LateDiagnosed.org reach more people."
+>
+  <main class="get-involved bg-white text-slate-700">
+    <section id="ways" class="scroll-mt-24 bg-[#faf9fc] px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-10">
+          <h2 class="font-heading text-3xl font-bold text-[#1e2a5e] md:text-4xl">How would you like to get involved?</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {involvementCards.map((card) => <HomeActionCard {...card} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="surveys" class="scroll-mt-24 px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-[#4a2068]">Community data</p>
+          <h2 class="font-heading mb-5 text-3xl font-bold text-[#1e2a5e] md:text-5xl">Your experience becomes evidence.</h2>
+          <p class="mb-5 text-lg leading-8 text-slate-700">
+            One story can help someone feel understood. Hundreds or thousands of stories can reveal a pattern.
+          </p>
+          <p class="mb-7 text-base leading-7 text-slate-600">
+            Our surveys help us understand what happens before, during, and after late diagnosis — including diagnosis pathways, burnout, skill regression, relationships, work, healthcare, support systems, identity, and what actually helped.
+          </p>
+          <a href={researchMailto} class="inline-flex items-center gap-2 rounded-lg bg-[#4a2068] px-6 py-3 font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-lg">
+            Contribute to Our Research <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="rounded-3xl border border-purple-100 bg-[#f8f5fa] p-6 shadow-sm md:p-8" aria-label="Decorative charts and graphs illustration">
+          <svg viewBox="0 0 720 430" role="img" aria-labelledby="community-data-graphic-title community-data-graphic-desc" class="h-auto w-full">
+            <title id="community-data-graphic-title">Community data illustration</title>
+            <desc id="community-data-graphic-desc">A decorative illustration with a bar chart, line graph, and pie chart representing community survey data.</desc>
+
+            <rect x="20" y="20" width="680" height="390" rx="28" fill="#ffffff" />
+
+            <g transform="translate(65 70)">
+              <rect width="260" height="145" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+              <line x1="35" y1="112" x2="225" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <rect x="52" y="72" width="28" height="40" rx="5" fill="#8b6aa7" />
+              <rect x="98" y="50" width="28" height="62" rx="5" fill="#4a2068" />
+              <rect x="144" y="32" width="28" height="80" rx="5" fill="#1e2a5e" />
+              <rect x="190" y="58" width="28" height="54" rx="5" fill="#6f4f8d" />
+            </g>
+
+            <g transform="translate(365 70)">
+              <rect width="290" height="145" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+              <line x1="32" y1="112" x2="255" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <line x1="32" y1="34" x2="32" y2="112" stroke="#cbd5e1" stroke-width="2" />
+              <polyline points="42,96 86,78 126,86 168,56 210,62 248,34" fill="none" stroke="#4a2068" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="42" cy="96" r="6" fill="#1e2a5e" />
+              <circle cx="86" cy="78" r="6" fill="#1e2a5e" />
+              <circle cx="126" cy="86" r="6" fill="#1e2a5e" />
+              <circle cx="168" cy="56" r="6" fill="#1e2a5e" />
+              <circle cx="210" cy="62" r="6" fill="#1e2a5e" />
+              <circle cx="248" cy="34" r="6" fill="#1e2a5e" />
+            </g>
+
+            <g transform="translate(65 250)">
+              <rect width="590" height="115" rx="18" fill="#faf9fc" stroke="#e7e0ef" />
+
+              <g transform="translate(92 57)">
+                <circle r="40" fill="#1e2a5e" />
+                <path d="M0 0 L0 -40 A40 40 0 0 1 38 12 Z" fill="#4a2068" />
+                <path d="M0 0 L38 12 A40 40 0 0 1 -20 35 Z" fill="#9b7ab5" />
+                <path d="M0 0 L-20 35 A40 40 0 0 1 0 -40 Z" fill="#d9cce5" />
+                <circle r="18" fill="#faf9fc" />
+              </g>
+
+              <g transform="translate(185 30)">
+                <rect x="0" y="0" width="150" height="12" rx="6" fill="#d9cce5" />
+                <rect x="0" y="28" width="205" height="12" rx="6" fill="#8b6aa7" />
+                <rect x="0" y="56" width="250" height="12" rx="6" fill="#1e2a5e" />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="donate" class="scroll-mt-24 relative overflow-hidden bg-[#1e2a5e] px-6 py-20 text-white md:py-28">
+      <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#4a2068]/45 to-transparent" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-6xl">
+        <div class="mb-12 max-w-3xl">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-purple-200">Donate</p>
+          <h2 class="font-heading mb-5 text-3xl font-bold text-white md:text-5xl">Help us reach the next person who’s still looking for answers.</h2>
+          <p class="text-lg leading-8 text-white/80">
+            Financial support helps us build useful resources, learn from the community, and put that knowledge in front of more people.
+          </p>
+        </div>
+
+        <div class="mb-10 grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-6">
+            <div class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-purple-200">Create</div>
+            <h3 class="mb-2 text-xl font-bold text-white">Free educational resources</h3>
+            <p class="mb-0 text-sm leading-6 text-white/70">Guides, articles, tools, and practical information created for the late-diagnosed community.</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-6">
+            <div class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-purple-200">Learn</div>
+            <h3 class="mb-2 text-xl font-bold text-white">Community surveys & research</h3>
+            <p class="mb-0 text-sm leading-6 text-white/70">Collecting lived-experience data so recurring patterns are harder to overlook.</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-6">
+            <div class="mb-3 text-sm font-bold uppercase tracking-[0.14em] text-purple-200">Reach</div>
+            <h3 class="mb-2 text-xl font-bold text-white">Awareness & outreach</h3>
+            <p class="mb-0 text-sm leading-6 text-white/70">Helping information reach late-diagnosed adults, families, professionals, and communities.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <a href={donationUrl} target="_blank" rel="noopener noreferrer" class="inline-block w-fit rounded-lg bg-white px-7 py-3.5 font-bold text-[#1e2a5e] no-underline transition hover:-translate-y-0.5 hover:shadow-xl">
+            Make a Donation
+          </a>
+          <p class="mb-0 max-w-2xl text-sm leading-6 text-white/65 md:text-right">
+            Late Diagnosed is an IRS-recognized 501(c)(3) public charity. Donations are tax-deductible to the extent allowed by law.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer section intentionally hidden; Volunteer tile routes to email. -->
+    <!-- Tell Your Story now routes to the dedicated /tell-your-story intake page tracked in WEB-30. -->
+    <!-- Discord moderation and Website Feedback remain deferred in WEB-31. -->
+    <!-- Email newsletter section intentionally hidden until WEB-32 is complete; restore under WEB-33. -->
+  </main>
+
+  <style>
+    :global(html) {
+      scroll-behavior: smooth;
+    }
+
+    main.get-involved {
+      padding: 0 !important;
+    }
+
+    .get-involved h1,
+    .get-involved h2,
+    .get-involved h3,
+    .get-involved p,
+    .get-involved blockquote {
+      margin-top: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :global(html) {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
+</PublicLayout>

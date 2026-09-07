@@ -1,0 +1,32 @@
+---
+import { micromark } from 'micromark';
+import { gfm, gfmHtml } from 'micromark-extension-gfm';
+import PublicLayout from '../../../layouts/PublicLayout.astro';
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+import '../../../styles/content-editor.css';
+
+let title = 'Article preview';
+let description = 'Fill in the article form, then choose Preview.';
+let body = '';
+let categories: string[] = [];
+let publishDate: Date | undefined;
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  title = String(form.get('title') || 'Untitled article');
+  description = String(form.get('description') || 'No tagline yet.');
+  body = String(form.get('body') || '');
+  categories = String(form.get('tags') || '').split(',').map((item) => item.trim()).filter(Boolean);
+  const candidate = new Date(`${String(form.get('publishDate') || '')}T${String(form.get('publishTime') || '')}:00`);
+  publishDate = Number.isNaN(candidate.getTime()) ? undefined : candidate;
+}
+const rendered = micromark(body, {
+  allowDangerousHtml: true,
+  extensions: [gfm()],
+  htmlExtensions: [gfmHtml()],
+});
+---
+<PublicLayout title={title} description={description}>
+  <ArticleLayout title={title} description={description} categories={categories} publishDate={publishDate}>
+    <div set:html={rendered} />
+  </ArticleLayout>
+</PublicLayout>

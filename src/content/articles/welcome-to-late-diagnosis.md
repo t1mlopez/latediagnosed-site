@@ -11,16 +11,30 @@ tags:
 
 author: late-diagnosed
 
-publishDate: 2026-06-16
+publishDate: 2026-06-16T00:00:00.000Z
 
-status: published
+status: draft
 
-featured: true
+featured: false
 
 excerpt: A short summary used for homepage cards and featured content.
 
 heroImage: /images/placeholder.jpg
+
+keyTakeaways:
+  - This article is placeholder content.
+  - The template now supports reusable summary blocks.
+  - Future articles can use this space for quick reader orientation.
+audience: []
+relatedArticles: []
+relatedResources: []
+relatedGuides: []
+hasPdf: false
+hasAudio: false
+hasVideo: false
+slug: welcome-to-late-diagnosis
 ---
+
 This is placeholder content.
 
 The purpose of this article is to validate:

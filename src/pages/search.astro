@@ -6,7 +6,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
   <main class="search-page">
     <section class="search-hero">
       <h1>Search Late Diagnosed</h1>
-      <p>Search articles, resource hubs, and future guides.</p>
+      <p>Search articles, resource hubs, and public pages.</p>
 
       <label class="sr-only" for="site-search">Search</label>
       <input
@@ -23,30 +23,50 @@ import PublicLayout from "../layouts/PublicLayout.astro";
   </main>
 
   <script>
-    const input = document.getElementById("site-search");
-    const resultsEl = document.getElementById("search-results");
+    interface SearchItem {
+      url: string;
+      type: string;
+      title: string;
+      description: string;
+      keyTakeaways?: string[];
+      categories?: string[];
+      tags?: string[];
+      audience?: string[];
+      difficulty?: string;
+      body?: string;
+    }
 
-    let searchIndex = [];
+    const input = document.querySelector<HTMLInputElement>("#site-search")!;
+    const resultsEl = document.querySelector<HTMLElement>("#search-results")!;
 
-    function normalize(value) {
+    let searchIndex: SearchItem[] = [];
+
+    function normalize(value: unknown): string {
       return String(value || "").toLowerCase();
     }
 
-    function scoreItem(item, query) {
+    function normalizeList(value: unknown): string {
+      return Array.isArray(value) ? normalize(value.join(" ")) : "";
+    }
+
+    function scoreItem(item: SearchItem, query: string): number {
       const q = normalize(query);
 
       let score = 0;
 
-      if (normalize(item.title).includes(q)) score += 10;
-      if (normalize(item.description).includes(q)) score += 6;
-      if (normalize(item.categories.join(" ")).includes(q)) score += 5;
-      if (normalize(item.tags.join(" ")).includes(q)) score += 4;
+      if (normalize(item.title).includes(q)) score += 12;
+      if (normalize(item.description).includes(q)) score += 8;
+      if (normalizeList(item.keyTakeaways).includes(q)) score += 8;
+      if (normalizeList(item.categories).includes(q)) score += 6;
+      if (normalizeList(item.tags).includes(q)) score += 4;
+      if (normalizeList(item.audience).includes(q)) score += 3;
+      if (normalize(item.difficulty).includes(q)) score += 3;
       if (normalize(item.body).includes(q)) score += 1;
 
       return score;
     }
 
-    function renderResults(items, query) {
+    function renderResults(items: SearchItem[], query: string) {
       if (!query.trim()) {
         resultsEl.innerHTML = '<p class="search-empty">Start typing to search the library.</p>';
         return;
@@ -69,7 +89,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
                   <h2>${item.title}</h2>
                   <p>${item.description}</p>
                   ${
-                    item.categories?.length
+                    Array.isArray(item.categories) && item.categories.length
                       ? `<div class="search-result-tags">${item.categories
                           .map((category) => `<span>${category}</span>`)
                           .join("")}</div>`
@@ -85,7 +105,7 @@ import PublicLayout from "../layouts/PublicLayout.astro";
 
     async function initSearch() {
       const response = await fetch("/search.json");
-      searchIndex = await response.json();
+      searchIndex = await response.json() as SearchItem[];
 
       input.addEventListener("input", () => {
         const query = input.value;
