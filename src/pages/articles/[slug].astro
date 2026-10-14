@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { resolveAuthorName } from "../../lib/authors";
 import PublicLayout from "../../layouts/PublicLayout.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
@@ -19,7 +20,7 @@ const article = articles.find((candidate) => candidate.id === Astro.params.slug)
 if (!article || article.data.status !== "published") return new Response("Not found", { status: 404 });
 
 const authors = await getCollection("authors");
-const author = authors.find((candidate) => candidate.id === article.data.author);
+const authorName = resolveAuthorName(article.data.author, authors);
 const relatedArticles = articles
   .filter((candidate) => {
     if (candidate.id === article.id || candidate.data.status !== "published") return false;
@@ -53,14 +54,14 @@ const isComponentShowcase = article.id === "component-showcase";
   image={article.data.heroImage}
   canonicalUrl={article.data.canonicalUrl}
   type="Article"
-author={author?.data?.name}
+author={authorName}
 publishDate={article.data.publishDate?.toISOString()}
 modifiedDate={(article.data.lastUpdated || article.data.publishDate)?.toISOString()}
 >
   <ArticleLayout
     title={article.data.title}
     description={article.data.description}
-    author={author?.data?.name}
+    author={authorName}
     categories={article.data.categories}
     publishDate={article.data.publishDate}
     lastUpdated={article.data.lastUpdated}
