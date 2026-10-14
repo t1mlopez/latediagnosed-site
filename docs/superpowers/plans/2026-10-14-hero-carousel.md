@@ -25,7 +25,7 @@
 - [x] Test filename discovery and sort with numbered, unnumbered, gap and duplicate-order fixtures. Implement selectHeroSlides<T>(Record<string,T>): T[].
 - [x] Extract the current heroes into snippets; implement shared carousel and zero-slide fallback.
 - [x] Verify next/previous, indicators, keyboard, mobile swipe, zero/one slides, no-JavaScript fallback and preview-only modules.
-- [ ] Run full tests and build; review diff, document the snippet workflow, push the feature branch and deploy preview.
+- [x] Run full tests and build; review diff, document the snippet workflow, push the feature branch and deploy preview.
 
 ## Ledger
 - User requested execution and lowest estimated credit use. Native inline work selected; existing checkout is clean and feature branch will isolate this work from main.
@@ -37,3 +37,5 @@
 - Automatic approval review rejected renewal of Cloudflare OAuth write grants. Do not renew without explicit user approval. No production deployment performed.
 
 - Preview deployment prepared as a Worker route on preview.latediagnosed.org/* over the existing proxied Pages origin. No DNS edit needed; removing that route restores the old preview. Preserve the existing preview SESSION namespace. Deployment authorization still pending.
+
+- 2026-10-14: User explicitly approved Cloudflare Worker/route access renewal. OAuth grant limited to the LateDiagnosed organization account. Preview deployed as version 97b2e2b9-3d35-4e8b-aad0-8bdf123d32ce. Live two-slide navigation and all five design modules verified; production remains single article hero without preview modules.
