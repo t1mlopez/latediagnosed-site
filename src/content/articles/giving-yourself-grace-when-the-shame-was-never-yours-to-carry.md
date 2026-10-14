@@ -1,15 +1,10 @@
 ---
 title: Giving Yourself Grace When The Shame Was Never Yours to Carry
-description: This article explores grace as a logical conclusion rather than an
-  emotional one. When trauma, shame, and learned survival responses shape how
-  someone sees themselves, their feelings may tell them they don’t deserve
-  grace, but those feelings aren’t necessarily reliable judges of
-  responsibility. By examining what you knew, what you could control, what you
-  were taught, what support you had, and what you were trying to survive at the
-  time, you can determine that grace is warranted even when you can’t
-  emotionally feel it yet. The goal isn’t to excuse behavior or avoid
-  accountability; it’s to stop letting shame decide how much blame belongs to
-  you.
+description: Grace can be a logical conclusion before it feels deserved. Trauma,
+  shame, and survival responses can distort self-judgment. Weigh your knowledge,
+  control, conditioning, support, and circumstances to assess responsibility
+  fairly; preserving accountability without letting shame assign more blame than
+  belongs to you.
 categories: []
 tags: []
 author: "Tim-Lopez "
