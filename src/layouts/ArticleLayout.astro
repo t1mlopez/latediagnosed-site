@@ -30,12 +30,8 @@ const {
   categories = [],
   publishDate,
   lastUpdated,
-  readingTime,
 
   difficulty,
-  audience = [],
-  reviewedBy,
-  reviewDate,
 
   hasPdf,
   pdfUrl,
@@ -49,7 +45,6 @@ const {
 
 const formattedPublishDate = publishDate?.toLocaleDateString();
 const formattedUpdatedDate = lastUpdated?.toLocaleDateString();
-const formattedReviewDate = reviewDate?.toLocaleDateString();
 
 const hasMediaLinks =
   (hasPdf && pdfUrl) ||
@@ -73,38 +68,26 @@ const hasMediaLinks =
       {description}
     </p>
 
-    <div class="article-meta">
-      {author && <span>By {author}</span>}
-      {readingTime && <span>{readingTime}</span>}
-      {difficulty && <span>{difficulty}</span>}
-      {formattedPublishDate && <span>Published {formattedPublishDate}</span>}
-      {formattedUpdatedDate && <span>Updated {formattedUpdatedDate}</span>}
-    </div>
+    {(author || difficulty || formattedPublishDate || formattedUpdatedDate) && (
+      <div class="article-meta">
+        {author && <span>By {author}</span>}
+        {difficulty && <span>{difficulty}</span>}
+        {(formattedPublishDate || formattedUpdatedDate) && (
+          <div class="article-dates">
+            {formattedPublishDate && <span>Published {formattedPublishDate}</span>}
+            {formattedUpdatedDate && <span>Updated {formattedUpdatedDate}</span>}
+          </div>
+        )}
+      </div>
+    )}
 
-    {(audience.length > 0 || reviewedBy || formattedReviewDate || hasMediaLinks) && (
+    {hasMediaLinks && (
       <div class="article-extra-meta">
-        {audience.length > 0 && (
-          <div>
-            <strong>Audience:</strong> {audience.join(", ")}
-          </div>
-        )}
-
-        {(reviewedBy || formattedReviewDate) && (
-          <div>
-            <strong>Reviewed:</strong>{" "}
-            {reviewedBy && <span>{reviewedBy}</span>}
-            {reviewedBy && formattedReviewDate && <span> · </span>}
-            {formattedReviewDate && <span>{formattedReviewDate}</span>}
-          </div>
-        )}
-
-        {hasMediaLinks && (
-          <div class="article-media-links">
-            {hasPdf && pdfUrl && <a href={pdfUrl}>PDF</a>}
-            {hasAudio && audioUrl && <a href={audioUrl}>Audio</a>}
-            {hasVideo && videoUrl && <a href={videoUrl}>Video</a>}
-          </div>
-        )}
+        <div class="article-media-links">
+          {hasPdf && pdfUrl && <a href={pdfUrl}>PDF</a>}
+          {hasAudio && audioUrl && <a href={audioUrl}>Audio</a>}
+          {hasVideo && videoUrl && <a href={videoUrl}>Video</a>}
+        </div>
       </div>
     )}
   </div>
