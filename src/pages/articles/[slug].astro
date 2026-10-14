@@ -19,7 +19,8 @@ const article = articles.find((candidate) => candidate.id === Astro.params.slug)
 if (!article || article.data.status !== "published") return new Response("Not found", { status: 404 });
 
 const authors = await getCollection("authors");
-const author = authors.find((candidate) => candidate.id === article.data.author);
+const authorId = article.data.author.trim().toLowerCase();
+const author = authors.find((candidate) => candidate.id.toLowerCase() === authorId);
 const relatedArticles = articles
   .filter((candidate) => {
     if (candidate.id === article.id || candidate.data.status !== "published") return false;
