@@ -3,18 +3,19 @@ title: Giving Yourself Grace When The Shame Was Never Yours to Carry
 description: This article explores grace as a logical conclusion rather than an
   emotional one. When trauma, shame, and learned survival responses shape how
   someone sees themselves, their feelings may tell them they don’t deserve
-  grace—but those feelings aren’t necessarily reliable judges of responsibility.
-  By examining what you knew, what you could control, what you were taught, what
-  support you had, and what you were trying to survive at the time, you can
-  determine that grace is warranted even when you can’t emotionally feel it yet.
-  The goal isn’t to excuse behavior or avoid accountability; it’s to stop
-  letting shame decide how much blame belongs to you.
+  grace, but those feelings aren’t necessarily reliable judges of
+  responsibility. By examining what you knew, what you could control, what you
+  were taught, what support you had, and what you were trying to survive at the
+  time, you can determine that grace is warranted even when you can’t
+  emotionally feel it yet. The goal isn’t to excuse behavior or avoid
+  accountability; it’s to stop letting shame decide how much blame belongs to
+  you.
 categories: []
 tags: []
 author: "Tim-Lopez "
-publishDate: 2026-10-12T21:38:00.000-07:00
-lastUpdated: 2026-10-12
-status: draft
+publishDate: 2026-10-14T10:47:00.000-07:00
+lastUpdated: ""
+status: published
 featured: false
 keyTakeaways: []
 audience:
@@ -34,13 +35,9 @@ hasPdf: false
 hasAudio: false
 hasVideo: false
 ---
-
-
 I think one of the things I’ve had to focus on for probably as long as I can remember is trying to find any kind of hope in any of the things that happened to me.
 
-A lot of what I went through—really, the majority of what I went through—wasn’t anything I asked for.
-
-And it was always something I knew I didn’t deserve.
+A lot of what I went through, really, the majority of what I went through, wasn’t anything I asked for. In fact, I have the benefit of having the long understanding that this was something I didn’t deserve.
 
 Even when I was a kid, I could look at what was happening and know that I hated it. I knew something about it wasn’t right.
 
@@ -298,13 +295,9 @@ Give yourself grace for that too.
 
 Because that is not a small thing.
 
-That is final-boss-level work.
+That is final-boss-level work. World 8, level 4 - Bowser Koopa.
 
-World 8, level 3.
-
-Bowser Koopa.
-
-That’s not world one, level two.
+This is not World 1, level 4.
 
 You’re dealing with something people before you may never have been willing or able to confront.
 
@@ -378,7 +371,7 @@ Another moment where I should have been helped and wasn’t.
 
 And almost every one of those roads ended in the same place:
 
-**Give yourself some grace.**
+## **Give yourself some grace.**
 
 At some point, it becomes easier to stop requiring a separate trial for every single thing you’ve ever blamed yourself for.
 
