@@ -1,0 +1,23 @@
+---
+const privatePath = /^\/(account|admin|auth|api|internal)(\/|$)/.test(Astro.url.pathname);
+---
+{!privatePath && <script is:inline>
+  (() => {
+    if (!['latediagnosed.org', 'www.latediagnosed.org'].includes(location.hostname)) return;
+    if (/^\/(account|admin|auth|api|internal)(\/|$)/.test(location.pathname)) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-MHSLJB268P', {
+      page_location: location.origin + location.pathname,
+      page_referrer: document.referrer ? document.referrer.split(/[?#]/)[0] : '',
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      send_page_view: true
+    });
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-MHSLJB268P';
+    document.head.appendChild(tag);
+  })();
+</script>}
