@@ -1,0 +1,14 @@
+---
+import HeroSlide from '../HeroSlide.astro';
+const { first = true } = Astro.props;
+---
+<HeroSlide
+  heading="Understanding yourself changes everything"
+  description="Supporting adults navigating late diagnosis of ADHD, Autism, AuDHD, Complex PTSD, Borderline Personality Disorder, Dissociative Disorders, burnout, and related neurodivergent experiences."
+  href="#start-here"
+  button="Start Here"
+  image="/images/hero-forest-2560.webp"
+  mobileImage="/images/hero-forest-1280.webp"
+  alt="Sunlight filtering through a misty autumn forest"
+  first={first}
+/>

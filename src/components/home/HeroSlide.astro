@@ -1,0 +1,31 @@
+---
+interface Props {
+  heading: string;
+  description: string;
+  href: string;
+  button: string;
+  image: string;
+  mobileImage?: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  position?: string;
+  first?: boolean;
+}
+const { heading, description, href, button, image, mobileImage = image, alt,
+  width = 2560, height = 1920, position = 'center', first = true } = Astro.props;
+---
+<div class="relative w-full overflow-hidden min-h-[70vh] bg-[#1e2a5e]">
+  <picture>
+    <source media="(max-width: 767px)" srcset={mobileImage} type="image/webp" />
+    <img class="absolute inset-0 w-full h-full object-cover" style={`object-position: ${position};`}
+      src={image} alt={alt} width={width} height={height}
+      loading={first ? 'eager' : 'lazy'} fetchpriority={first ? 'high' : 'auto'} decoding="async" />
+  </picture>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#1e2a5eee] to-[#4a2068cc]"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[70vh] py-24">
+    <h1 class="font-heading text-white mb-4 text-4xl md:text-5xl font-bold max-w-4xl">{heading}</h1>
+    <p class="text-white/90 text-lg max-w-2xl mb-8">{description}</p>
+    <a href={href} class="inline-block w-fit px-6 py-3 rounded-lg font-semibold bg-white text-[#1e2a5e] no-underline">{button}</a>
+  </div>
+</div>
