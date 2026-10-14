@@ -8,10 +8,20 @@ import Community from "../components/home/Community.astro";
 import Mission from "../components/home/Mission.astro";
 import FeaturedArticles from "../components/home/FeaturedArticles.astro";
 import Donate from "../components/home/Donate.astro";
+import ResourceLibrary from "../components/home/ResourceLibrary.astro";
+import PractitionerLibrary from "../components/home/PractitionerLibrary.astro";
+import Stories from "../components/home/Stories.astro";
+import Newsletter from "../components/home/Newsletter.astro";
+import { showDesignModules } from "../lib/home/preview";
 import { getCollection } from "astro:content";
 
+const designPreview = showDesignModules(Astro.url.hostname);
+const resources = designPreview
+  ? (await getCollection("resources")).filter((resource) => resource.data.status === "published")
+  : [];
+
 const featuredArticles = (await getCollection("articles"))
-  .filter((article) => article.data.status === "published" && article.data.featured)
+  .filter((article) => article.data.status === "published" && (article.data.featured || designPreview))
   .sort((a, b) => {
     const aDate = a.data.publishDate ? new Date(a.data.publishDate).getTime() : 0;
     const bDate = b.data.publishDate ? new Date(b.data.publishDate).getTime() : 0;
@@ -46,11 +56,19 @@ const featuredArticles = (await getCollection("articles"))
 
   <StartHere />
 
+  {designPreview && <ResourceLibrary resources={resources} />}
+
   <Community />
 
   <Mission />
 
   <FeaturedArticles featuredArticles={featuredArticles} />
+
+  {designPreview && <PractitionerLibrary />}
+
+  {designPreview && <Stories />}
+
+  {designPreview && <Newsletter />}
 
   <Donate />
 

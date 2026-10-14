@@ -5,6 +5,9 @@
   "compatibility_date": "2026-08-29",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "routes": [
+    { "pattern": "preview.latediagnosed.org/*", "zone_name": "latediagnosed.org" }
+  ],
   "rules": [
     { "type": "ESModule", "globs": ["**/*.js", "**/*.mjs"] }
   ],
@@ -14,7 +17,7 @@
     "run_worker_first": false
   },
   "kv_namespaces": [
-    { "binding": "SESSION" }
+    { "binding": "SESSION", "id": "b6371b531c6748dc9d841afe5afe3be9" }
   ],
   "images": {
     "binding": "IMAGES"

@@ -1,32 +1,86 @@
-<!-- Hero -->
-  <header class="relative w-full overflow-hidden min-h-[70vh] bg-[#1e2a5e]">
-    <picture>
-      <source
-        media="(max-width: 767px)"
-        srcset="/images/hero-grace-1280.webp"
-        type="image/webp"
-      />
-      <img
-        class="absolute inset-0 w-full h-full object-cover object-[75%_70%]"
-        src="/images/hero-grace-2560.webp"
-        alt="A full leafy tree beside a red barn beneath a sweeping blue sky"
-        width="2560"
-        height="1361"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </picture>
-    <div class="absolute inset-0 bg-gradient-to-r from-[#1e2a5eee] to-[#4a2068cc]"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-6 flex flex-col justify-center min-h-[70vh] py-24">
-      <h1 class="font-heading text-white mb-4 text-4xl md:text-5xl font-bold max-w-4xl">
-        The shame was never yours to carry
-      </h1>
-      <p class="text-white/90 text-lg max-w-2xl mb-8">
-        You don’t have to feel deserving to begin giving yourself grace. Explore what you knew, what you could control, and what you were trying to survive.
-      </p>
-      <a href="/articles/giving-yourself-grace-when-the-shame-was-never-yours-to-carry/" class="inline-block w-fit px-6 py-3 rounded-lg font-semibold bg-white text-[#1e2a5e] no-underline">
-        Read the article
-      </a>
+---
+import Welcome from './hero-slides/Welcome.astro';
+import { selectHeroSlides } from '../../lib/home/hero-slides';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+const modules = import.meta.glob<{ default: AstroComponentFactory; title?: string }>('./hero-slides/*.astro', { eager: true });
+const activeSlides = selectHeroSlides(modules);
+const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 'Understanding yourself' }];
+---
+<section class="hero-carousel relative" data-hero-carousel role="region" aria-roledescription="carousel" aria-label="Featured resources" tabindex="0">
+  {slides.map(({ default: Slide, title }, index) => (
+    <div data-hero-slide data-title={title ?? `Slide ${index + 1}`} role="group" aria-roledescription="slide"
+      aria-label={`${index + 1} of ${slides.length}`} hidden={index !== 0}>
+      <Slide first={index === 0} />
     </div>
-  </header>
+  ))}
+  {slides.length > 1 && (
+    <div class="hero-controls absolute inset-x-0 bottom-5 z-20" data-hero-controls hidden>
+      <div class="max-w-6xl mx-auto px-6 flex items-center gap-3">
+        <button type="button" data-hero-previous aria-label="Previous slide" class="hero-nav">&#8592;</button>
+        <div class="flex gap-2" aria-label="Choose a slide">
+          {slides.map(({ title }, index) => (
+            <button type="button" class="hero-dot" data-hero-index={index}
+              aria-label={`Show slide ${index + 1}: ${title ?? `Slide ${index + 1}`}`} aria-current={index === 0 ? 'true' : 'false'}>
+              <span class="sr-only">{index + 1}</span>
+            </button>
+          ))}
+        </div>
+        <button type="button" data-hero-next aria-label="Next slide" class="hero-nav">&#8594;</button>
+        <span class="text-white text-sm" data-hero-count aria-hidden="true">1 / {slides.length}</span>
+      </div>
+      <p class="sr-only" data-hero-status role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  )}
+</section>
+<style>
+  [hidden] { display: none !important; }
+  .hero-carousel:focus-visible { outline: 3px solid white; outline-offset: -6px; }
+  .hero-nav, .hero-dot { color: white; border: 1px solid #ffffff80; background: #1e2a5e99; cursor: pointer; }
+  .hero-nav { width: 44px; height: 44px; border-radius: 50%; font-size: 24px; }
+  .hero-dot { width: 44px; height: 44px; border-radius: 50%; position: relative; border-color: transparent; background: transparent; }
+  .hero-dot::after { content: ''; display: block; width: 10px; height: 10px; border-radius: 50%; background: #ffffff70; margin: auto; }
+  .hero-dot[aria-current="true"]::after { background: white; }
+  .hero-nav:focus-visible, .hero-dot:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+</style>
+<script>
+  import { swipeDirection } from '../../lib/home/swipe';
+  document.querySelectorAll<HTMLElement>('[data-hero-carousel]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    const controls = root.querySelector<HTMLElement>('[data-hero-controls]');
+    if (slides.length < 2 || !controls) return;
+    const indicators = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-hero-index]'));
+    const count = root.querySelector<HTMLElement>('[data-hero-count]');
+    const status = root.querySelector<HTMLElement>('[data-hero-status]');
+    let current = 0;
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => { slide.hidden = i !== current; });
+      indicators.forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
+      if (count) count.textContent = `${current + 1} / ${slides.length}`;
+      if (status) status.textContent = `Slide ${current + 1} of ${slides.length}: ${slides[current].dataset.title}`;
+    }
+    root.querySelector('[data-hero-previous]')?.addEventListener('click', () => show(current - 1));
+    root.querySelector('[data-hero-next]')?.addEventListener('click', () => show(current + 1));
+    indicators.forEach((button, index) => button.addEventListener('click', () => show(index)));
+    root.addEventListener('keydown', (event) => {
+      if ((event.target as HTMLElement).closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(current + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
+    });
+    let touch: { x: number; y: number } | null = null;
+    root.addEventListener('touchstart', (event) => {
+      touch = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+    }, { passive: true });
+    root.addEventListener('touchcancel', () => { touch = null; }, { passive: true });
+    root.addEventListener('touchend', (event) => {
+      if (!touch || event.changedTouches.length !== 1) return;
+      const end = event.changedTouches[0];
+      const direction = swipeDirection(touch, { x: end.clientX, y: end.clientY });
+      touch = null;
+      if (direction) show(current + direction);
+    }, { passive: true });
+    controls.hidden = false;
+  });
+</script>
