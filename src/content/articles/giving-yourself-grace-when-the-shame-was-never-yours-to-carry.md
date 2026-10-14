@@ -1,15 +1,20 @@
 ---
 title: Giving Yourself Grace When The Shame Was Never Yours to Carry
-description: Grace can be a logical conclusion before it feels deserved. Trauma,
-  shame, and survival responses can distort self-judgment. Weigh your knowledge,
-  control, conditioning, support, and circumstances to assess responsibility
-  fairly; preserving accountability without letting shame assign more blame than
-  belongs to you.
+description: Grace can be a logical conclusion before it feels deserved. Trauma, shame,
+  and survival responses can distort self-judgment. Weigh your knowledge, control,
+  conditioning, support, and circumstances to assess responsibility fairly; preserving
+  accountability without letting shame assign more blame than belongs to you.
 categories: []
-tags: []
-author: "Tim-Lopez "
-publishDate: 2026-10-14T10:47:00.000-07:00
-lastUpdated: ""
+tags:
+  - CPTSD
+  - ADHD
+  - AuDHD
+  - Autism
+  - Late Diagnosis
+  - Grace
+  - Healing
+author: "Tim-Lopez"
+publishDate: 2026-10-14T17:47:00.000Z
 status: published
 featured: false
 keyTakeaways: []
@@ -22,14 +27,16 @@ audience:
   - parents
   - workplace
   - general
-reviewDate: 2026-10-12T21:39:00.000-07:00
+reviewDate: 2026-10-12
 relatedArticles: []
 relatedResources: []
 relatedGuides: []
 hasPdf: false
 hasAudio: false
 hasVideo: false
+slug: giving-yourself-grace-when-the-shame-was-never-yours-to-carry
 ---
+
 I think one of the things I’ve had to focus on for probably as long as I can remember is trying to find any kind of hope in any of the things that happened to me.
 
 A lot of what I went through, really, the majority of what I went through, wasn’t anything I asked for. In fact, I have the benefit of having the long understanding that this was something I didn’t deserve.
@@ -366,7 +373,7 @@ Another moment where I should have been helped and wasn’t.
 
 And almost every one of those roads ended in the same place:
 
-## **Give yourself some grace.**
+**Give yourself some grace.**
 
 At some point, it becomes easier to stop requiring a separate trial for every single thing you’ve ever blamed yourself for.
 
