@@ -15,9 +15,9 @@ const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 
   ))}
   {slides.length > 1 && (
     <div class="hero-controls absolute inset-x-0 bottom-5 z-20" data-hero-controls hidden>
-      <div class="max-w-6xl mx-auto px-6 flex items-center gap-3">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap items-center gap-1 sm:gap-3">
         <button type="button" data-hero-previous aria-label="Previous slide" class="hero-nav">&#8592;</button>
-        <div class="flex gap-2" aria-label="Choose a slide">
+        <div class="flex flex-wrap gap-2" aria-label="Choose a slide">
           {slides.map(({ title }, index) => (
             <button type="button" class="hero-dot" data-hero-index={index}
               aria-label={`Show slide ${index + 1}: ${title ?? `Slide ${index + 1}`}`} aria-current={index === 0 ? 'true' : 'false'}>
@@ -26,6 +26,7 @@ const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 
           ))}
         </div>
         <button type="button" data-hero-next aria-label="Next slide" class="hero-nav">&#8594;</button>
+        <button type="button" data-hero-pause aria-label="Pause automatic slide rotation" class="hero-nav">Ⅱ</button>
         <span class="text-white text-sm" data-hero-count aria-hidden="true">1 / {slides.length}</span>
       </div>
       <p class="sr-only" data-hero-status role="status" aria-live="polite" aria-atomic="true"></p>
@@ -43,6 +44,7 @@ const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 
   .hero-nav:focus-visible, .hero-dot:focus-visible { outline: 2px solid white; outline-offset: 3px; }
 </style>
 <script>
+  import { createAutoAdvance } from '../../lib/home/autoplay';
   import { swipeDirection } from '../../lib/home/swipe';
   document.querySelectorAll<HTMLElement>('[data-hero-carousel]').forEach((root) => {
     const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-hero-slide]'));
@@ -52,12 +54,38 @@ const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 
     const count = root.querySelector<HTMLElement>('[data-hero-count]');
     const status = root.querySelector<HTMLElement>('[data-hero-status]');
     let current = 0;
-    function show(index: number) {
+    const pause = root.querySelector<HTMLButtonElement>('[data-hero-pause]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let paused = reducedMotion.matches;
+    let hovered = root.matches(':hover');
+    let focused = root.contains(document.activeElement);
+    const clock = createAutoAdvance(() => show(current + 1, false));
+    function syncPlayback() {
+      clock.stop();
+      if (!paused && !hovered && !focused && !document.hidden) clock.start();
+      if (pause) {
+        pause.textContent = paused ? '▶' : 'Ⅱ';
+        pause.setAttribute('aria-label', paused ? 'Start automatic slide rotation' : 'Pause automatic slide rotation');
+      }
+      status?.setAttribute('aria-live', paused || hovered || focused ? 'polite' : 'off');
+    }
+    pause?.addEventListener('click', () => { paused = !paused; syncPlayback(); });
+    root.addEventListener('mouseenter', () => { hovered = true; syncPlayback(); });
+    root.addEventListener('mouseleave', () => { hovered = false; syncPlayback(); });
+    root.addEventListener('focusin', () => { focused = true; syncPlayback(); });
+    root.addEventListener('focusout', (event) => {
+      focused = root.contains(event.relatedTarget as Node | null);
+      syncPlayback();
+    });
+    document.addEventListener('visibilitychange', syncPlayback);
+    reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) paused = true; syncPlayback(); });
+    function show(index: number, manual = true) {
       current = (index + slides.length) % slides.length;
       slides.forEach((slide, i) => { slide.hidden = i !== current; });
       indicators.forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
       if (count) count.textContent = `${current + 1} / ${slides.length}`;
       if (status) status.textContent = `Slide ${current + 1} of ${slides.length}: ${slides[current].dataset.title}`;
+      if (manual) syncPlayback();
     }
     root.querySelector('[data-hero-previous]')?.addEventListener('click', () => show(current - 1));
     root.querySelector('[data-hero-next]')?.addEventListener('click', () => show(current + 1));
@@ -82,5 +110,6 @@ const slides = activeSlides.length ? activeSlides : [{ default: Welcome, title: 
       if (direction) show(current + direction);
     }, { passive: true });
     controls.hidden = false;
+    syncPlayback();
   });
 </script>

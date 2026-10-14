@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { createAutoAdvance } from '../src/lib/home/autoplay.ts';
+test('advances every five seconds and stops while paused', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let advances = 0;
+  const timer = createAutoAdvance(() => advances++);
+  timer.start();
+  timer.start();
+  t.mock.timers.tick(4999);
+  assert.equal(advances, 0);
+  t.mock.timers.tick(1);
+  assert.equal(advances, 1);
+  t.mock.timers.tick(5000);
+  assert.equal(advances, 2);
+  timer.stop();
+  t.mock.timers.tick(10000);
+  assert.equal(advances, 2);
+  timer.start();
+  t.mock.timers.tick(5000);
+  assert.equal(advances, 3);
+  timer.stop();
+});

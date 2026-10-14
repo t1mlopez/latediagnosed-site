@@ -19,6 +19,6 @@ Commit changes to the branch deployed by preview; publishing rebuilds the folder
 
 `Welcome.astro` is a shared, unnumbered fallback: it never joins rotation on its own. The numbered `02-welcome.astro` wraps it. If no numbered slides remain, the welcome hero appears without controls. One numbered slide also appears without controls.
 
-The carousel advances manually through arrows, labeled indicators, keyboard arrows when focused, and horizontal touch swipes. It does not auto-advance. Without JavaScript only the first active slide appears and the controls remain hidden.
+The carousel advances every five seconds. Arrows, labeled indicators, keyboard arrows and horizontal touch swipes also work. A pause/play control is available. Rotation pauses while hovered, while keyboard focus is inside the carousel, or while the tab is hidden. Reduced-motion preferences start rotation paused; visitors can explicitly start it. Without JavaScript only the first active slide appears and the controls remain hidden.
 
 These are trusted website source snippets, not visitor-submitted HTML. Keep disabled snippets valid Astro code because the build imports the folder.
