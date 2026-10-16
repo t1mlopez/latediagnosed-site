@@ -1,9 +1,11 @@
 ---
 title: Giving Yourself Grace When The Shame Was Never Yours to Carry
-description: Grace can be a logical conclusion before it feels deserved. Trauma, shame,
-  and survival responses can distort self-judgment. Weigh your knowledge, control,
-  conditioning, support, and circumstances to assess responsibility fairly; preserving
-  accountability without letting shame assign more blame than belongs to you.
+description: Grace can be a logical conclusion before it feels deserved. Trauma,
+  shame, and survival responses can distort self-judgment. Weigh your knowledge,
+  control, conditioning, support, and circumstances to assess responsibility
+  fairly; preserving accountability without letting shame assign more blame than
+  belongs to you.
+heroImage: /uploads/5a506e12-ad37-44af-89b9-c26be2bd9c32.png
 categories: []
 tags:
   - CPTSD
@@ -13,7 +15,7 @@ tags:
   - Late Diagnosis
   - Grace
   - Healing
-author: "Tim-Lopez"
+author: Tim-Lopez
 publishDate: 2026-10-14T17:47:00.000Z
 status: published
 featured: false
@@ -31,10 +33,10 @@ reviewDate: 2026-10-12
 relatedArticles: []
 relatedResources: []
 relatedGuides: []
-hasPdf: false
 hasAudio: false
 hasVideo: false
 slug: giving-yourself-grace-when-the-shame-was-never-yours-to-carry
+hasPdf: false
 ---
 
 I think one of the things I’ve had to focus on for probably as long as I can remember is trying to find any kind of hope in any of the things that happened to me.
